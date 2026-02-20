@@ -27,7 +27,7 @@ For non-healthcare data products, these skills stay inactive. All other skills u
 The skills compose in this natural sequence:
 
 ```
-scope problem -> write PRD -> define metrics -> review model -> write stakeholder brief
+scope problem -> write PRD -> define metrics -> review model -> test pipeline -> tell the story -> write stakeholder brief
 ```
 
 Each step builds on the prior. Commands write output files that downstream steps can reference:

@@ -1,7 +1,5 @@
 ---
-name: write-data-prd
 description: Generate a complete data product requirements document with data-specific sections
-disable-model-invocation: true
 argument-hint: <product name or brief description>
 allowed-tools: Read, Write, AskUserQuestion
 ---

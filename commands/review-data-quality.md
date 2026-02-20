@@ -1,7 +1,5 @@
 ---
-name: review-data-quality
 description: Systematic data quality assessment with 5-dimension scoring and improvement recommendations
-disable-model-invocation: true
 argument-hint: <data source, table name, or pipeline description>
 allowed-tools: Read, Write, Bash, AskUserQuestion
 ---

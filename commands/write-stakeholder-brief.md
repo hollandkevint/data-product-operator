@@ -1,7 +1,5 @@
 ---
-name: write-stakeholder-brief
 description: Translate technical data work into a 1-page business summary with impact metrics
-disable-model-invocation: true
 argument-hint: <project or feature to summarize>
 allowed-tools: Read, Write, AskUserQuestion
 ---

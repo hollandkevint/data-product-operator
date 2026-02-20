@@ -10,8 +10,17 @@ Most data teams ship datasets. A data product operator ships data *products* —
 
 ## Install
 
+From the Claude Code marketplace:
+
+```
+/plugin marketplace add hollandkevint/data-product-operator
+/plugin install data-product-operator@data-product-operator
+```
+
+For local development:
+
 ```bash
-claude plugins add hollandkevint/data-product-operator
+claude --plugin-dir /path/to/data-product-operator
 ```
 
 ## Skills
@@ -40,6 +49,21 @@ Background skills activate automatically based on context.
 | `/dpo:write-stakeholder-brief` | Translates technical data work into a 1-page business summary with impact metrics | `stakeholder-brief-<name>.md` |
 | `/dpo:review-data-model <file>` | Evaluates schema design for normalization, naming, relationships, and extensibility | Conversational |
 | `/dpo:reshape-sprint` | Converts sprint artifacts into a shaped pitch: problem, appetite, solution, rabbit holes, no-gos | `shaped-pitch-<name>.md` |
+
+## Example Workflows
+
+**New data product from scratch:**
+Start with `data-product-thinking` to scope the problem, then `/dpo:write-data-prd` to capture requirements. Use `metrics-definition` to nail down success metrics, `/dpo:review-data-model` on your schema, `data-pipeline-quality` to set up tests, then `/dpo:write-stakeholder-brief` to communicate the plan.
+
+**Inherited dataset cleanup:**
+Run `/dpo:review-data-quality` to score the current state. Use `data-model-design` to evaluate the schema, then `data-pipeline-quality` to add automated checks. Close with `data-storytelling` to present findings to leadership.
+
+**Sprint to Shape Up conversion:**
+Run `/dpo:reshape-sprint` on your backlog. The shaped pitch uses `data-product-thinking` to frame appetite and `stakeholder-alignment` to translate for the betting table.
+
+## Connecting Your Data Stack
+
+Commands work better when they can read your live schemas and sprint artifacts. See [CONNECTORS.md](CONNECTORS.md) for setup instructions. No connections required; every command works with manually provided context.
 
 ## For Healthcare Data Teams
 

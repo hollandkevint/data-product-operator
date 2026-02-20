@@ -1,7 +1,5 @@
 ---
-name: review-data-model
 description: Evaluate a data model or schema design for normalization, naming, relationships, and extensibility
-disable-model-invocation: true
 argument-hint: <file path, DDL, or schema description>
 allowed-tools: Read, Bash, AskUserQuestion
 ---

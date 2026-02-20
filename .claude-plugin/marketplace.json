@@ -1,0 +1,18 @@
+{
+  "name": "data-product-operator",
+  "owner": {
+    "name": "Kevin Holland",
+    "email": "hollandkevint@users.noreply.github.com"
+  },
+  "metadata": {
+    "description": "Skills and commands for data product managers",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "data-product-operator",
+      "source": "./",
+      "description": "Data product thinking, quality, metrics, storytelling, pipeline quality, stakeholder alignment, schema design, team ops, healthcare data, and ethics."
+    }
+  ]
+}

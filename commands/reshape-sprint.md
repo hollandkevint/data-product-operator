@@ -1,7 +1,5 @@
 ---
-name: reshape-sprint
 description: Convert sprint artifacts into a shaped pitch with problem, appetite, solution, rabbit holes, and no-gos
-disable-model-invocation: true
 argument-hint: <sprint backlog, user stories, or project description>
 allowed-tools: Read, Write, AskUserQuestion
 ---
