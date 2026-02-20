@@ -1,8 +1,8 @@
 # Data Product Operator
 
-Skills and commands for data product managers working in Claude Code.
+Skills and commands for data product managers.
 
-This plugin encodes practitioner knowledge for building data products, with a focus on healthcare data. It provides background skills (auto-activated) and slash commands (user-invoked) that cover the full data product lifecycle.
+Background skills activate on context. Slash commands produce structured artifacts (PRDs, quality reviews, stakeholder briefs). Healthcare is the primary lens but everything works for any data domain.
 
 ## Voice
 
@@ -39,18 +39,17 @@ Each step builds on the prior. Commands write output files that downstream steps
 
 ## Skill Composition
 
-Multiple skills may activate simultaneously. They reinforce each other:
+Multiple skills activate simultaneously. They cross-reference instead of duplicating. `ethical-risk-assessment` points to `data-quality-assessment` for scoring details rather than repeating the 5-dimension model.
 
-- `data-product-thinking` provides the decision framework (value-first, 5-risk model)
-- `data-quality-assessment` provides quality scoring (5 dimensions)
-- `metrics-definition` provides metric precision (outcome trees, naming rules)
-- `stakeholder-alignment` provides translation patterns (technical to business)
-- `data-team-operating-model` provides team structure (squads, cycles, handoffs)
-- `data-model-design` provides schema guidance (star schema, dimensional modeling)
-- `healthcare-data-domain` provides clinical data context (FHIR, OMOP, terminology)
-- `ethical-risk-assessment` provides governance practices (bias testing, phased rollout)
-
-When skills overlap, they cross-reference rather than duplicate. For example, `ethical-risk-assessment` says "For quality scoring details, see `data-quality-assessment`" rather than repeating the 5-dimension model.
+Quick map:
+- **Decision framing**: `data-product-thinking` (5-risk model, outcome trees)
+- **Quality**: `data-quality-assessment` (5 dimensions, circuit breakers)
+- **Metrics**: `metrics-definition` (naming rules, grain, trust metrics)
+- **Translation**: `stakeholder-alignment` (jargon to outcomes, shaping requests)
+- **Team ops**: `data-team-operating-model` (squads, Shape Up cycles)
+- **Schema**: `data-model-design` (star schema, SCDs, ADRs)
+- **Clinical data**: `healthcare-data-domain` (FHIR, OMOP, terminology)
+- **Ethics**: `ethical-risk-assessment` (bias testing, phased rollout)
 
 ## Skill Writing Rules
 

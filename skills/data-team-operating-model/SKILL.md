@@ -26,7 +26,7 @@ CRITICAL: The Data Lead is co-equal to the PM, not subordinate. They have veto a
 
 ## Shape Up for Data Teams
 
-Six-week cycles replace two-week sprints. Data products need longer cycles because discovery is continuous and data work is inherently uncertain.
+Six-week cycles replace two-week sprints. Data work has more unknowns than typical software — discovery doesn't stop when building starts.
 
 **Cycle structure:**
 - 2 weeks shaping (before the cycle): PM and Data Lead define the problem, set the appetite

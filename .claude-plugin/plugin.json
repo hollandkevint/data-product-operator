@@ -1,7 +1,7 @@
 {
   "name": "data-product-operator",
   "version": "0.1.0",
-  "description": "Claude Code skills for data product managers. Product thinking meets data engineering. Background skills for data quality, metrics, stakeholder alignment, and healthcare data. Slash commands for PRDs, quality reviews, and stakeholder briefs.",
+  "description": "Skills for data product managers. Quality scoring, metrics, stakeholder translation, schema design, and healthcare data patterns. Commands for PRDs, quality reviews, and stakeholder briefs.",
   "author": {
     "name": "Kevin Holland",
     "url": "https://kevintholland.com"
