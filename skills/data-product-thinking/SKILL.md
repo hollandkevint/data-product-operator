@@ -49,6 +49,12 @@ NEVER confuse data availability with product viability. Having the data doesn't 
 
 AVOID "we could also..." scope expansion. If it doesn't serve the defined outcome, it waits.
 
+## Upstream Discovery
+
+Before applying the Five-Risk Evaluation, validate that the problem is worth solving. Use `data-consumer-discovery` to gather evidence from actual consumers. Use `data-product-validation` to score demand, feasibility, and schema risk. Use `research-synthesis-data` to convert raw findings into ranked problems with traceable evidence chains.
+
+The sequence: discover consumers → synthesize findings → validate demand → then scope and evaluate risks here.
+
 ## Build vs Buy
 
 Ask: "How good would this solution have to be if we were charging users to use it?" If the answer requires custom work, build. If an off-the-shelf tool meets 80% of the bar, buy and customize.

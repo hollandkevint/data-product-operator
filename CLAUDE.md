@@ -27,10 +27,12 @@ For non-healthcare data products, these skills stay inactive. All other skills u
 The skills compose in this natural sequence:
 
 ```
-scope problem -> write PRD -> define metrics -> review model -> test pipeline -> tell the story -> write stakeholder brief
+discover consumers -> synthesize findings -> validate demand -> scope problem -> write PRD -> define metrics -> review model -> test pipeline -> tell the story -> write stakeholder brief
 ```
 
 Each step builds on the prior. Commands write output files that downstream steps can reference:
+- `/run-discovery` writes `discovery-brief-<name>.md`
+- `/write-problem-brief` writes `problem-brief-<name>.md`
 - `/write-data-prd` writes `data-prd-<name>.md`
 - `/review-data-quality` writes `quality-review-<name>.md`
 - `/write-stakeholder-brief` writes `stakeholder-brief-<name>.md`
@@ -42,6 +44,10 @@ Each step builds on the prior. Commands write output files that downstream steps
 Multiple skills activate simultaneously. They cross-reference instead of duplicating. `ethical-risk-assessment` points to `data-quality-assessment` for scoring details rather than repeating the 5-dimension model.
 
 Quick map:
+- **Discovery**: `data-consumer-discovery` (Mom Test for data, workaround archaeology, consumer segments)
+- **Validation**: `data-product-validation` (5-dimension scorecard, experiment types, Type 1/2 decisions)
+- **Synthesis**: `research-synthesis-data` (atomic research chain, evidence hierarchy, 3 outputs)
+- **Team positioning**: `data-team-positioning` (3 stances, evidence as currency, betting table pitches)
 - **Decision framing**: `data-product-thinking` (5-risk model, outcome trees)
 - **Quality**: `data-quality-assessment` (5 dimensions, circuit breakers)
 - **Metrics**: `metrics-definition` (naming rules, grain, trust metrics)

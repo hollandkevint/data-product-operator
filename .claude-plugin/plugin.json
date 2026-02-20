@@ -1,7 +1,7 @@
 {
   "name": "data-product-operator",
-  "version": "1.0.0",
-  "description": "Skills for data product managers. Quality scoring, metrics, stakeholder translation, schema design, and healthcare data patterns. Commands for PRDs, quality reviews, and stakeholder briefs.",
+  "version": "1.1.0",
+  "description": "Skills for data product managers. Discovery, validation, quality scoring, metrics, stakeholder translation, schema design, and healthcare data patterns. Commands for discovery sessions, problem briefs, PRDs, quality reviews, and stakeholder briefs.",
   "author": {
     "name": "Kevin Holland",
     "url": "https://kevintholland.com"
