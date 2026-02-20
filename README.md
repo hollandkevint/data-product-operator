@@ -52,7 +52,7 @@ Built on the **Data Product Operating System (DPOS)** — a framework for buildi
 - [DPOS Blog Series](https://kevintholland.com) — the thinking behind these practices
 - [DPOS Assessment](https://kevintholland.com) — score your data team's maturity across 4 dimensions
 
-Built by [Kevin Holland](https://kevintholland.com) ([LinkedIn](https://linkedin.com/in/kevintholland)). 6 years building healthcare data products across 36M patient records.
+Built by [Kevin Holland](https://kevintholland.com) ([LinkedIn](https://linkedin.com/in/kevintholland)). 10 years building healthcare data products across 36M patient records.
 
 ## Contributing
 
