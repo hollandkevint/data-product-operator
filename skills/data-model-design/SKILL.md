@@ -58,4 +58,21 @@ Before building, validate with limited data:
 4. Check query performance against SLA
 5. Confirm grain is correct (no unexpected row multiplication)
 
+## Source Schema Evaluation
+
+You probably won't design the OLTP schema. But you'll need to evaluate whether it's a reliable source for your data product.
+
+Quick checklist before building on a source system:
+- Primary keys defined and enforced (not just implied by convention)
+- Foreign keys constrained at the database level (not just in the application)
+- Indexes on FK columns (missing indexes = slow extracts)
+- NOT NULL on required fields (nullable everything = garbage in)
+- Migrations are reversible (no destructive ALTER TABLE without a rollback plan)
+
+Anti-patterns to flag immediately:
+- `VARCHAR(255)` on every string column (signals no thought about data types)
+- `FLOAT` or `DOUBLE` for money (use `DECIMAL` or integer cents)
+- Missing FK constraints ("the app handles it" means orphaned rows)
+- Dates stored as strings ("2024-01-15" in a `VARCHAR` breaks sorting and comparison)
+
 See `schema-patterns.md` for common dimensional modeling patterns.

@@ -27,6 +27,8 @@ Background skills activate automatically based on context.
 | `metrics-definition` | Defines metrics with precision: numerator/denominator, grain, time window, edge cases, naming conventions. |
 | `data-team-operating-model` | Squad structure, Shape Up 6-week cycles for data teams, handoff contracts, role assignments by lifecycle stage. |
 | `healthcare-data-domain` | FHIR, OMOP, HL7, clinical terminology (ICD-10, SNOMED, CPT, LOINC, RxNorm), claims data patterns. |
+| `data-storytelling` | Presents data findings to stakeholders. Headline formulas, narrative structures, chart selection, anti-patterns. |
+| `data-pipeline-quality` | Automated quality checks in pipelines. Testing pyramid, dbt patterns, data contracts, circuit breakers, monitoring. |
 | `ethical-risk-assessment` | Bias audit protocols, phased rollout governance, ethics canvas for ML features, HIPAA scope awareness. |
 
 ## Commands

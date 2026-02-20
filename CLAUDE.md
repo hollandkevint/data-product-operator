@@ -49,6 +49,8 @@ Quick map:
 - **Team ops**: `data-team-operating-model` (squads, Shape Up cycles)
 - **Schema**: `data-model-design` (star schema, SCDs, ADRs)
 - **Clinical data**: `healthcare-data-domain` (FHIR, OMOP, terminology)
+- **Storytelling**: `data-storytelling` (headlines, narrative arcs, chart selection)
+- **Pipeline quality**: `data-pipeline-quality` (dbt tests, contracts, circuit breakers)
 - **Ethics**: `ethical-risk-assessment` (bias testing, phased rollout)
 
 ## Skill Writing Rules

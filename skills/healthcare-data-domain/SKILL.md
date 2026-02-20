@@ -47,6 +47,40 @@ The 30-40 normalized OMOP tables are wrong for analytics dashboards. Transform t
 
 See `domain-reference.md` for detailed OMOP table relationships and FHIR resource mappings.
 
+## FHIR Gotchas
+
+Common mistakes when working with FHIR resources:
+
+| Gotcha | What Trips You Up | Fix |
+|--------|-------------------|-----|
+| Coding vs CodeableConcept | `Coding` is a single code. `CodeableConcept` wraps multiple codings with a display text. Most FHIR fields use CodeableConcept. | Always access `.coding[0].code`, not `.code` directly. |
+| Patient.identifier vs Patient.id | `.id` is the FHIR server's internal ID. `.identifier` holds MRNs, SSNs, and other business identifiers. | Query by `.identifier.value` with the correct `.identifier.system`. |
+| Observation.value[x] | Polymorphic field. Could be `valueQuantity`, `valueString`, `valueCodeableConcept`, or others. | Check the resource profile or test data to know which type your source sends. |
+| Bundle pagination | Search results return pages of 20-50 resources. The full result set requires following `Bundle.link` where `relation = "next"`. | Always paginate. NEVER assume a single Bundle contains all results. |
+
+## FHIR-to-OMOP Mapping
+
+When transforming FHIR resources into OMOP CDM:
+
+| FHIR Resource | OMOP Table | Key Mapping Notes |
+|---------------|-----------|-------------------|
+| Patient | person | Map `Patient.birthDate` → `year_of_birth`. Gender codes differ between systems. |
+| Condition | condition_occurrence | `Condition.code` → `condition_concept_id` via SNOMED-to-OMOP vocabulary mapping. |
+| Observation | measurement | Lab results map here. Use LOINC code from `Observation.code` for `measurement_concept_id`. |
+| MedicationRequest | drug_exposure | Map RxNorm codes. `MedicationRequest.dosageInstruction` → `dose_value`/`dose_unit`. |
+| Encounter | visit_occurrence | `Encounter.class` → `visit_concept_id`. Map inpatient/outpatient/emergency. |
+
+## Common LOINC Codes for Vitals
+
+| Vital Sign | LOINC Code | Units |
+|------------|-----------|-------|
+| Blood pressure, systolic | 8480-6 | mmHg |
+| Blood pressure, diastolic | 8462-4 | mmHg |
+| Heart rate | 8867-4 | /min |
+| Body temperature | 8310-5 | Cel |
+| Body weight | 29463-7 | kg |
+| Body height | 8302-2 | cm |
+
 ## HIPAA Awareness
 
 CRITICAL: Any data product handling patient data must consider the 18 HIPAA identifiers. See `domain-reference.md` for the full list. De-identification is required before data leaves a HIPAA-governed environment.
