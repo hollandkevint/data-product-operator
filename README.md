@@ -25,6 +25,14 @@ claude --plugin-dir /path/to/data-product-operator
 
 ## Skills
 
+### Healthcare Data Readiness Debrief
+
+Work through one healthcare data project and produce a short brief with evidence gaps, next checks and owners. Use it as a worksheet or with your approved AI assistant. No patient records or database access required.
+
+[Get the standalone skill](skills/healthcare-data-readiness-debrief/CONTEXT.md) · [Twelve synthetic examples](skills/healthcare-data-readiness-debrief/examples/scenarios.md) · [Codex and Claude installation](docs/healthcare-data-readiness.md)
+
+This is a debrief, not a dataset audit or compliance certification. The package documents its simulated tests and limits. It can be used without the rest of the plugin.
+
 Background skills activate automatically based on context.
 
 | Skill | What It Does |

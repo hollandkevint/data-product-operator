@@ -61,6 +61,8 @@ Quick map:
 
 ## Skill Writing Rules
 
+The standalone `healthcare-data-readiness-debrief` is directly invocable and portable across Codex and Claude. Its frontmatter uses `name`, `description`, and `metadata.version`; do not add `user-invocable: false`. Its longer entrypoint preserves interview and safety boundaries, with domain detail in references. Do not impose maturity scores or dataset access from adjacent skills on this debrief.
+
 For contributors adding or modifying skills:
 
 - YAML frontmatter: `name`, `description` (with trigger phrases), `user-invocable: false`, `version`
