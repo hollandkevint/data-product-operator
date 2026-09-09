@@ -2,7 +2,7 @@
 name: healthcare-data-readiness-debrief
 description: Debrief one healthcare data project where preparation took more work than expected. Use a project summary or short interview to identify evidence gaps, trace their effect on the intended use, and produce a practical next-check brief. Works without patient records or database access.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # Healthcare Data Readiness Debrief

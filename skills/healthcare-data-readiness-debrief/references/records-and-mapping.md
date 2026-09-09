@@ -8,6 +8,8 @@ An HTTP success or an empty response does not establish complete clinical covera
 
 Propose synthetic fixtures with known records, multiple pages and unsupported filters inside the approved environment. Distinguish unavailable records from absent events. No returned medication record does not establish that a patient takes no medication; an order returned does not establish actual use.
 
+A successful synthetic query supports only the retrieval behavior exercised by that fixture. It does not prove that source coverage, rather than filtering, permissions or another difference, caused the original absence. Compare the original request and scope before assigning a cause. Label untested explanations as hypotheses.
+
 Source: [FHIR R4 search](https://hl7.org/fhir/R4/search.html).
 
 ## Identity and access

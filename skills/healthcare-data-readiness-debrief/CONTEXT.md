@@ -35,6 +35,8 @@ These were same-model conversational exercises with an AI reviewer. Most testers
 
 This packaging follow-up clarified single-question interviewing, shorter briefs and completed-retrospective handling. Those edits received structural and editorial checks; the 25 conversations predate them and were not rerun. Their results should not be presented as a fresh benchmark of this exact package.
 
+Installation smoke tests subsequently exercised Codex on a synthetic claims-payment case and Claude on a synthetic record-retrieval case. The Claude run exposed an unsupported causal conclusion; version 0.1.1 adds a retrieval-evidence boundary, and a focused retest kept the original cause unresolved. These checks establish invocation and limited behavior, not a full regression pass. The host must allow the assistant to read the bundled reference files.
+
 Review the brief before using it. Check whether it preserves your account, identifies a consequential uncertainty and proposes a check your team can perform. Correct mistaken interpretations. An unresolved answer is useful when the brief identifies who can resolve it.
 
 ## Design context
