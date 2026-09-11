@@ -1,6 +1,6 @@
 ---
 name: data-pipeline-quality
-version: 0.1.0
+version: 0.1.1
 description: >
   Automated data quality checks for pipelines. Testing pyramids, dbt test patterns,
   data contracts, circuit breakers, and monitoring. Use when implementing data quality
@@ -96,9 +96,9 @@ CRITICAL: Never auto-heal data quality issues in production. Alert, block, inves
 
 Track quality over time, not just point-in-time pass/fail:
 
-- **Row count trends**: Expected vs actual with tolerance bands. A sudden 40% drop is a pipeline failure. A gradual 5% weekly decline is a source issue.
-- **Freshness**: Time since last successful pipeline run. Track P50 and P95, not just "last run."
-- **Anomaly detection**: Statistical thresholds beat static thresholds. A metric that normally ranges 1,000-1,200 firing at 950 is more useful than a static "alert below 500" that never triggers.
+- **Row count trends**: Compare expected and observed counts within the same scope. Abrupt or gradual changes suggest checks; their shape does not establish source or pipeline root cause. Test competing explanations.
+- **Freshness**: Separate source-event time, arrival time and processing time against the consumer's requirement. A successful run can process stale or incomplete inputs. Track the relevant lag distribution and coverage.
+- **Anomaly detection**: Choose statistical or fixed thresholds for the risk, seasonality and available history. Confirm expected ranges with the owner; a statistical alert does not replace an acceptance rule.
 
 ## Cross-References
 

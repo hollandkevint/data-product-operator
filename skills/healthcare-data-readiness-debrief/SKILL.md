@@ -11,7 +11,17 @@ Help a healthcare data professional answer: What made this project's data prepar
 
 Work on one project and one intended use. A retrospective can end with lessons for the next project. An active project should end with an evidence request or check that helps its owner make the next decision.
 
-For recipient setup and the limits of prior testing, see `CONTEXT.md`. No other skill, plugin, private vault or database connection is required.
+## Using this file
+
+Read the questions as a worksheet, or give this file and the relevant linked reference to your team's approved AI assistant. Start with an approved summary of one project. Ask for one question at a time, or request a brief from the summary. Say “brief now” to stop the interview. No patient records or database access are needed.
+
+The output is a short brief with the intended use, what happened, unresolved questions, next checks and owners to confirm. The instructions below guide the assistant; you do not need to answer every question in this file.
+
+[See a complete fictional brief](example.md) · [Browse synthetic scenarios](examples/scenarios.md) · [Setup and testing limits](CONTEXT.md) · [Install in Codex or Claude Code](../../docs/healthcare-data-readiness.md) · [Full skill library](../../README.md)
+
+Keep the supporting files with this skill. If your assistant cannot open a reference, supply that file separately. No other skill or plugin is required. Use approved summaries or synthetic examples, not patient records, credentials, confidential contracts or restricted study materials. This debrief does not audit a dataset or approve a launch. Your chosen assistant's data-handling rules still apply.
+
+## Instructions for the assistant
 
 ## Start with their account
 
@@ -52,9 +62,9 @@ For example: “What does one row represent?” is a factual question. “I reco
 
 Read only the matching reference before domain-specific questioning or a brief. A project may need two routes. Keep distinct decisions separate.
 
-- HEDIS or eCQM reporting, trial feasibility or trial data: `references/quality-and-trials.md`.
-- Patient record pulls, identity matching, HL7/FHIR mapping: `references/records-and-mapping.md`.
-- Claims analysis, RCM/billing, scheduling, support or support AI: `references/claims-and-operations.md`.
+- HEDIS or eCQM reporting, trial feasibility or trial data: [Quality and trials](references/quality-and-trials.md).
+- Patient record pulls, identity matching, HL7/FHIR mapping: [Records and mapping](references/records-and-mapping.md).
+- Claims analysis, RCM/billing, scheduling, support or support AI: [Claims and operations](references/claims-and-operations.md).
 
 These references provide investigation prompts and public source boundaries, not executable measure logic or a compliance checklist. Bind consequential rules to the user's applicable program, period, specification/profile/protocol and terminology versions. The newest version is not automatically the applicable one. Ask for approved source labels and owners, not restricted document contents. If current normative details matter, verify the primary source and its applicability; without access, leave them unresolved rather than recalling rules from memory.
 
@@ -114,6 +124,6 @@ When the user supplies only a narrative, describe the output as a debrief based 
 
 Before handing off, verify that every asserted cause has evidence or a hypothesis label; every proposed check names the decision it informs; and no claim of readiness, benefit, or completed testing exceeds the inputs.
 
-Use the example in `example.md` only when a user asks what the output looks like. Its project and results are fictional; never use them as evidence about the user's project.
+Use the [complete example](example.md) only when a user asks what the output looks like. Its project and results are fictional; never use them as evidence about the user's project.
 
-For additional worked scenarios, see `examples/scenarios.md`. They are synthetic teaching cases, not verified customer outcomes. Do not load them as evidence for a live project.
+For additional worked scenarios, see [synthetic scenarios](examples/scenarios.md). They are synthetic teaching cases, not verified customer outcomes. Do not load them as evidence for a live project.

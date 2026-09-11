@@ -1,6 +1,6 @@
 ---
 name: healthcare-data-domain
-version: 0.1.0
+version: 0.1.1
 description: >
   Healthcare data domain context covering FHIR, HL7, OMOP CDM, real-world evidence,
   and clinical terminology systems. Use when working on clinical data pipelines,
@@ -32,20 +32,20 @@ Do NOT activate for: general analytics, marketing data, financial data, or non-c
 | CPT | Procedures | 99213 (Office visit, established patient) |
 | SNOMED CT | Clinical concepts | 73211009 (Diabetes mellitus) |
 | LOINC | Lab tests/observations | 2345-7 (Glucose, serum/plasma) |
-| RxNorm | Medications | 197361 (Sertraline 50mg tablet) |
+| RxNorm | Medications | Resolve ingredient, strength and dose form against the selected release |
 | NDC | Drug packages | National Drug Code for specific manufacturer/package |
 
-ALWAYS use standard terminology codes rather than free-text descriptions. Map to the appropriate code system for the use case.
+Preserve original codes, text, system and version. Use the appropriate standard terminology when a supported mapping exists; keep ambiguous and unmapped values visible for review. Verify example codes against the applicable vocabulary release before implementation.
 
 ## OMOP Analytics Patterns
 
-The 30-40 normalized OMOP tables are wrong for analytics dashboards. Transform to star schema with strategic denormalization:
+Choose an analytical view or serving model for the consumer's query pattern while preserving the canonical CDM and provenance. If a star schema is useful:
 - Fact tables: Drug exposures, visits, conditions (events become facts)
 - Dimension tables: Patient, drug, diagnosis
 - Pre-calculated cohort definitions for common queries
-- NEVER fully denormalize (One Big Table). Healthcare's many-to-many relationships cause exponential row growth.
+- Check join cardinality before denormalizing. Multiple event tables can multiply rows and distort totals; aggregate at the intended grain before joining when appropriate.
 
-See `domain-reference.md` for detailed OMOP table relationships and FHIR resource mappings.
+See [domain-reference.md](domain-reference.md) for source types and interpretation limits. Confirm the deployed CDM version before using any mapping.
 
 ## FHIR Gotchas
 
@@ -53,10 +53,10 @@ Common mistakes when working with FHIR resources:
 
 | Gotcha | What Trips You Up | Fix |
 |--------|-------------------|-----|
-| Coding vs CodeableConcept | `Coding` is a single code. `CodeableConcept` wraps multiple codings with a display text. Most FHIR fields use CodeableConcept. | Always access `.coding[0].code`, not `.code` directly. |
+| Coding vs CodeableConcept | A CodeableConcept can contain several codings and text. The first coding need not be the required system. | Select by the expected system and applicable version; preserve alternatives and handle text-only values. |
 | Patient.identifier vs Patient.id | `.id` is the FHIR server's internal ID. `.identifier` holds MRNs, SSNs, and other business identifiers. | Query by `.identifier.value` with the correct `.identifier.system`. |
 | Observation.value[x] | Polymorphic field. Could be `valueQuantity`, `valueString`, `valueCodeableConcept`, or others. | Check the resource profile or test data to know which type your source sends. |
-| Bundle pagination | Search results return pages of 20-50 resources. The full result set requires following `Bundle.link` where `relation = "next"`. | Always paginate. NEVER assume a single Bundle contains all results. |
+| Bundle pagination | Page size is server-dependent. A successful first response may cover only part of the search. | Follow authorized `next` links, verify filters and scope, and distinguish complete retrieval from complete clinical history. |
 
 ## FHIR-to-OMOP Mapping
 
@@ -66,8 +66,8 @@ When transforming FHIR resources into OMOP CDM:
 |---------------|-----------|-------------------|
 | Patient | person | Map `Patient.birthDate` → `year_of_birth`. Gender codes differ between systems. |
 | Condition | condition_occurrence | `Condition.code` → `condition_concept_id` via SNOMED-to-OMOP vocabulary mapping. |
-| Observation | measurement | Lab results map here. Use LOINC code from `Observation.code` for `measurement_concept_id`. |
-| MedicationRequest | drug_exposure | Map RxNorm codes. `MedicationRequest.dosageInstruction` → `dose_value`/`dose_unit`. |
+| Observation | measurement or another appropriate domain | Resolve the concept's domain, value type and units under the applicable vocabulary and CDM conventions; not every Observation is a measurement. |
+| MedicationRequest | drug_exposure when supported by the ETL convention | Preserve the order's provenance/type and supported fields. CDM 5.4 has no generic `dose_value`/`dose_unit` fields in this table. Do not infer actual use or dose from strength. |
 | Encounter | visit_occurrence | `Encounter.class` → `visit_concept_id`. Map inpatient/outpatient/emergency. |
 
 ## Common LOINC Codes for Vitals
@@ -83,6 +83,10 @@ When transforming FHIR resources into OMOP CDM:
 
 ## HIPAA Awareness
 
-CRITICAL: Any data product handling patient data must consider the 18 HIPAA identifiers. See `domain-reference.md` for the full list. De-identification is required before data leaves a HIPAA-governed environment.
+Determine applicable privacy rules, permitted purpose, recipients and agreements with the responsible owner. HIPAA permits some identifiable-data uses and disclosures under specified conditions; de-identification is one route, not a universal condition for every transfer. Do not export data based on this overview.
 
 This skill provides general domain context, not compliance advice. Involve your privacy officer and legal team for HIPAA compliance decisions.
+
+## Source checks
+
+Reviewed September 10, 2026: [FHIR R4 datatypes](https://hl7.org/fhir/R4/datatypes.html#CodeableConcept), [FHIR R4 search](https://hl7.org/fhir/R4/search.html), [OMOP CDM 5.4](https://ohdsi.github.io/CommonDataModel/cdm54.html) and [HHS Privacy Rule summary](https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html). These are versioned or scope-limited sources, not automatic approval for a project.
