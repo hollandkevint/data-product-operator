@@ -5,14 +5,14 @@
     "email": "hollandkevint@users.noreply.github.com"
   },
   "metadata": {
-    "description": "Skills and commands for data product managers",
-    "version": "1.2.1"
+    "description": "An operating system for data leaders and data product managers",
+    "version": "1.3.0"
   },
   "plugins": [
     {
       "name": "data-product-operator",
       "source": "./",
-      "description": "Data product thinking, quality, metrics, storytelling, pipeline quality, stakeholder alignment, schema design, team ops, healthcare data, and ethics."
+      "description": "Domain-agnostic data-product skills, operating loops and analyst evidence graphs, with healthcare, marketing, logistics/ops and ecommerce applications."
     }
   ]
 }

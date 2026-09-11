@@ -1,6 +1,6 @@
 ---
 name: data-team-operating-model
-version: 0.1.0
+version: 0.1.1
 description: >
   Team structure and operating rhythm for data product teams. Product squads,
   Shape Up 6-week cycles, handoff contracts, and role assignments by lifecycle
@@ -13,7 +13,7 @@ user-invocable: false
 
 ## Product Squad Structure
 
-Data products need four co-equal roles, not a hierarchy:
+Use this four-role model as one option. Fit accountabilities to the actual team and decision rights; one person may cover several roles.
 
 | Role | Owns | Veto Authority |
 |------|------|---------------|
@@ -22,11 +22,11 @@ Data products need four co-equal roles, not a hierarchy:
 | Design Lead | UX, usability, information design | User experience |
 | Data Lead | Data quality, ethics, data engineering | Ethical concerns |
 
-CRITICAL: The Data Lead is co-equal to the PM, not subordinate. They have veto authority on ethical data concerns. This is what distinguishes data product teams from software product teams.
+Agree on escalation and stop-work rights with the organization. This example does not grant veto authority or replace clinical, privacy, security or operational owners.
 
 ## Shape Up for Data Teams
 
-Six-week cycles replace two-week sprints. Data work has more unknowns than typical software — discovery doesn't stop when building starts.
+Consider Shape Up when bounded project bets fit the work. Keep the existing cadence when it serves the team; incident response and regulatory deadlines may need different rhythms. The following is an example, not a required schedule.
 
 **Cycle structure:**
 - 2 weeks shaping (before the cycle): PM and Data Lead define the problem, set the appetite
@@ -73,7 +73,7 @@ Example: Discovery -> Decide handoff:
 - From: PM + Data Lead
 - To: Full squad
 - Required: Problem brief with evidence, data availability assessment, ethical screening
-- Quality gates: Problem validated with 3+ customer data points, no blocking constraints
+- Quality gates: Decision-relevant evidence reviewed, contradictions and blocking constraints named, and an accepting owner identified; no universal interview-count threshold
 - Trigger: Shaping session scheduled
 
 NEVER hand off without context documentation. "I'll explain it in the meeting" is how context dies.

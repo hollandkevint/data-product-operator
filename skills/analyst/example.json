@@ -1,0 +1,12 @@
+{
+  "revision": "synthetic-active-accounts-review-1",
+  "nodes": [
+    {"id": "q1", "kind": "question", "summary": "Can the monthly active-accounts report support the product review?", "owner": "Synthetic product owner", "depends_on": [], "skills": ["skills/data-consumer-discovery/SKILL.md"]},
+    {"id": "d1", "kind": "definition", "summary": "One row per tenant and account with a qualifying activity event in August, cutoff September 5. Qualifying events and late-event handling remain unresolved.", "version": "draft-1", "depends_on": ["q1"], "skills": ["skills/metrics-definition/SKILL.md"]},
+    {"id": "s1", "kind": "source", "summary": "Fictional activity export; coverage and late-event semantics are not confirmed.", "version": "fictional-export-2026-09-05", "locator": "Synthetic narrative in this file; no personal records or live source", "depends_on": [], "skills": ["skills/data-model-design/SKILL.md"]},
+    {"id": "c1", "kind": "check", "summary": "Reconcile source and output account counts and key multiplicity at the declared grain, including duplicate and late-event cases.", "method": "Group by tenant and account before and after the account join; compare event and arrival times under the confirmed rules.", "expected": "No unexplained count difference or key multiplication within the pinned scope; the product owner must confirm acceptance criteria.", "state": "proposed", "basis": "synthetic", "result": null, "run_ref": null, "depends_on": ["d1", "s1"], "skills": ["skills/data-quality-assessment/SKILL.md", "skills/duckdb-data-profiling/SKILL.md"]},
+    {"id": "f1", "kind": "finding", "summary": "Join inflation and late-event handling are competing hypotheses. Neither is established by this example.", "basis": "hypothesis", "depends_on": ["c1"], "skills": ["skills/research-synthesis-data/SKILL.md"]},
+    {"id": "j1", "kind": "decision", "summary": "Hold the report handoff pending event definitions and executed reconciliation.", "state": "hold", "owner": "Synthetic product owner", "scope": "August active-accounts report only", "review_trigger": "Source owner confirms rules and analyst supplies run evidence", "depends_on": ["f1"], "skills": ["skills/stakeholder-alignment/SKILL.md"]},
+    {"id": "o1", "kind": "outcome", "summary": "No product-owner acceptance or recurrence observation has occurred.", "state": "pending", "window": "Agree on the observation period with the product owner", "evidence": null, "depends_on": ["j1"], "skills": ["skills/data-product-operator/SKILL.md"]}
+  ]
+}

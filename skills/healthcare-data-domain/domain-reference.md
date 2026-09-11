@@ -38,9 +38,9 @@ Detailed reference for clinical data systems, terminology codes, and regulatory 
 ### Workflow
 - ServiceRequest, Task, Communication
 
-## HIPAA 18 Identifiers (PHI)
+## HIPAA Safe Harbor identifier categories
 
-Data containing any of these requires HIPAA protections:
+The following is an abbreviated orientation to identifier categories, not a de-identification checklist. HIPAA applicability depends on the information, entity and activity. Safe Harbor has detailed exceptions and an actual-knowledge condition; Expert Determination is a separate method. Use the [HHS de-identification guidance](https://www.hhs.gov/hipaa/for-professionals/special-topics/de-identification/index.html) and qualified review rather than this summary to make a release decision.
 
 1. Names
 2. Geographic data smaller than state
@@ -66,13 +66,13 @@ Data containing any of these requires HIPAA protections:
 ### Claims Data
 - Medical claims (professional, institutional, pharmacy)
 - Sources: Medicare (CMS), commercial payers, Medicaid
-- Strengths: large populations, longitudinal, billing-complete
-- Weaknesses: diagnosis coding driven by reimbursement, no clinical detail
+- Potential strengths: Longitudinal billed-service history within the source's payer and enrollment scope
+- Limits: Adjudication lag, corrections, coding incentives and care outside coverage; clinical detail varies by feed
 
 ### EHR Data
 - Clinical notes, lab results, vitals, medications, orders
 - Sources: Epic, Cerner, Allscripts, custom systems
-- Strengths: clinical richness, real-time availability
+- Potential strengths: Clinical detail from documented care; extraction freshness and completeness must be checked
 - Weaknesses: documentation bias, site-specific variation, extraction complexity
 
 ### Registry Data

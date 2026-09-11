@@ -1,12 +1,12 @@
 # Data Product Operator
 
-Skills and commands for data product managers.
+An operating system for data leaders and data product managers, with reusable skills, decision records and workflow handoffs. Keep the top-level positioning domain agnostic.
 
-Background skills activate on context. Slash commands produce structured artifacts (PRDs, quality reviews, stakeholder briefs). Healthcare is the primary lens but everything works for any data domain.
+Skill discovery depends on the host. Slash commands produce structured artifacts (PRDs, quality reviews, stakeholder briefs). Core data-product skills apply across domains; use healthcare-specific skills when the project calls for them.
 
 ## Voice
 
-Write like a practitioner, not a consultant. Use specific numbers, real examples, and concrete frameworks. Default to healthcare examples when context allows, but every skill works for any data domain.
+Write like a practitioner, not a consultant. Use supported numbers, sourced or clearly synthetic examples, and concrete checks. Use the reader's domain; do not default to healthcare.
 
 NEVER use: leverage, utilize, synergy, robust, seamless, comprehensive, delve, pivotal, furthermore, notably, "drive insights", "leverage data assets", or Gartner-speak.
 
@@ -14,13 +14,17 @@ ALWAYS use: active voice, specific numbers ("$2,847" not "significant cost"), co
 
 ## DPOS Framework Context
 
-The Data Product Operating System (DPOS) is a framework for building data products that actually ship. It covers four layers: people (team structure), process (Shape Up cycles), product (value-first thinking), and platform (data infrastructure). Skills in this plugin encode DPOS practices. Learn more at kevintholland.com.
+The Data Product Operating System (DPOS) covers people, process, product and platform. Start with [Data Product Operator](skills/data-product-operator/SKILL.md) for leader/DPM decisions and a repeatable operating loop. Grow from one decision to a product, team or portfolio only when needed. Shape Up is one process option, not a required cadence. The library supports operating work; it does not autonomously run a company or replace its tracker. Learn more at kevintholland.com.
 
-## Healthcare Context
+## Domain and platform context
 
-One skill (`healthcare-data-domain`) and portions of `ethical-risk-assessment` are healthcare-specific. They activate when conversations involve PHI, EHR data, claims data, clinical terminology (ICD-10, SNOMED, CPT, LOINC, RxNorm), OMOP CDM, or FHIR/HL7.
+Keep domain packs below the core OS in navigation. [Domain applications](docs/domain-applications.md) covers marketing data, logistics/operations and ecommerce using core skills. [Healthcare applications](docs/healthcare-applications.md) has additional dedicated skills. State differences in pack depth and testing; do not imply equal maturity.
 
-For non-healthcare data products, these skills stay inactive. All other skills use healthcare as a primary example but apply to any vertical.
+The healthcare pack includes `healthcare-data-readiness-debrief`, `healthcare-cohort-design`, `healthcare-data-reconciliation`, `healthcare-data-domain` and relevant portions of `ethical-risk-assessment`. Choose the specific job; do not load every healthcare skill automatically.
+
+Platform guidance lives in `databricks-data-product-review` and `duckdb-data-profiling`. Keep the clinical definition separate from execution details. Confirm the environment and authorization before running queries, changing data or exporting results.
+
+Healthcare-specific skills stay inactive for non-healthcare work. Core skills may retain healthcare examples as historical illustrations; adapt them to the current domain without importing clinical assumptions.
 
 ## Workflow Chain
 
@@ -41,7 +45,9 @@ Each step builds on the prior. Commands write output files that downstream steps
 
 ## Skill Composition
 
-Multiple skills activate simultaneously. They cross-reference instead of duplicating. `ethical-risk-assessment` points to `data-quality-assessment` for scoring details rather than repeating the 5-dimension model.
+Use [Analyst](skills/analyst/SKILL.md) for an explicit evidence graph across skills. Route from the unresolved decision; record definition/source versions, proposed versus executed checks, findings, owner decisions and follow-up observations. [Healthcare applications](docs/healthcare-applications.md) provide domain routes. Keep project evidence outside the public repository. Test graph changes with `python3 skills/analyst/scripts/check_graph.py --self-test`.
+
+Hosts may select several skills or require explicit invocation. They cross-reference instead of duplicating. `ethical-risk-assessment` points to `data-quality-assessment` for scoring details rather than repeating the 5-dimension model.
 
 Quick map:
 - **Discovery**: `data-consumer-discovery` (Mom Test for data, workaround archaeology, consumer segments)
@@ -65,7 +71,7 @@ The standalone `healthcare-data-readiness-debrief` is directly invocable and por
 
 For contributors adding or modifying skills:
 
-- YAML frontmatter: `name`, `description` (with trigger phrases), `user-invocable: false`, `version`
+- New portable skills use `name`, a task-specific `description`, and `metadata.version`. Keep them directly invocable and discoverable. Preserve existing invocation policy unless deliberately changing it.
 - Body: 50-80 lines for foundational skills, 80-100 lines for domain skills
 - Imperative voice: "Write", "Avoid", "Include"
 - Use ALWAYS/NEVER/CRITICAL for non-negotiable rules
