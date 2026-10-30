@@ -35,13 +35,13 @@ discover consumers -> synthesize findings -> validate demand -> scope problem ->
 ```
 
 Each step builds on the prior. Commands write output files that downstream steps can reference:
-- `/run-discovery` writes `discovery-brief-<name>.md`
-- `/write-problem-brief` writes `problem-brief-<name>.md`
-- `/write-data-prd` writes `data-prd-<name>.md`
-- `/review-data-quality` writes `quality-review-<name>.md`
-- `/write-stakeholder-brief` writes `stakeholder-brief-<name>.md`
-- `/reshape-sprint` writes `shaped-pitch-<name>.md`
-- `/review-data-model` provides conversational critique
+- `/data-product-operator:run-discovery` writes `discovery-brief-<name>.md`
+- `/data-product-operator:write-problem-brief` writes `problem-brief-<name>.md`
+- `/data-product-operator:write-data-prd` writes `data-prd-<name>.md`
+- `/data-product-operator:review-data-quality` writes `quality-review-<name>.md`
+- `/data-product-operator:write-stakeholder-brief` writes `stakeholder-brief-<name>.md`
+- `/data-product-operator:reshape-sprint` writes `shaped-pitch-<name>.md`
+- `/data-product-operator:review-data-model` provides conversational critique
 
 ## Skill Composition
 
