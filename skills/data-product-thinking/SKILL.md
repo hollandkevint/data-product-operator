@@ -33,19 +33,19 @@ Before committing to any data product bet, evaluate all five risks:
 4. **Business viability risk** - Does it work for the business model?
 5. **Ethical data risk** - Can we build it without bias, privacy violations, or unintended harm? (This is the 5th risk unique to data products. See `ethical-risk-assessment` for the full framework.)
 
-CRITICAL: Never skip ethical data risk. A technically correct model that produces biased outcomes is worse than no model.
+Never skip ethical data risk. A technically correct model that produces biased outcomes is worse than no model.
 
 ## Decision Framing
 
-ALWAYS start with the problem, not the data. "Payers need to reduce readmissions" before "we have claims data."
+Start with the problem, not the data. "Payers need to reduce readmissions" before "we have claims data."
 
-ALWAYS define success metrics before data requirements. Build an outcome metric tree:
+Define success metrics before data requirements. Build an outcome metric tree:
 - Business outcome (reduce readmissions 10%)
 - Product outcome (clinical decisions 3x faster)
 - Feature outcome (risk scores updated real-time)
 - Leading indicator (query latency under 1 second)
 
-NEVER confuse data availability with product viability. Having the data doesn't mean there's a product.
+Never confuse data availability with product viability. Having the data doesn't mean there's a product.
 
 AVOID "we could also..." scope expansion. If it doesn't serve the defined outcome, it waits.
 

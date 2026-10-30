@@ -23,7 +23,7 @@ Ask these in order. Each builds on the prior answer:
 
 5. **"If you could get this answer in under a minute, what changes?"** Gauges impact. If the answer is "nothing much," the problem isn't painful enough to build for. If it's "we could catch billing errors before they go out," you have a validated need.
 
-NEVER ask "what data do you want?" or "what would you like us to build?" These questions produce wish lists, not validated needs. The Mom Test applies to data teams: talk about their life, not your product.
+Never ask "what data do you want?" or "what would you like us to build?" These questions produce wish lists, not validated needs. The Mom Test applies to data teams: talk about their life, not your product.
 
 ## Workaround Archaeology
 
@@ -49,7 +49,7 @@ Data consumers fall into four segments. Each needs different product shapes:
 | **Decision-makers** | One number with context | Executive summaries, scorecards, red/yellow/green |
 | **Builders** | Reliable APIs and tables | Documented APIs, data contracts, SLAs |
 
-ALWAYS identify which segment you're building for before writing requirements. A product that tries to serve all four serves none.
+Identify which segment you're building for before writing requirements. A product that tries to serve all four serves none.
 
 ## Trust Barrier Assessment
 
@@ -72,4 +72,4 @@ Rank evidence before acting on it:
 - **Moderate** (investigate): 3+ quotes describing same problem, or usage data showing repeated manual queries. Requires: pattern across sources, not just one loud voice.
 - **Emerging** (watch): 1-2 mentions, no observed behavior change. Requires: nothing yet.
 
-NEVER build on Emerging signals. Moderate signals justify a 1-day experiment (see `data-product-validation`). Strong signals justify a shaped pitch.
+Never build on Emerging signals. Moderate signals justify a 1-day experiment (see `data-product-validation`). Strong signals justify a shaped pitch.

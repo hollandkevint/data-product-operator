@@ -58,10 +58,10 @@ Patterns with fewer than 3 sources are flagged as "Emerging" and excluded from t
 For each pattern, answer "so what?" in the context of data product decisions.
 
 Connect each insight to a downstream action:
-- Problem to solve → feeds `/dpo:write-data-prd`
-- Data source to audit → feeds `/dpo:review-data-quality`
-- Consumer need to validate → feeds `/dpo:run-discovery` on a specific sub-problem
-- Stakeholder to align → feeds `/dpo:write-stakeholder-brief`
+- Problem to solve → feeds `/data-product-operator:write-data-prd`
+- Data source to audit → feeds `/data-product-operator:review-data-quality`
+- Consumer need to validate → feeds `/data-product-operator:run-discovery` on a specific sub-problem
+- Stakeholder to align → feeds `/data-product-operator:write-stakeholder-brief`
 
 ## Write the Problem Brief
 

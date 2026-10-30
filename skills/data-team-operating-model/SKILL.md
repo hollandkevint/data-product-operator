@@ -76,7 +76,7 @@ Example: Discovery -> Decide handoff:
 - Quality gates: Decision-relevant evidence reviewed, contradictions and blocking constraints named, and an accepting owner identified; no universal interview-count threshold
 - Trigger: Shaping session scheduled
 
-NEVER hand off without context documentation. "I'll explain it in the meeting" is how context dies.
+Never hand off without context documentation. "I'll explain it in the meeting" is how context dies.
 
 ## Common Anti-Patterns
 

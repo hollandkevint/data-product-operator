@@ -74,6 +74,10 @@ For contributors adding or modifying skills:
 - New portable skills use `name`, a task-specific `description`, and `metadata.version`. Keep them directly invocable and discoverable. Preserve existing invocation policy unless deliberately changing it.
 - Body: 50-80 lines for foundational skills, 80-100 lines for domain skills
 - Imperative voice: "Write", "Avoid", "Include"
-- Use ALWAYS/NEVER/CRITICAL for non-negotiable rules
+- State non-negotiable rules in sentence case ("Never ship...", not "NEVER ship..." or "CRITICAL:")
 - Cross-reference related skills by name instead of duplicating content
 - Include concrete examples. Name real products, cite specific numbers
+
+## Shared skills: public wins
+
+This library owns the body of every skill it ships. A private collection copies those bodies unchanged. A private-only difference goes in a sibling `overlay.md` in the private copy, never as an edit to the shared `SKILL.md`. Improve a shared skill here first, then re-sync private copies.

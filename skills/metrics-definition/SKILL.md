@@ -28,7 +28,7 @@ Every metric must specify:
 - **Update cadence**: How often does this refresh?
 - **Known edge cases**: What situations produce unexpected results?
 
-NEVER define a metric without specifying grain and time window. "Monthly active users" means nothing until you define what "active" means and whether "monthly" is calendar month or trailing 30 days.
+Never define a metric without specifying grain and time window. "Monthly active users" means nothing until you define what "active" means and whether "monthly" is calendar month or trailing 30 days.
 
 ## Outcome Metric Trees
 
@@ -81,8 +81,8 @@ The fix is always a single source of truth with an explicit definition, not reco
 
 When charts represent your metrics:
 
-- ALWAYS use colorblind-safe palettes. 8% of men have color vision deficiency. Your VP of Sales might be one of them.
-- ALWAYS label data directly on the chart. Legends force the reader to look away from the data.
-- NEVER use dual Y-axes. They let you imply any correlation by adjusting the scale.
+- Use colorblind-safe palettes. 8% of men have color vision deficiency. Your VP of Sales might be one of them.
+- Label data directly on the chart. Legends force the reader to look away from the data.
+- Never use dual Y-axes. They let you imply any correlation by adjusting the scale.
 
 For presentation structure, chart selection, and narrative framing, see `data-storytelling`.
