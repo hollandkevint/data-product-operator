@@ -29,7 +29,7 @@ Before committing to any ML/AI feature, complete this structured evaluation:
 4. **Known limitations**: What does the model NOT do well? Document before shipping, not after complaints.
 5. **Transparency requirements**: Can you explain to a user how the model reached its conclusion? If not, the model should not make autonomous decisions.
 
-CRITICAL: Complete the ethics canvas before writing a line of model code. Discovering bias after deployment is 10x more expensive than preventing it.
+Complete the ethics canvas before writing a line of model code. Discovering bias after deployment is 10x more expensive than preventing it.
 
 ## Bias Testing Protocol
 
@@ -53,7 +53,7 @@ Non-negotiable for high-risk changes (new ML models, major algorithm updates, da
 4. **25% traffic**: Expand if metrics hold. Investigate any anomalies.
 5. **Full rollout**: Only after all stages pass quality and bias thresholds.
 
-NEVER skip phased rollout for ML features. "It tested well in staging" is not evidence it works in production. Production data is messier, more diverse, and more adversarial than test data.
+Never skip phased rollout for ML features. "It tested well in staging" is not evidence it works in production. Production data is messier, more diverse, and more adversarial than test data.
 
 ## Governance Practices
 

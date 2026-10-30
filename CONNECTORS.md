@@ -41,8 +41,8 @@ Replace URLs with your actual MCP server endpoints. Each tool's MCP server docum
 
 ## What Each Connector Enables
 
-- **Data Warehouse**: `/dpo:review-data-model` can read live schemas. `/dpo:review-data-quality` can run sample queries.
+- **Data Warehouse**: `/data-product-operator:review-data-model` can read live schemas. `/data-product-operator:review-data-quality` can run sample queries.
 - **dbt Cloud**: `data-pipeline-quality` skill can reference your actual dbt project structure, tests, and models.
-- **Linear/Jira**: `/dpo:reshape-sprint` can pull sprint artifacts directly instead of requiring copy-paste.
+- **Linear/Jira**: `/data-product-operator:reshape-sprint` can pull sprint artifacts directly instead of requiring copy-paste.
 
 No connector is required. Every command works with manually provided context.

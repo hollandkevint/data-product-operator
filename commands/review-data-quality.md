@@ -122,4 +122,4 @@ Write the assessment to `quality-review-<name>.md` where `<name>` is a kebab-cas
 - [Specific action 2]
 ```
 
-ALWAYS provide specific, actionable improvement recommendations. "Improve data quality" is not a recommendation. "Add null check on patient_id at the ingestion layer, rejecting records where patient_id is missing" is.
+Provide specific, actionable improvement recommendations. "Improve data quality" is not a recommendation. "Add null check on patient_id at the ingestion layer, rejecting records where patient_id is missing" is.
