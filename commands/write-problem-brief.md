@@ -39,7 +39,7 @@ Tag each nugget with:
 - **Consumer segment**: Explorer, Reporter, Decision-maker, Builder (see `data-consumer-discovery`)
 - **Topic**: short keyword for grouping
 
-CRITICAL: Preserve specifics. "Spends 4 hours every Monday" not "spends significant time." "$2,847 per incident" not "costly errors." Numbers and names make evidence credible.
+Preserve specifics. "Spends 4 hours every Monday" not "spends significant time." "$2,847 per incident" not "costly errors." Numbers and names make evidence credible.
 
 ## Find Patterns
 

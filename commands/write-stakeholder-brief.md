@@ -61,14 +61,14 @@ Target length: 1 page (300-500 words). Executives skim. Every sentence must earn
 
 ### Writing Rules
 
-ALWAYS lead with the outcome, not the process. "Reduced report generation time from 45 minutes to 5 seconds" not "We optimized the ETL pipeline and migrated to a columnar database."
+Lead with the outcome, not the process. "Reduced report generation time from 45 minutes to 5 seconds" not "We optimized the ETL pipeline and migrated to a columnar database."
 
-ALWAYS quantify impact in terms the audience cares about. For executives: revenue, cost savings, risk reduction, time saved. For business partners: capabilities enabled, decisions supported, customer impact.
+Quantify impact in terms the audience cares about. For executives: revenue, cost savings, risk reduction, time saved. For business partners: capabilities enabled, decisions supported, customer impact.
 
-NEVER include technical implementation details. If they need to know about the database migration, schedule a separate technical review.
+Never include technical implementation details. If they need to know about the database migration, schedule a separate technical review.
 
-NEVER use jargon without translation. "SLA" becomes "our commitment to data freshness." "Schema migration" becomes "updated the data structure to support the new reporting requirements."
+Never use jargon without translation. "SLA" becomes "our commitment to data freshness." "Schema migration" becomes "updated the data structure to support the new reporting requirements."
 
-ALWAYS name the tradeoff when flagging risks. "We can ship Feature X in 3 weeks with 90% coverage, or 6 weeks with 99%. Recommend the 3-week version because [reason]."
+Name the tradeoff when flagging risks. "We can ship Feature X in 3 weeks with 90% coverage, or 6 weeks with 99%. Recommend the 3-week version because [reason]."
 
 Keep paragraphs to 2-3 sentences. Use bullet points for lists. Bold the key number in each impact line.

@@ -110,10 +110,10 @@ Write to `shaped-pitch-<name>.md` where `<name>` is a kebab-case summary of the 
 
 ### Key Principles
 
-ALWAYS frame the pitch around the problem, not the solution backlog. The sprint had 15 stories. The pitch should describe 1 problem worth solving.
+Frame the pitch around the problem, not the solution backlog. The sprint had 15 stories. The pitch should describe 1 problem worth solving.
 
-ALWAYS set an appetite, not an estimate. "This is worth 6 weeks of our time" is different from "this will take 6 weeks." The first is a business decision. The second is a guess.
+Set an appetite, not an estimate. "This is worth 6 weeks of our time" is different from "this will take 6 weeks." The first is a business decision. The second is a guess.
 
-NEVER carry over story points or velocity. Those are sprint artifacts. The pitch should stand on its own without sprint context.
+Never carry over story points or velocity. Those are sprint artifacts. The pitch should stand on its own without sprint context.
 
 When in doubt, make the appetite smaller and the no-gos list longer. It's better to ship a smaller version that works than to run out of time on a bigger version.
