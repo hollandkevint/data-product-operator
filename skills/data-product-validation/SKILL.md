@@ -83,7 +83,7 @@ How locked-in are consumers once we ship?
 | 100-249 | **Investigate** | Run a 1-week experiment to de-risk the lowest-scoring dimension |
 | <100 | **Kill** | Document why and move on. Revisit only if new evidence surfaces |
 
-CRITICAL: A Data Feasibility score of 1 kills the idea at any composite score. You can't build a data product without data.
+A Data Feasibility score of 1 kills the idea at any composite score. You can't build a data product without data.
 
 ## Experiment Types
 

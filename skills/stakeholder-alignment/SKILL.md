@@ -27,7 +27,7 @@ Data products are built by a core squad with extended stakeholder input:
 - Finance: budget and ROI modeling
 - Data Governance: policy and access control
 
-CRITICAL: Bring extended stakeholders in during shaping (before commitment), not during delivery (as surprise reviewers). Early input prevents late vetoes.
+Bring extended stakeholders in during shaping (before commitment), not during delivery (as surprise reviewers). Early input prevents late vetoes.
 
 ## Translation Patterns
 
@@ -50,7 +50,7 @@ When a stakeholder says "I need a dashboard for X":
 3. Ask what they do today without it (the workaround reveals the real need)
 4. Ask what "good enough" looks like (perfect is the enemy of shipped)
 
-NEVER build what was asked for without understanding why it was asked for. The request is a symptom. The decision they need to make is the diagnosis.
+Never build what was asked for without understanding why it was asked for. The request is a symptom. The decision they need to make is the diagnosis.
 
 ## Resolving Competing Priorities
 

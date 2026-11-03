@@ -34,7 +34,7 @@ State the problem in one paragraph. Include:
 - Evidence the problem is real (customer quotes, usage data, support tickets)
 - What success looks like (measurable outcome)
 
-NEVER write a problem statement without evidence. "We think users want X" is not a problem statement.
+Never write a problem statement without evidence. "We think users want X" is not a problem statement.
 
 ### 2. Data Sources and Lineage
 

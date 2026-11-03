@@ -25,9 +25,9 @@ For analytics data products, default to star schema with strategic denormalizati
 - Human-readable labels alongside codes
 - Hierarchies for drill-down (region -> state -> city)
 
-NEVER fully denormalize into One Big Table. Many-to-many relationships cause exponential row growth. A patient with 10 conditions and 5 medications creates 50 rows instead of 15.
+Never fully denormalize into One Big Table. Many-to-many relationships cause exponential row growth. A patient with 10 conditions and 5 medications creates 50 rows instead of 15.
 
-ALWAYS start with the query patterns. What questions will consumers ask? Design the schema to make those queries simple. If 80% of queries filter by date and group by category, those should be the primary dimensions.
+Start with the query patterns. What questions will consumers ask? Design the schema to make those queries simple. If 80% of queries filter by date and group by category, those should be the primary dimensions.
 
 ## Slowly Changing Dimensions (SCD)
 

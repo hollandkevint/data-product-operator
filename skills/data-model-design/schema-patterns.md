@@ -70,7 +70,7 @@ bridge_visit_diagnosis
 └── present_on_admission_flag
 ```
 
-NEVER flatten many-to-many into the fact table. Use a bridge.
+Never flatten many-to-many into the fact table. Use a bridge.
 
 ## Pattern: Junk Dimension
 
@@ -94,7 +94,7 @@ Dimensions shared across multiple fact tables must use identical keys and attrib
 - `dim_date` used by every fact table
 - `dim_provider` used by visit and claim facts
 
-ALWAYS build conformed dimensions first. They are the backbone of a data product that needs to answer questions across domains.
+Build conformed dimensions first. They are the backbone of a data product that needs to answer questions across domains.
 
 ## Naming Conventions
 

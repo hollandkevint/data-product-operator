@@ -90,7 +90,7 @@ Wire quality gates into pipeline stages. When a check fails, block the pipeline 
 
 Cross-reference `data-quality-assessment` for the 4-stage quality model (detect → assess → respond → prevent).
 
-CRITICAL: Never auto-heal data quality issues in production. Alert, block, investigate. Auto-fixes mask root causes and erode trust faster than stale data.
+Never auto-heal data quality issues in production. Alert, block, investigate. Auto-fixes mask root causes and erode trust faster than stale data.
 
 ## Monitoring
 

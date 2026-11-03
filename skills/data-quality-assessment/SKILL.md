@@ -44,7 +44,7 @@ Score each dimension 1-5 when evaluating any data source or pipeline:
 
 ## Circuit Breaker Protocol
 
-CRITICAL: If data accuracy drops below threshold during development, pause deployment until the data lead investigates. Quality incidents in production destroy trust that takes months to rebuild.
+If data accuracy drops below threshold during development, pause deployment until the data lead investigates. Quality incidents in production destroy trust that takes months to rebuild.
 
 Implement circuit breakers at every pipeline stage:
 1. Source validation (schema, nulls, ranges)
@@ -66,4 +66,4 @@ Week 1: Audit the last 20 data quality issues. Write simple checks for the top 3
 Week 2: Label 100 production examples. Write your first automated quality monitor. Connect to CI/CD.
 Weeks 3-4: Monitor 10% of production data flow. Build the detect-fix-measure loop.
 
-NEVER ship a data product without at least completeness and accuracy checks in the pipeline. Everything else can come later. Those two catch 80% of issues.
+Never ship a data product without at least completeness and accuracy checks in the pipeline. Everything else can come later. Those two catch 80% of issues.

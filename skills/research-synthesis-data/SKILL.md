@@ -57,7 +57,7 @@ Insights translated into action. Each recommendation links to a specific skill o
 
 Every discovery effort produces three artifacts:
 
-**1. Problem Brief** — The top 3 problems ranked by evidence strength. For each: problem statement, evidence summary (nuggets and patterns), affected consumer segments, estimated impact. Feeds directly into `/dpo:write-data-prd`.
+**1. Problem Brief** — The top 3 problems ranked by evidence strength. For each: problem statement, evidence summary (nuggets and patterns), affected consumer segments, estimated impact. Feeds directly into `/data-product-operator:write-data-prd`.
 
 **2. Data Landscape Assessment** — Current state of relevant data sources. For each: what exists, quality baseline (cross-ref `data-quality-assessment`), gaps, access constraints. Feeds into `data-product-validation` Data Feasibility scoring.
 
@@ -73,4 +73,4 @@ When evidence conflicts:
 
 Example: "Interview data suggests daily demand, but query logs show weekly access. Recommend monitoring actual usage for 2 weeks before committing to real-time refresh SLA."
 
-NEVER present a clean narrative when the evidence is messy. Stakeholders deserve honest uncertainty over false confidence.
+Never present a clean narrative when the evidence is messy. Stakeholders deserve honest uncertainty over false confidence.

@@ -47,11 +47,11 @@ Match the metric type to the right chart:
 | Correlation | Scatter plot | Cost vs complexity score |
 | Ranking | Horizontal bar | Top 10 diagnoses by volume |
 
-NEVER use pie charts. Stacked bar does everything a pie chart does, with readable labels.
+Use stacked bars, not pie charts; labels stay readable.
 
-NEVER use dual Y-axes. Two metrics, two charts. Dual axes let you imply any correlation by scaling the axes.
+Never use dual Y-axes. Two metrics, two charts. Dual axes let you imply any correlation by scaling the axes.
 
-ALWAYS label data directly on the chart. A legend across the room is useless.
+Label data directly on the chart. A legend across the room is useless.
 
 ## Presentation Anti-Patterns
 

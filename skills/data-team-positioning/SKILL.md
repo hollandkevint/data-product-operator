@@ -53,7 +53,7 @@ When presenting data product opportunities to leadership:
 
 **Tradeoff** (1 sentence): What you won't build to fund this. "This means we defer the executive dashboard refresh to next cycle." Every yes is a visible no to something else.
 
-NEVER pitch without evidence. A pitch backed by "we think" loses to a pitch backed by "we observed." Discovery is the investment that makes every other investment smarter.
+Never pitch without evidence. A pitch backed by "we think" loses to a pitch backed by "we observed." Discovery is the investment that makes every other investment smarter.
 
 ## Anti-Patterns
 
@@ -70,4 +70,4 @@ Each anti-pattern has a specific remedy:
 - Request-only backlog → Reserve 20% of capacity for team-originated work
 - Throughput metrics → Add one outcome metric to the team scorecard
 - Urgency bypass → Require evidence (workaround, usage data, or 3 consumer quotes) for priority overrides
-- Can't name problems → Run `/dpo:run-discovery` on your most-used data product
+- Can't name problems → Run `data-consumer-discovery` on your most-used data product
