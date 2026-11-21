@@ -1,11 +1,11 @@
 import tempfile
 import unittest
 
-from repo_checks import REPO, check_first_principles
+from repo_checks import REPO, check_first_principles, check_no_recheck_markers
 from test_links import tree
 
 
-def page(principles=9, links=True, disagreements=8, label=True, quote_marked=True):
+def page(principles=9, links=True, disagreements=8, label=True, quote_marked=False):
     out = ["# First principles\n"]
     if label:
         out.append("The maturity model is Kevin Holland's synthesis.\n")
@@ -50,8 +50,16 @@ class FirstPrinciples(unittest.TestCase):
     def test_missing_synthesis_label_fails(self):
         self.assertTrue(any("synthesis" in p for p in run(label=False)))
 
-    def test_unmarked_quote_fails(self):
-        self.assertTrue(any("recheck" in p for p in run(quote_marked=False)))
+    def test_leftover_recheck_marker_fails(self):
+        self.assertTrue(any("recheck" in p for p in run(quote_marked=True)))
+
+    def test_marker_in_readme_fails(self):
+        with tempfile.TemporaryDirectory() as t:
+            tree(t, {"README.md": 'He said "a long enough quote here". <!-- recheck quote -->\n'})
+            self.assertEqual(len(check_no_recheck_markers(t)), 1)
+
+    def test_verified_quote_passes(self):
+        self.assertEqual(run(quote_marked=False), [])
 
 
 if __name__ == "__main__":

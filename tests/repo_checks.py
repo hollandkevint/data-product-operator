@@ -270,6 +270,22 @@ def _sections(text, level):
     }
 
 
+RECHECK_MARKER = "<!-- recheck quote -->"
+
+
+def check_no_recheck_markers(root):
+    """Release gate: every quote is verified, so no recheck marker may remain in README or docs/."""
+    problems = []
+    for p in markdown_files(root):
+        rel = p.relative_to(root)
+        if rel.parts[0] != "docs" and str(rel) != "README.md":
+            continue
+        for n, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1):
+            if RECHECK_MARKER in line:
+                problems.append(f"{rel}:{n}: unverified quote still carries a recheck marker")
+    return problems
+
+
 def check_first_principles(root):
     page = Path(root) / FP_PATH
     if not page.is_file():
@@ -288,8 +304,5 @@ def check_first_principles(root):
         problems.append(f"{FP_PATH}: disagreements section has {count} items, need {MIN_DISAGREEMENTS}")
     if "Kevin Holland's synthesis" not in text:
         problems.append(f"{FP_PATH}: maturity model is not labelled Kevin Holland's synthesis")
-    for n, line in enumerate(text.splitlines(), 1):
-        for q in QUOTED.findall(line):
-            if len(q.split()) >= 6 and "<!-- recheck quote -->" not in line:
-                problems.append(f"{FP_PATH}:{n}: quote lacks a recheck marker")
+    problems += check_no_recheck_markers(root)
     return problems
