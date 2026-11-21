@@ -2,7 +2,7 @@
 
 Formerly dpm_os. Part of [Data Product Operator](../README.md); the repo root README covers the full plugin.
 
-An operating system for a data product manager. One markdown repo per product decision: seven context files, three manual gates, one weekly packet, one append-only decision log, and a validator that keeps every claim tagged with its source. Built for Claude Code. No database, no agents beyond one initializer, nothing that runs without a person.
+An operating system for a data product operator. One markdown repo per product decision: seven context files, three manual gates, one weekly packet, one append-only decision log, and a validator that keeps every claim tagged with its source. Built for Claude Code. No database, no agents beyond one initializer, nothing that runs without a person.
 
 ## The habit loop
 
@@ -37,7 +37,7 @@ scripts/validate.py      required files, links, decision fields, provenance tags
 
 ## Where it comes from
 
-The gates, packet, and decision log encode the Data Product Operating System (DPOS): the handoff between roles is the unit that gets engineered. The analysis skills the initializer points at live in [data-product-operator](https://github.com/hollandkevint/data-product-operator), a separate install.
+The gates, packet, and decision log encode the Data Product Operating System (DPOS): the handoff between roles is the unit that gets engineered. The analysis skills the initializer points at live in [data-product-operator](https://github.com/hollandkevint/data-product-operator), installed from the same repo (see [install](docs/install.md)).
 
 ## Sample grader
 

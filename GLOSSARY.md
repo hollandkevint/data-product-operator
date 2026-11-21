@@ -30,6 +30,10 @@ _Avoid_: Data product manager (as a required title), data owner
 The people who build and run a data product with its operator: data engineers, data scientists, analysts, and anyone else whose handoff the product depends on.
 _Avoid_: Data team (when it means a service desk), squad
 
+**Consumer**:
+The named person or team whose decision a data product improves.
+_Avoid_: User (when unnamed), stakeholder, customer
+
 ## Loops
 
 **Team loop**:
@@ -39,7 +43,3 @@ _Avoid_: DPM OS, sprint (when it means the whole cycle)
 **Strategy review**:
 The quarterly loop where the operator reads the decision log and asks whether the strategy still holds: what paid off, which consumers were lost, and what to stop.
 _Avoid_: QBR, planning (when nothing in the log is read)
-
-**Consumer**:
-The named person or team whose decision a data product improves.
-_Avoid_: User (when unnamed), stakeholder, customer

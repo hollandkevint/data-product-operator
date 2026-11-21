@@ -1,6 +1,7 @@
 ---
 name: data-product-retro
-version: 0.1.0
+metadata:
+  version: "0.1.0"
 adapted_from: Matt Pocock, mattpocock/skills, retro
 description: >
   Look back at a shipped data product decision and ask two questions: did the

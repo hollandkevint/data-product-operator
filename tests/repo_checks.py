@@ -43,7 +43,17 @@ def parse_frontmatter(text):
     return fields
 
 
-def check_skill_shape(root):
+# Skills added in the 2.0 release. They use `metadata.version`; older skills
+# keep their top-level `version:` and are not force-migrated.
+RELEASE_2_SKILLS = (
+    "strategy-review", "decision-follow-up", "weekly-metric-review",
+    "data-quality-watch", "agent-eval-regression", "data-product-retro",
+    "analytics-agent", "metric-glossary", "launch-and-adoption",
+    "shipping-bridge", "data-dictionary-grill", "team-loop",
+)
+
+
+def check_skill_shape(root, release_skills=RELEASE_2_SKILLS):
     problems = []
     skills = Path(root) / "skills"
     if not skills.is_dir():
@@ -64,6 +74,8 @@ def check_skill_shape(root):
             problems.append(f"{rel}/SKILL.md: name '{fm['name']}' does not match folder")
         if not fm.get("description"):
             problems.append(f"{rel}/SKILL.md: description is missing")
+        if d.name in release_skills and ("version" in fm or "version:" not in fm.get("metadata", "")):
+            problems.append(f"{rel}/SKILL.md: 2.0 skills use metadata.version, not a top-level version")
     return problems
 
 
@@ -148,7 +160,7 @@ GLOSSARY_ALLOWED = {
     "customer": "domain vocabulary in the ecommerce and support guides",
 }
 
-GLOSSARY_USE_SCOPE = ("README.md", "docs")
+GLOSSARY_USE_SCOPE = ("README.md", "docs", "skills", "team-loop")
 QUOTED = re.compile(r'"[^"\n]*"|“[^”\n]*”')
 HTML_COMMENT = re.compile(r"<!--.*?-->")
 LINK_TARGET = re.compile(r"\]\([^)]*\)")
@@ -237,7 +249,7 @@ def _prose(text):
 
 
 def check_glossary_use(root, allowed=None):
-    """Avoid terms from GLOSSARY.md do not appear unquoted in README.md or docs/."""
+    """Avoid terms from GLOSSARY.md do not appear unquoted in README.md, docs/, skills/ or team-loop/."""
     root = Path(root)
     allowed = GLOSSARY_ALLOWED if allowed is None else allowed
     terms = [t for t in avoid_terms(root) if t.lower() not in allowed]

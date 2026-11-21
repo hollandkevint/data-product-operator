@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""DPM OS instance validator.
+"""Team loop workspace validator.
 
 CLI mode:   python3 scripts/validate.py <instance-dir>
             exit 0 on pass, 1 on any finding, one line per finding.

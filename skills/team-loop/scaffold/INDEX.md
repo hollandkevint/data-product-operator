@@ -1,4 +1,4 @@
-# INDEX — DPM OS instance
+# INDEX — team loop workspace
 
 Start here. Every task begins by routing through this file.
 

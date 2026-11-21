@@ -1,6 +1,7 @@
 ---
 name: metric-glossary
-version: 0.1.0
+metadata:
+  version: "0.1.0"
 adapted_from: Matt Pocock, mattpocock/skills, domain-modeling
 description: >
   Build and sharpen the team's METRICS glossary: one definition, one owner and one

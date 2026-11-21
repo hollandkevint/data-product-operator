@@ -68,8 +68,21 @@ class GlossaryUse(unittest.TestCase):
             self.assertEqual(len(check_glossary_use(t, allowed={})), 1)
             self.assertEqual(check_glossary_use(t, allowed={"dashboard": "generic noun"}), [])
 
+    def test_skills_and_team_loop_are_checked(self):
+        for path in ("skills/x/SKILL.md", "team-loop/README.md", "skills/team-loop/scaffold/CLAUDE.md"):
+            with self.subTest(path=path):
+                self.assertEqual(len(self.run_check({path: "squad\n"})), 1)
+
+    def test_planted_dpm_os_in_a_skill_fails(self):
+        with tempfile.TemporaryDirectory() as t:
+            tree(t, {"GLOSSARY.md": (REPO / "GLOSSARY.md").read_text(encoding="utf-8"),
+                     "skills/x/SKILL.md": "Initialize a DPM OS here.\n"})
+            out = check_glossary_use(t)
+            self.assertEqual(len(out), 1)
+            self.assertIn("DPM OS", out[0])
+
     def test_other_folders_are_not_checked(self):
-        self.assertEqual(self.run_check({"skills/x/SKILL.md": "squad\n"}), [])
+        self.assertEqual(self.run_check({"tests/x.md": "squad\n"}), [])
 
 
 if __name__ == "__main__":

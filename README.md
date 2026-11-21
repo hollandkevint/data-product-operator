@@ -4,6 +4,8 @@
 
 Decide what is worth building. Help a team deliver it. Check whether it changed the outcome it was built for. Every skill is a Markdown file you can read, run in Claude Code, or hand to another assistant.
 
+Your job title does not matter. The operator is whoever owns the data product and its decisions.
+
 Built by [Kevin Holland](https://kevintholland.com). Terms follow the [glossary](GLOSSARY.md). The reasons follow the [first principles](docs/first-principles.md).
 
 ## The cycle

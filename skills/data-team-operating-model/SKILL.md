@@ -2,7 +2,7 @@
 name: data-team-operating-model
 version: 0.1.1
 description: >
-  Team structure and operating rhythm for data product teams. Product squads,
+  Team structure and operating rhythm for data product teams. Data product teams,
   Shape Up 6-week cycles, handoff contracts, and role assignments by lifecycle
   stage. Use when organizing a data team, planning data product development cycles,
   defining roles and responsibilities, improving team handoffs, or when someone asks
@@ -11,7 +11,7 @@ description: >
 user-invocable: false
 ---
 
-## Product Squad Structure
+## Data Product Team Structure
 
 Use this four-role model as one option. Fit accountabilities to the actual team and decision rights; one person may cover several roles.
 
@@ -30,7 +30,7 @@ Consider Shape Up when bounded project bets fit the work. Keep the existing cade
 
 **Cycle structure:**
 - 2 weeks shaping (before the cycle): PM and Data Lead define the problem, set the appetite
-- 6 weeks building (the cycle): squad executes with fixed time, variable scope
+- 6 weeks building (the cycle): the team executes with fixed time, variable scope
 - 2 weeks cooldown: bug fixes, tech debt, exploration, skill development
 
 **Shaping artifacts:**
@@ -71,7 +71,7 @@ Every stage transition requires a handoff contract:
 
 Example: Discovery -> Decide handoff:
 - From: PM + Data Lead
-- To: Full squad
+- To: Full team
 - Required: Problem brief with evidence, data availability assessment, ethical screening
 - Quality gates: Decision-relevant evidence reviewed, contradictions and blocking constraints named, and an accepting owner identified; no universal interview-count threshold
 - Trigger: Shaping session scheduled
