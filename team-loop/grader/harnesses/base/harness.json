@@ -1,0 +1,6 @@
+{
+  "name": "base",
+  "parent": null,
+  "slice": null,
+  "summary": "The default harness. A dpm-os instance with the data contract filled in for an OMOP CDM 5.3 extract, plus one SQL answer per grader question."
+}

@@ -1,0 +1,6 @@
+{
+  "name": "cohorts",
+  "parent": "base",
+  "slice": "cohorts",
+  "summary": "A cohort-builder's harness. Overrides one shared definition: a condition concept now includes its descendants in the vocabulary hierarchy."
+}

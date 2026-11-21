@@ -1,0 +1,237 @@
+{
+  "dataset": "OHDSI Eunomia GiBleed, OMOP CDM 5.3",
+  "questions": [
+    {
+      "id": "q01",
+      "slice": "population",
+      "question": "How many distinct patients are in the person table?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q02",
+      "slice": "population",
+      "question": "How many patients are female (gender_concept_id 8532)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q03",
+      "slice": "population",
+      "question": "What percent of patients are female? Answer 0-100.",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.1
+      }
+    },
+    {
+      "id": "q04",
+      "slice": "population",
+      "question": "How many patients were born before 1950 (year_of_birth < 1950)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q05",
+      "slice": "population",
+      "question": "What is the mean patient age on 2019-01-01, computed as 2019 minus year_of_birth?",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.05
+      }
+    },
+    {
+      "id": "q06",
+      "slice": "population",
+      "question": "What is the median observation-period length in days (end date minus start date) for patients in the person table?",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.5
+      }
+    },
+    {
+      "id": "q07",
+      "slice": "population",
+      "question": "How many observation_period rows have no matching patient in the person table?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q08",
+      "slice": "cohorts",
+      "question": "How many patients have a gastrointestinal hemorrhage condition (concept 192671 or any descendant)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q09",
+      "slice": "cohorts",
+      "question": "How many patients have a sinusitis condition (concept 4283893 or any descendant)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q10",
+      "slice": "cohorts",
+      "question": "How many patients have a traumatic brain injury condition (concept 4132546 or any descendant)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q11",
+      "slice": "cohorts",
+      "question": "How many condition_occurrence records are for sinusitis (concept 4283893 or any descendant)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q12",
+      "slice": "cohorts",
+      "question": "How many patients have a streptococcal sore throat condition (concept 28060 or any descendant)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q13",
+      "slice": "cohorts",
+      "question": "How many female patients have a gastrointestinal hemorrhage condition (concept 192671 or any descendant)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q14",
+      "slice": "cohorts",
+      "question": "Among patients with sinusitis (concept 4283893 or any descendant), what percent also have acute bronchitis (concept 260139 or any descendant)? Answer 0-100.",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.1
+      }
+    },
+    {
+      "id": "q15",
+      "slice": "cohorts",
+      "question": "How many patients had their first gastrointestinal hemorrhage (concept 192671 or any descendant) between 2010-01-01 and 2018-12-31 inclusive?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q16",
+      "slice": "utilization",
+      "question": "How many inpatient visits (visit_concept_id 9201) are there?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q17",
+      "slice": "utilization",
+      "question": "How many patients have at least one inpatient visit?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q18",
+      "slice": "utilization",
+      "question": "How many inpatient visits started in calendar year 2017?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q19",
+      "slice": "utilization",
+      "question": "How many patients have two or more inpatient visits?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q20",
+      "slice": "utilization",
+      "question": "What is the mean inpatient length of stay in days, computed as visit end date minus visit start date?",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.01
+      }
+    },
+    {
+      "id": "q21",
+      "slice": "utilization",
+      "question": "How many inpatient visits started per 1,000 patient-years of observation between 2010-01-01 and 2018-12-31? Count only observation time inside that window, for patients in the person table, with a day counted inclusively and a year as 365.25 days.",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.05
+      }
+    },
+    {
+      "id": "q22",
+      "slice": "utilization",
+      "question": "For patients with two or more inpatient visits, what is the median number of days from the end of one inpatient visit to the start of that patient's next inpatient visit?",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.5
+      }
+    },
+    {
+      "id": "q23",
+      "slice": "medications",
+      "question": "How many patients were exposed to celecoxib (ingredient concept 1118084, any product containing it)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q24",
+      "slice": "medications",
+      "question": "How many patients were exposed to diclofenac (ingredient concept 1124300, any product containing it)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q25",
+      "slice": "medications",
+      "question": "How many patients had a gastrointestinal hemorrhage (concept 192671 or any descendant) on or after the date of their first celecoxib exposure?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q26",
+      "slice": "medications",
+      "question": "How many drug_exposure records are for a product containing acetaminophen (ingredient concept 1125315)?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q27",
+      "slice": "medications",
+      "question": "What percent of patients exposed to celecoxib are female? Answer 0-100.",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.1
+      }
+    },
+    {
+      "id": "q28",
+      "slice": "medications",
+      "question": "How many patients were exposed to naproxen (ingredient concept 1115008) or ibuprofen (ingredient concept 1177480), any product containing either?",
+      "scoring": {
+        "type": "exact"
+      }
+    }
+  ]
+}
