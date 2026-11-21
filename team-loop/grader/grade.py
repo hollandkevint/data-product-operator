@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Sample grader: score dpm-os harnesses on 28 data-team questions and apply the ship rule.
+"""Sample grader: score team-loop harnesses on 28 data-team questions and apply the ship rule.
 
     python3 grader/grade.py key                 recompute answer_key.json from key/*.sql
     python3 grader/grade.py run <harness>       score one harness
     python3 grader/grade.py ship <harness>      ship-rule verdict for a specialized harness vs base
     python3 grader/grade.py demo                score every harness, write RUNS.md
     python3 grader/grade.py live <harness>      regenerate a harness's SQL with `claude -p`, then replay
-    python3 grader/grade.py materialize <harness> <dir>   write the resolved harness as a dpm-os instance
+    python3 grader/grade.py materialize <harness> <dir>   write the resolved harness as a team-loop instance
 
 A harness is a folder under harnesses/: harness.json, context/, definitions/*.sql,
 sql/<question-id>.sql. A specialized harness names a parent and holds only the files it
 overrides. Any file it does not hold resolves to the nearest ancestor that does, and the
-base resolves to the dpm-os scaffold for context files. Replay is the only scorer; live
+base resolves to the team-loop scaffold for context files. Replay is the only scorer; live
 mode only rewrites SQL files.
 """
 
@@ -29,8 +29,8 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import data  # noqa: E402
 
-REPO = HERE.parent
-SCAFFOLD = REPO / ".claude" / "skills" / "dpm-os" / "scaffold"
+REPO = HERE.parent.parent
+SCAFFOLD = REPO / "skills" / "team-loop" / "scaffold"
 HARNESSES = HERE / "harnesses"
 KEY_DIR = HERE / "key"
 KEY_FILE = HERE / "answer_key.json"
@@ -303,7 +303,7 @@ print(con.sql(Path(sys.argv[1]).read_text()))
 
 TASK = """# Grader task
 
-You are working inside a dpm-os instance. Read `CLAUDE.md`, then `context/data-contract.md`.
+You are working inside a team-loop instance. Read `CLAUDE.md`, then `context/data-contract.md`.
 The definitions in `definitions/*.sql` are already loaded as views and macros.
 
 For each question below, write exactly one SQL file at `sql/<id>.sql`. The file holds one
@@ -316,7 +316,7 @@ answers anywhere else.
 
 
 def materialize(name: str, dest: Path, ids: list[str] | None = None) -> Path:
-    """Write the resolved harness as a full dpm-os instance: scaffold, then harness files on top."""
+    """Write the resolved harness as a full team-loop instance: scaffold, then harness files on top."""
     dest = Path(dest)
     shutil.copytree(SCAFFOLD, dest, dirs_exist_ok=True)
     for rel, src in resolve(name).items():

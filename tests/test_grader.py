@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -7,8 +8,8 @@ import unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-GRADER = REPO / "grader"
-VALIDATE = REPO / ".claude" / "skills" / "dpm-os" / "scaffold" / "scripts" / "validate.py"
+GRADER = REPO / "team-loop" / "grader"
+VALIDATE = REPO / "skills" / "team-loop" / "scaffold" / "scripts" / "validate.py"
 
 sys.path.insert(0, str(GRADER))
 import data  # noqa: E402
@@ -16,7 +17,7 @@ import grade  # noqa: E402
 
 HAS_DUCKDB = importlib.util.find_spec("duckdb") is not None
 HAS_DATA = HAS_DUCKDB and data.DB.is_file()
-NEEDS_DATA = "needs duckdb and grader/.data/ (run: python3 grader/data.py)"
+NEEDS_DATA = "needs duckdb and team-loop/grader/.data/ (run: python3 team-loop/grader/data.py)"
 
 
 class GraderShapeTests(unittest.TestCase):
@@ -54,7 +55,7 @@ class GraderShapeTests(unittest.TestCase):
             self.assertEqual(meta["parent"], "base")
             self.assertTrue(grade.slice_ids(meta["slice"]))
 
-    def test_materialized_harness_is_a_valid_dpm_os_instance(self):
+    def test_materialized_harness_is_a_valid_team_loop_instance(self):
         for name in grade.all_harnesses():
             with tempfile.TemporaryDirectory() as d:
                 dest = grade.materialize(name, Path(d) / name)
@@ -97,6 +98,14 @@ class ShipRuleTests(unittest.TestCase):
         v = grade.ship_verdict(self.BASE, dict(self.BASE), ["a", "b"])
         self.assertFalse(v["ship"])
         self.assertEqual(v["regressions"], [])
+
+
+class CiHasGraderData(unittest.TestCase):
+    """The end-to-end tests skip on a bare machine. In CI they must run."""
+
+    @unittest.skipUnless(os.environ.get("CI"), "only enforced in CI")
+    def test_data_is_loaded_in_ci(self):
+        self.assertTrue(HAS_DATA, NEEDS_DATA)
 
 
 @unittest.skipUnless(HAS_DATA, NEEDS_DATA)

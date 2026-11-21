@@ -1,11 +1,11 @@
-# CLAUDE.md — dpm_os (maintainer)
+# CLAUDE.md — Team Loop (maintainer), formerly dpm_os
 
-This repo ships one Claude Code skill, `dpm-os`, that scaffolds a DPM OS instance. This file is for people and agents editing the repo, not for people using an instance. An instance's manual is `.claude/skills/dpm-os/scaffold/CLAUDE.md`.
+Team Loop is one Claude Code skill, `team-loop`, that scaffolds an instance. It lives in the `data-product-operator` repo. This file is for people and agents editing it, not for people using an instance. An instance's manual is `skills/team-loop/scaffold/CLAUDE.md`.
 
 ## Rules
 
 - **Edit `scaffold/`, never an instance.** Instances are copies. A fix belongs in the scaffold and ships in the next version.
-- **This repo is public. It contains no client, customer, or engagement terms.** `tests/test_containment.py` holds the only list of such terms and fails on any hit. Before any push, also grep tracked files and `git log -p` by hand for names the list does not know.
+- **This repo is public. It contains no client, customer, or engagement terms.** `tests/test_containment.py` (repo root) holds the only list of such terms and fails on any hit. Before any push, also grep tracked files and `git log -p` by hand for names the list does not know.
 - **No CE artifacts here.** Plans, solutions, and other compound-engineering documents live outside this repo.
 - **Bump `SCAFFOLD_VERSION`** in `scaffold/README.md` when the scaffold changes shape.
 - **Stdlib only** in `scripts/validate.py`. It must run on a bare `python3`.
@@ -14,15 +14,15 @@ This repo ships one Claude Code skill, `dpm-os`, that scaffolds a DPM OS instanc
 ## Test
 
 ```bash
-python3 -m unittest discover tests
-python3 .claude/skills/dpm-os/scaffold/scripts/validate.py .claude/skills/dpm-os/scaffold
+python3 -m unittest discover -s tests
+python3 skills/team-loop/scaffold/scripts/validate.py skills/team-loop/scaffold
 ```
 
 ## Layout
 
-- `.claude/skills/dpm-os/SKILL.md` — the initializer
-- `.claude/skills/dpm-os/prompts/` — mode detection, migration, interview, post-scaffold
-- `.claude/skills/dpm-os/scaffold/` — the instance, copied as-is
-- `grader/` — sample grader: questions, answer-key SQL, harnesses, ship rule
-- `tests/` — validator, grader, and containment tests
-- `docs/install.md` — install and uninstall
+- `skills/team-loop/SKILL.md` — the initializer
+- `skills/team-loop/prompts/` — mode detection, migration, interview, post-scaffold
+- `skills/team-loop/scaffold/` — the instance, copied as-is
+- `team-loop/grader/` — sample grader: questions, answer-key SQL, harnesses, ship rule
+- `tests/` (repo root) — validator, grader, and containment tests
+- `team-loop/docs/install.md` — install and uninstall

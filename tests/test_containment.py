@@ -1,5 +1,8 @@
 """Containment test: no client term in any tracked file of this public repo.
 
+Covers every tracked file in the repo, including the merged Team Loop area
+(formerly dpm_os), not one subfolder.
+
 The banned terms are stored only as SHA-256 digests of their lowercased,
 whitespace-normalized word forms, so this file names nothing. A line is scanned
 as its 1-gram and 2-gram word sequences; a hit is any gram whose digest is in
@@ -64,15 +67,33 @@ def scan(paths, digests=DIGESTS):
     return hits
 
 
-def tracked_files():
-    out = subprocess.run(["git", "ls-files"], cwd=REPO, capture_output=True, text=True, check=True).stdout
-    return [REPO / line for line in out.splitlines() if line]
+def tracked_files(root=REPO):
+    root = Path(root)
+    out = subprocess.run(["git", "ls-files"], cwd=root, capture_output=True, text=True, check=True).stdout
+    return [root / line for line in out.splitlines() if line]
 
 
 class ContainmentTests(unittest.TestCase):
     def test_repo_has_no_client_terms(self):
         hits = scan(tracked_files())
         self.assertEqual(hits, [], f"client terms found: {hits}")
+
+    def test_scan_covers_the_whole_repo_not_one_folder(self):
+        rel = {p.relative_to(REPO).parts[0] for p in tracked_files()}
+        for area in ("skills", "team-loop", "tests", "commands", "docs"):
+            self.assertIn(area, rel)
+
+    def test_planted_term_in_a_nested_tracked_file_is_found(self):
+        probe = {digest("Zebra Widget")}
+        with tempfile.TemporaryDirectory() as d:
+            run = lambda *a: subprocess.run(["git", *a], cwd=d, check=True, capture_output=True)
+            run("init", "-q")
+            nested = Path(d) / "team-loop" / "deep" / "note.md"
+            nested.parent.mkdir(parents=True)
+            nested.write_text("clean line\nthe zebra widget account\n")
+            run("add", "-A")
+            hits = scan(tracked_files(d), probe)
+            self.assertEqual([(Path(h[0]).name, h[1]) for h in hits], [("note.md", 2)])
 
     def test_scan_catches_a_two_word_term(self):
         probe = {digest("Zebra Widget")}

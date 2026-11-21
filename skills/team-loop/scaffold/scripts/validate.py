@@ -300,9 +300,9 @@ def _hook() -> int:
         return 0
     blocking, warnings = validate_file(path, root)
     if warnings:
-        print("[dpm-os] warnings:\n" + "\n".join(warnings), file=sys.stderr)
+        print("[team-loop] warnings:\n" + "\n".join(warnings), file=sys.stderr)
     if blocking:
-        print("[dpm-os] BLOCKING, fix this turn:\n" + "\n".join(blocking), file=sys.stderr)
+        print("[team-loop] BLOCKING, fix this turn:\n" + "\n".join(blocking), file=sys.stderr)
         return 2
     return 0
 

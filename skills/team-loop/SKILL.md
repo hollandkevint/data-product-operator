@@ -1,9 +1,9 @@
 ---
-name: dpm-os
-description: Initialize a DPM OS — a markdown workspace for one data product manager to move one data product decision from discovery to controlled release with three manual gates, a weekly decision packet, and an append-only decision log. Detects greenfield, migration, or active-repo mode, asks only for missing load-bearing context, copies the deterministic scaffold without overwriting, populates fields with provenance tags, runs the validator, and hands off the first three actions. Use when invoked as `/dpm-os` or when asked to set up a DPM OS in a directory.
+name: team-loop
+description: Formerly dpm_os. Initialize a Team Loop workspace (a DPM OS) — a markdown workspace for one data product manager to move one data product decision from discovery to controlled release with three manual gates, a weekly decision packet, and an append-only decision log. Detects greenfield, migration, or active-repo mode, asks only for missing load-bearing context, copies the deterministic scaffold without overwriting, populates fields with provenance tags, runs the validator, and hands off the first three actions. Use when invoked as `/team-loop` (formerly `/dpm-os`) or when asked to set up a Team Loop or DPM OS in a directory.
 ---
 
-# dpm-os — initializer
+# team-loop — initializer (formerly dpm_os)
 
 Scaffolds and initializes a DPM OS instance in the current working directory. Structure is deterministic (copied from `scaffold/`). Reasoning is adaptive (loaded from `prompts/` per phase).
 
@@ -15,7 +15,7 @@ Scaffolds and initializes a DPM OS instance in the current working directory. St
 
 ## When to invoke
 
-- The operator runs `/dpm-os` or asks to set up a DPM OS here.
+- The operator runs `/team-loop` or asks to set up a DPM OS here.
 - Do not invoke for routine work after init. The seeded `CLAUDE.md` in the instance owns that.
 
 ## Workflow

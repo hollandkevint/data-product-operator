@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-SCAFFOLD = REPO / ".claude" / "skills" / "dpm-os" / "scaffold"
+SCAFFOLD = REPO / "skills" / "team-loop" / "scaffold"
 VALIDATE = SCAFFOLD / "scripts" / "validate.py"
 
 spec = importlib.util.spec_from_file_location("validate", VALIDATE)

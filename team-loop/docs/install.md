@@ -2,15 +2,15 @@
 
 ## Claude Code
 
-1. Clone this repo.
+1. Clone `data-product-operator`. Team Loop is in it as `skills/team-loop`.
 2. Copy the skill into the project that will hold the instance:
 
    ```bash
-   cp -R dpm_os/.claude/skills/dpm-os <your-project>/.claude/skills/dpm-os
+   cp -R data-product-operator/skills/team-loop <your-project>/.claude/skills/team-loop
    ```
 
-   For every project on the machine, copy to `~/.claude/skills/dpm-os` instead.
-3. Open the project in Claude Code and run `/dpm-os`. The skill detects whether the directory is empty, holds product artifacts, or is an active code repo, asks for what it cannot infer, copies the scaffold without overwriting anything you already have, runs the validator, and hands you the first three actions.
+   For every project on the machine, copy to `~/.claude/skills/team-loop` instead.
+3. Open the project in Claude Code and run `/team-loop` (formerly `/dpm-os`). The skill detects whether the directory is empty, holds product artifacts, or is an active code repo, asks for what it cannot infer, copies the scaffold without overwriting anything you already have, runs the validator, and hands you the first three actions.
 
 Requirements: `python3` on the path for the validator and its hook. Nothing else.
 
@@ -32,7 +32,7 @@ rm -rf context rules packets decisions risks source ingestion maintenance script
 rm -f AGENTS.md CLAUDE.md INDEX.md README.md
 ```
 
-If `.claude/settings.json` existed before install, remove only the `PostToolUse` entry whose command is `python3 scripts/validate.py`. If it did not, remove the file. Then delete `.claude/skills/dpm-os`.
+If `.claude/settings.json` existed before install, remove only the `PostToolUse` entry whose command is `python3 scripts/validate.py`. If it did not, remove the file. Then delete `.claude/skills/team-loop`.
 
 Source artifacts you copied into `source/` during migration are copies; the originals were never moved.
 
