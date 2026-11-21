@@ -23,8 +23,8 @@ Why three layers and not one definition. Asset alone passes a governed table nob
 
 Name the decision, who owns it, and what changes if the answer changes. Dashboards, pipelines and agents come after.
 
-- Ben Rogojan asks first: "What question or decision does this data support?" <!-- recheck quote --> ([Six questions before a data project](https://seattledataguy.substack.com/p/are-data-teams-solving-the-right))
-- Nick Valiotti: "A modern stack without defined KPIs is just a prettier spreadsheet." <!-- recheck quote --> ([Stop overbuilding your data stack](https://nickvaliotti.substack.com/p/stop-overbuilding-your-data-stack))
+- Ben Rogojan asks first: "What question or decision is this data supposed to support?" ([Six questions before a data project](https://seattledataguy.substack.com/p/are-data-teams-solving-the-right))
+- Nick Valiotti: "a modern stack without defined KPIs is just a prettier spreadsheet." ([Stop overbuilding your data stack](https://nickvaliotti.substack.com/p/stop-overbuilding-your-data-stack))
 - Vin Vashishta works from the opportunity to the workflow to the technology ([metric vs outcome](https://vinvashishta.substack.com/p/the-metric-isnt-the-outcome-how-to)).
 - Peter Everill: a data team helps the business decide where to focus ([The purpose of a data team](https://petereverill.substack.com/p/the-purpose-of-a-data-team)).
 - Emilie Schario's jobs-to-be-done method turns requests into the job behind them ([JTBD for data teams](https://locallyoptimistic.com/?p=671)).
@@ -33,14 +33,14 @@ Name the decision, who owns it, and what changes if the answer changes. Dashboar
 
 A support function that takes tickets becomes a bottleneck. A product team owns a consumer's problem or metric from end to end.
 
-- Xavier Gumara Rigol: "A data asset is a product when someone owns its use and life cycle." <!-- recheck quote --> ([The two pillars of data-driven product organizations](https://moderndata101.substack.com/p/pillars-of-data-driven-product))
+- Xavier Gumara Rigol says a data asset works as a product when it has named consumers, clear ownership and someone accountable for its life cycle ([The two pillars of data-driven product organizations](https://moderndata101.substack.com/p/pillars-of-data-driven-product))
 - Nick Zervoudis: the team should ask whether it works on the right problem, not take orders ([interview](https://designingforanalytics.com/resources/episodes/130-nick-zervoudis-on-data-product-management-ux-design-training-and-overcoming-imposter-syndrome)).
 - Zhamak Dehghani names the central platform backlog as the bottleneck ([From monolith to mesh](https://martinfowler.com/articles/data-monolith-to-mesh.html)).
-- Eric Weber: "Throughput is dead as a value metric". <!-- recheck quote --> ([Stop counting dashboards](https://ericdataproduct.substack.com/p/stop-counting-dashboards-data-team))
+- Eric Weber argues a data team can no longer attribute its value to throughput. ([Stop counting dashboards](https://ericdataproduct.substack.com/p/stop-counting-dashboards-data-team))
 
 ### P3. One written definition and one named owner for each decision metric, before any tool or AI
 
-- Nick Valiotti: "If 'no one' owns data, then 'everyone' ignores it." <!-- recheck quote --> ([10 data strategy mistakes](https://nickvaliotti.substack.com/p/10-mistakes-i-see-in-every-startups))
+- Nick Valiotti: "If 'no one' owns data, then 'everyone' ignores it." ([10 data strategy mistakes](https://nickvaliotti.substack.com/p/10-mistakes-i-see-in-every-startups))
 - Tristan Handy, quoting Ian Macomber, says consensus is the scarce resource ([The analyst's new competitive advantage](https://open.substack.com/pub/dataanalysis/p/the-analysts-new-competitive-advantage)).
 - Ben Rogojan asks where the real source of truth lives ([Six questions](https://seattledataguy.substack.com/p/are-data-teams-solving-the-right)).
 - Zhamak Dehghani puts quality accountability at the source ([Data mesh principles](https://martinfowler.com/articles/data-mesh-principles.html)).
@@ -49,7 +49,7 @@ A support function that takes tickets becomes a bottleneck. A product team owns 
 ### P4. Treat a data asset as a product: a named consumer, a contract, a life cycle that includes retirement
 
 - Zhamak Dehghani: domain data must be treated as a product, with an owner who knows its users ([Data mesh principles](https://martinfowler.com/articles/data-mesh-principles.html)).
-- Modern Data 101: "It has a named consumer in mind." <!-- recheck quote --> ([Essential context](https://moderndata101.substack.com/p/data-products-the-essential-context))
+- Modern Data 101: "It has a named consumer in mind." ([Essential context](https://moderndata101.substack.com/p/data-products-the-essential-context))
 - Brian T. O'Neill: owner and contract are not enough. The product must also work as a decision solution for a person ([definition](https://designingforanalytics.com/resources/the-definition-of-data-product/)).
 - Benn Stancil: production is a state you declare and then support. Mark the assets that are in production ([What is production?](https://benn.substack.com/p/what-is-production)).
 
@@ -57,7 +57,7 @@ A support function that takes tickets becomes a bottleneck. A product team owns 
 
 Challenge a request, then compare use cases as investments.
 
-- Nick Zervoudis and Dylan Anderson: "A good use case is not a good investment." <!-- recheck quote --> ([Value-driven prioritisation](https://thedataecosystem.substack.com/p/issue-66-value-driven-prioritisation))
+- Nick Zervoudis, in a guest post for Dylan Anderson's newsletter: "A good use case is not necessarily a good investment." ([Value-driven prioritisation](https://thedataecosystem.substack.com/p/issue-66-value-driven-prioritisation))
 - Ben Rogojan lists the cost of not doing the work as one of his six questions ([Six questions](https://seattledataguy.substack.com/p/are-data-teams-solving-the-right)).
 - Eric Weber tracks how many experiments pay off ([Stop counting dashboards](https://ericdataproduct.substack.com/p/stop-counting-dashboards-data-team)).
 
@@ -65,25 +65,25 @@ Challenge a request, then compare use cases as investments.
 
 Dashboards built and queries answered are activity. Decision speed, outcome lift and countermetrics are value.
 
-- Vin Vashishta: "Any metric that is disconnected from an outcome can be gamed." <!-- recheck quote --> ([Why are businesses so good at lying](https://vinvashishta.substack.com/p/why-are-businesses-so-good-at-lying))
+- Vin Vashishta: "Any metric that is disconnected from an outcome can be gamed, and that’s what happened in most businesses." ([Why are businesses so good at lying](https://vinvashishta.substack.com/p/why-are-businesses-so-good-at-lying))
 - Vashishta also describes four linked levels: adoption, model performance, workflow outcome, business outcome ([metric vs outcome](https://vinvashishta.substack.com/p/the-metric-isnt-the-outcome-how-to)).
 - Eric Weber proposes decision velocity, experiment yield and revenue affected ([Stop counting dashboards](https://ericdataproduct.substack.com/p/stop-counting-dashboards-data-team)).
 - Brian T. O'Neill: judge the product by the outcome in the user's own workflow ([Surgery or healing?](https://designingforanalytics.com/resources/does-your-data-product-enable-surgery-or-healing/)).
-- Dylan Anderson's critic, Benny Benford: "More complex analytics ≠ more value." <!-- recheck quote --> ([LinkedIn post](https://www.linkedin.com/feed/update/urn:li:activity:7134843183393300480))
+- Dylan Anderson's critic, Benny Benford: "More complex analytics ≠ more value." ([LinkedIn post](https://www.linkedin.com/feed/update/urn:li:activity:7134843183393300480))
 
 ### P7. Match stage and stack to today's decisions
 
 Buy a tool when a KPI and a decision need it, not before.
 
 - Nick Valiotti ties data function problems to company stage, not to tools ([stages post](https://www.linkedin.com/posts/valiotti_most-founders-build-their-data-function-one-share-7506244865148690434--ZVY/)).
-- Ben Rogojan: "Every new data pipeline you build without a clear purpose just becomes a technical liability over time." <!-- recheck quote --> ([Why data pipelines exist](https://seattledataguy.substack.com/p/why-data-pipelines-exist))
+- Ben Rogojan argues a pipeline needs a clear purpose beyond moving data from A to B ([Why data pipelines exist](https://seattledataguy.substack.com/p/why-data-pipelines-exist))
 - Dylan Anderson: ask how mature you need to be for what is expected today ([Data and AI maturity](https://thedataecosystem.substack.com/p/issue-61-data-and-ai-maturity)).
 
 ### P8. Adoption is an incentive and structure problem
 
 Map incentives before you design the product.
 
-- Anna Bergevin: "The Incentive Map is the invisible layer that powers organizational behavior." <!-- recheck quote --> ([The incentive map](https://dataprodmgmt.substack.com/p/the-incentive-map-every-data-platform))
+- Anna Bergevin: "The Incentive Map is the invisible layer that powers organizational behavior." ([The incentive map](https://dataprodmgmt.substack.com/p/the-incentive-map-every-data-platform))
 - Vin Vashishta says data teams support the business but own nothing outside the data team, so incentives must cross teams ([cross-functional organizations](https://vinvashishta.substack.com/p/building-cross-functional-data-organizations)).
 - Eric Weber says the technical and operating halves multiply ([Data infra PM](https://ericdataproduct.substack.com/p/data-infra-pm-the-most-important)).
 - Benn Stancil's test is pull: the work should be bought, not sold ([Data teams and product-market fit](https://benn.substack.com/p/data-teams-product-market-fit)).
@@ -92,9 +92,9 @@ Map incentives before you design the product.
 
 Govern use, evaluate outputs, and give agents context.
 
-- Tristan Handy: "The bottleneck moved." <!-- recheck quote --> AI lowers the cost of producing analytics, not the cost of trusting it ([interview](https://open.substack.com/pub/dataanalysis/p/the-analysts-new-competitive-advantage)).
+- Olga Berezovsky, in her interview with Tristan Handy: the bottleneck shifts from producing analytics to making sense of them. AI lowers the cost of producing analytics, not the cost of trusting it ([interview](https://open.substack.com/pub/dataanalysis/p/the-analysts-new-competitive-advantage)).
 - Nick Valiotti separates a running query from a trusted answer ([The job was never the code](https://nickvaliotti.substack.com/p/the-job-was-never-the-code)).
-- Eric Weber: "Humans are remarkably good at putting up with a mess". <!-- recheck quote --> Agents are not. ([Data infra PM](https://ericdataproduct.substack.com/p/data-infra-pm-the-most-important))
+- Eric Weber: "Humans are remarkably good at putting up with a mess (while also complaining about it)." Agents are not. ([Data infra PM](https://ericdataproduct.substack.com/p/data-infra-pm-the-most-important))
 - Modern Data 101 treats context as a first-class asset ([Essential context](https://moderndata101.substack.com/p/data-products-the-essential-context)).
 - Peter Everill: the team also manages the machine, meaning explainability, inputs and ethics ([The purpose of a data team](https://petereverill.substack.com/p/the-purpose-of-a-data-team)).
 
@@ -104,12 +104,12 @@ Govern use, evaluate outputs, and give agents context.
 - **Tone when you challenge a request (P1, P5).** Nick Zervoudis says build trust slowly and stay curious. Ben Rogojan says engineering should push back. The goal is the same. The method differs.
 - **Causal claims about value (P6).** Eric Weber wants a revenue ledger. The Vashishta position is that business-outcome claims are confounded and workflow outcomes are the least you should claim. Weber's 70 percent experiment-yield line has no stated basis.
 - **Size of the stack (P7).** Valiotti and Rogojan lean small. Weber and Modern Data 101 say agents need heavy context infrastructure. The stage test resolves it: a small stack for early decisions, a context layer once agents act on the data.
-- **Where the filter sits (P1, P9).** Vashishta says the filter was always the quality of the opportunity, and agents removed the productivity limit. Handy says trust is now the limit. Both hold: P1 picks the problem, P9 keeps the answer safe.
+- **Where the filter sits (P1, P9).** Vashishta says the filter was always the quality of the opportunity, and agents removed the productivity limit. The Berezovsky interview with Handy says trust and interpretation are now the limit. Both hold: P1 picks the problem, P9 keeps the answer safe.
 - **Is an owned asset already a product? (P4).** Xavier Gumara Rigol says yes, an owned asset is a product. Brian T. O'Neill says no, "data as a product" is only a refined asset, and a data product is a human-in-the-loop decision solution.
 - **Does the product model fit every company? (P2, P4).** Benn Stancil questions the "everything is a product" frame in [The problem was the product](https://benn.substack.com/p/the-problem-was-the-product) and asks whether a data team has product-market fit at all. Schario and Murphy and the mesh authors assume it does.
 - **Who is the customer? (P2).** Schario and Murphy treat colleagues as customers. Later commentary says the company is the customer. This repo does not settle it. Use the glossary word consumer.
 - **What counts as a data product.** The packaging school asks what the thing is. Zervoudis says it should be defined by how you make it. Dehghani limits the term to analytical data on a mesh, while Patil includes end-user applications.
-- **Product or service.** Databricks now argues "Stop building data products. Start building data services," <!-- recheck quote --> because one product per use case breaks when agents are the consumer ([Databricks](https://www.databricks.com/blog/stop-building-data-products-start-building-data-services)). This repo keeps the product frame and treats an agent as a delivery surface.
+- **Product or service.** Databricks now argues "Stop building data products. Start building data services," because one product per use case breaks when agents are the consumer ([Databricks](https://www.databricks.com/blog/stop-building-data-products-start-building-data-services)). This repo keeps the product frame and treats an agent as a delivery surface.
 - **Are agents products or consumers?** Most 2025 and 2026 writing says consumers. Some vendor pages list agents as products. The glossary picks consumer-side: an analytics agent is a delivery surface.
 - **Maturity ladders.** Dylan Anderson and Benny Benford argue against one ladder for a whole company. This page keeps the stages and scores them per use case, which is the fix Anderson proposes.
 
