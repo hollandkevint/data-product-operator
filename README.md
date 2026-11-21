@@ -139,15 +139,27 @@ In Claude Code, select the installed command from the command menu. Other assist
 skills/
   data-product-operator/        Leader/DPM entry point and operating loop
   analyst/                      Evidence graph, example and structural checker
-  decision-follow-up/           First loop: checks past decisions against outcomes
+  decision-follow-up/           Loop: checks past decisions against outcomes
+  weekly-metric-review/         Loop: flags metric moves nobody has explained
+  data-quality-watch/           Loop: daily freshness, volume, null and schema checks
+  agent-eval-regression/        Loop: replays golden questions against an analytics agent
+  strategy-review/              Loop: quarterly keep, change or stop questions
+  team-loop/                    Sets up a Team Loop workspace (formerly dpm_os)
+  analytics-agent/              Plan, build and test an agent that answers over a data product
+  metric-glossary/              One definition, owner and grain per metric
+  data-dictionary-grill/        Checks a plan against the dictionary and glossary
+  data-product-retro/           Looks back at a shipped decision
+  launch-and-adoption/          Launch plan, adoption signal and retire rule
+  shipping-bridge/              Maps a decision to release gates
   ...                           Core, domain and platform skills
 commands/                       Longer workflow entry points
 docs/
   domain-applications.md        Marketing, logistics/ops and ecommerce routes
   healthcare-applications.md    Healthcare application pack
   analyst-testing.md            Checks and explicit limits
+  analytics-agents/             Four guides: reference architecture and build routes
   loop-pattern.md               Maker, checker, state file and demo data for loops
-  match-grid.md                 Nine jobs against nine source packs, with the cycle
+  match-grid.md                 Nine jobs against nine source packs, the cycle and gap notes
 .claude-plugin/                 Claude plugin and marketplace metadata
 CONNECTORS.md                   Optional integrations
 CLAUDE.md                       Contributor and agent guidance

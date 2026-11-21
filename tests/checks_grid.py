@@ -26,6 +26,7 @@ LINK = re.compile(r"^\[([^\]]+)\]\(([^)\s]+)\)$")
 NAME = re.compile(r"^[A-Za-z0-9_.:\-]+$")  # one token: a skill name, never prose
 TICKED = re.compile(r"^`([A-Za-z0-9_.:\-]+)`$")
 ROW_LABEL = re.compile(r"^(J[1-9])(\.\d+)?\s+\S")
+NOTE = re.compile(r"^-\s+(J[1-9]\.\d+)\s*/\s*([^:]+):\s*(\S.*)$")
 FENCE = re.compile(r"^```(\w*)\s*$")
 
 
@@ -71,11 +72,11 @@ def _check_cell(col, text, where, root, page_dir):
         name, url = m.groups()
         if col in LOCAL:
             target = (page_dir / url.split("#")[0]).resolve()
-            skills = (Path(root) / "skills").resolve()
-            if skills not in target.parents:
-                problems.append(f"{where}: '{url}' is not a skill in this repo")
+            roots = [(Path(root) / d).resolve() for d in ("skills", "docs")]
+            if not any(r in target.parents for r in roots):
+                problems.append(f"{where}: '{url}' is not a skill or doc in this repo")
             elif not target.is_file():
-                problems.append(f"{where}: link to missing skill '{url}'")
+                problems.append(f"{where}: link to missing skill or doc '{url}'")
         else:
             if not NAME.match(name):
                 problems.append(f"{where}: outside cell holds '{name}', names only")
@@ -106,7 +107,7 @@ def check_match_grid(root):
         if first_table is not None and line > first_table:
             problems.append(f"{GRID_PATH}: cycle diagram must come above the table")
 
-    seen_jobs, headers = set(), 0
+    seen_jobs, headers, gaps = set(), 0, set()
     page_dir = page.parent
     for n, line in table_lines:
         cells = _cells(line)
@@ -126,10 +127,32 @@ def check_match_grid(root):
             problems.append(f"{GRID_PATH}:{n}: {cells[0]} has {len(cells) - 1} cells, need {len(COLUMNS)}")
             continue
         for col, cell in enumerate(cells[1:]):
+            if cell == "gap" and col in LOCAL:
+                gaps.add((cells[0].split()[0], COLUMNS[col]))
             problems += _check_cell(col, cell, f"{GRID_PATH}:{n}: {cells[0]} / {COLUMNS[col]}", root, page_dir)
     if headers == 0:
         problems.append(f"{GRID_PATH}: no grid table found")
     for job in JOBS:
         if job not in seen_jobs:
             problems.append(f"{GRID_PATH}: row {job} is missing")
+    problems += _check_notes(text, gaps)
     return problems
+
+
+def _check_notes(text, gaps):
+    """Every gap in this repo's two columns needs one note line; no note may be stale."""
+    out, notes, in_section = [], set(), False
+    for line in text.splitlines():
+        if line.startswith("## "):
+            in_section = line.strip() == "## Gap notes"
+        elif in_section and line.startswith("-"):
+            m = NOTE.match(line)
+            if m:
+                notes.add((m.group(1), m.group(2).strip()))
+            else:
+                out.append(f"{GRID_PATH}: gap note '{line[:40]}' must read '- J1.1 / Column: reason'")
+    for job, col in sorted(gaps - notes):
+        out.append(f"{GRID_PATH}: {job} / {col} is a gap with no line under 'Gap notes'")
+    for job, col in sorted(notes - gaps):
+        out.append(f"{GRID_PATH}: note for {job} / {col} but that cell is not a gap")
+    return out

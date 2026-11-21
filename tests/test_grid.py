@@ -9,7 +9,7 @@ from test_links import tree
 DIAGRAM = ('```mermaid\nflowchart LR\n  A["J1 J2 J3"] --> B["J4 J5 J6"]\n'
            '  B -->|"Team Loop"| A\n  B -->|"strategy review"| C["J7 J8 J9"]\n```\n')
 LOCAL_OK = "[a](../skills/a/SKILL.md)"
-GOOD = [LOCAL_OK, "gap", "`kh-skill`",
+GOOD = [LOCAL_OK, LOCAL_OK, "`kh-skill`",
         "[pm-x:y](https://github.com/phuryn/pm-skills)",
         "[ship-check](https://github.com/phuryn/product-engineering)",
         "[pmg-x](https://github.com/polar-bear-org/claude-skills/tree/main/packs/p)",
@@ -17,7 +17,7 @@ GOOD = [LOCAL_OK, "gap", "`kh-skill`",
         "[tdd](https://github.com/mattpocock/skills)"]
 
 
-def grid(cells=None, jobs=range(1, 10), columns=None, diagram=DIAGRAM, tables_first=False):
+def grid(cells=None, jobs=range(1, 10), columns=None, diagram=DIAGRAM, tables_first=False, notes=""):
     cells = cells or {}
     cols = columns or COLUMNS
     out = ["# Match grid\n"]
@@ -30,6 +30,8 @@ def grid(cells=None, jobs=range(1, 10), columns=None, diagram=DIAGRAM, tables_fi
         out.append(f"| J{j}.1 Thing | " + " | ".join(row) + " |")
     if tables_first:
         out.append(diagram)
+    if notes:
+        out.append("\n## Gap notes\n\n" + notes)
     return "\n".join(out) + "\n"
 
 
@@ -75,7 +77,7 @@ class MatchGrid(unittest.TestCase):
 
     def test_local_link_outside_skills_fails(self):
         out = run(cells={(2, 1): "[g](../README.md)"})
-        self.assertIn("not a skill in this repo", out[0])
+        self.assertIn("not a skill or doc in this repo", out[0])
 
     def test_copied_text_in_90n_cell_fails(self):
         out = run(cells={(1, 5): "[Builds a roadmap with a confidence note](https://github.com/polar-bear-org/claude-skills/x)"})
@@ -95,7 +97,7 @@ class MatchGrid(unittest.TestCase):
 
     def test_wrong_cell_count_fails(self):
         with tempfile.TemporaryDirectory() as t:
-            text = grid().replace("| gap | `kh-skill`", "| `kh-skill`", 1)
+            text = grid().replace(f"| {LOCAL_OK} | `kh-skill`", "| `kh-skill`", 1)
             tree(t, {"skills/a/SKILL.md": "x\n", "docs/match-grid.md": text})
             self.assertTrue(any("cells, need 9" in p for p in check_match_grid(t)))
 
@@ -106,6 +108,35 @@ class MatchGrid(unittest.TestCase):
     def test_diagram_below_table_fails(self):
         out = run(tables_first=True)
         self.assertTrue(any("above the table" in p for p in out))
+
+    def test_unnoted_gap_in_repo_column_fails(self):
+        out = run(cells={(2, 1): "gap"})
+        self.assertEqual(len(out), 1)
+        self.assertIn("J2.1 / Team Loop is a gap with no line", out[0])
+
+    def test_unnoted_gap_in_first_repo_column_fails(self):
+        out = run(cells={(4, 0): "gap"})
+        self.assertIn("J4.1 / Data Product Operator is a gap", out[0])
+
+    def test_noted_gap_passes(self):
+        self.assertEqual(run(cells={(2, 1): "gap"}, notes="- J2.1 / Team Loop: filled later by a loop.\n"), [])
+
+    def test_gap_in_outside_column_needs_no_note(self):
+        self.assertEqual(run(cells={(2, 3): "gap", (2, 7): "gap"}), [])
+
+    def test_note_for_filled_cell_fails(self):
+        out = run(notes="- J2.1 / Team Loop: stale.\n")
+        self.assertTrue(any("not a gap" in p for p in out))
+
+    def test_malformed_note_fails(self):
+        out = run(cells={(2, 1): "gap"}, notes="- J2.1 Team Loop missing the colon\n")
+        self.assertTrue(any("must read" in p for p in out))
+
+    def test_link_to_doc_passes(self):
+        with tempfile.TemporaryDirectory() as t:
+            text = grid(cells={(2, 0): "[g](g/x.md)"})
+            tree(t, {"skills/a/SKILL.md": "x\n", "docs/g/x.md": "x\n", "docs/match-grid.md": text})
+            self.assertEqual(check_match_grid(t), [])
 
     def test_no_diagram_fails(self):
         out = run(diagram="")
