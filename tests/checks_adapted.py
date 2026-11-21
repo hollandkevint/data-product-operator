@@ -1,7 +1,7 @@
 """License-line check for adapted skills.
 
 A skill adapted from someone else's work carries `adapted_from:` in its
-frontmatter (format: `Author, repo or title, part`) and ends with a
+frontmatter (free text: where it came from, or a URL) and ends with a
 `Source:` line that names the author, links the original and states the
 license. See docs/adapted-skills.md.
 """
@@ -14,7 +14,8 @@ from repo_checks import parse_frontmatter
 ADAPT_LICENSES = ("MIT",)
 # Authors whose text this repo adapts. A skill that names one must be marked.
 KNOWN_ADAPTED_AUTHORS = re.compile(r"Matt Pocock|Pawel Huryn|Paweł Huryn|phuryn", re.I)
-SOURCE_LINK = re.compile(r"\]\(https?://[^)\s]+\)")
+SOURCE_LINK = re.compile(r"https?://[^\s)]+")
+SOURCE_AUTHOR = re.compile(r"^Source:\s*[^,\[\]:/]+,")
 
 
 def check_adapted_sources(root):
@@ -29,16 +30,12 @@ def check_adapted_sources(root):
             if KNOWN_ADAPTED_AUTHORS.search(text):
                 problems.append(f"{rel}: names an adapted-from author but has no adapted_from frontmatter")
             continue
-        author = marked.split(",")[0].strip()
-        if not author:
-            problems.append(f"{rel}: adapted_from has no author")
-            continue
         if not lines or not lines[-1].startswith("Source:"):
             problems.append(f"{rel}: adapted skill must end with a Source: line")
             continue
         src = lines[-1]
-        if author.lower() not in src.lower():
-            problems.append(f"{rel}: Source line does not name the author '{author}'")
+        if not SOURCE_AUTHOR.match(src):
+            problems.append(f"{rel}: Source line does not start with 'Source: <author>,'")
         if not SOURCE_LINK.search(src):
             problems.append(f"{rel}: Source line has no link")
         if not any(re.search(rf"\b{re.escape(l)}\b", src) for l in ADAPT_LICENSES):

@@ -52,7 +52,10 @@ class AdaptedSources(unittest.TestCase):
         self.assertIn("no cleared license", self.check(GOOD.replace("MIT", "GPL-3.0")))
 
     def test_wrong_author_fails(self):
-        self.assertIn("does not name the author", self.check(GOOD.replace("Source: Matt Pocock", "Source: Someone")))
+        self.assertIn("does not start with", self.check(GOOD.replace("Source: Matt Pocock,", "Source: [x](https://a.b),")))
+
+    def test_bare_url_counts_as_link(self):
+        self.assertEqual(self.check(GOOD.replace("[mattpocock/skills](https://github.com/mattpocock/skills)", "https://github.com/mattpocock/skills")), "")
 
     def test_unmarked_adaptation_fails(self):
         text = "---\nname: a\ndescription: x\n---\nBased on Matt Pocock's grill-me skill.\n"
