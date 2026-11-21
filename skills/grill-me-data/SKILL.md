@@ -1,6 +1,7 @@
 ---
 name: grill-me-data
 version: 0.1.0
+adapted_from: Matt Pocock, mattpocock/skills, grilling
 description: >
   Decision tree exploration for data product plans. Interview relentlessly about
   schema decisions, consumer contracts, quality SLAs, and delivery choices. Use when
@@ -76,9 +77,9 @@ At the end, produce:
 - **Quality gaps:** Where SLAs are undefined or unrealistic
 - **Recommended next step:** The single most important thing to resolve first
 
-Based on Matt Pocock's grill-me skill pattern, adapted for data products.
-
 ---
 
 Part of the [Data Product Operator](https://github.com/hollandkevint/data-product-operator) plugin.
 Decision architecture skills: [decision-architecture](https://github.com/hollandkevint/decision-architecture)
+
+Source: Matt Pocock, [mattpocock/skills](https://github.com/mattpocock/skills) (grilling), MIT license. Adapted for data products. For checking a plan against the data dictionary, see `data-dictionary-grill`.

@@ -1,6 +1,7 @@
 ---
 name: healthcare-data-readiness-debrief
 description: Debrief one healthcare data project where preparation took more work than expected. Use a project summary or short interview to identify evidence gaps, trace their effect on the intended use, and produce a practical next-check brief. Works without patient records or database access.
+adapted_from: Matt Pocock, mattpocock/skills, grilling
 metadata:
   version: "0.1.1"
 ---
@@ -127,3 +128,5 @@ Before handing off, verify that every asserted cause has evidence or a hypothesi
 Use the [complete example](example.md) only when a user asks what the output looks like. Its project and results are fictional; never use them as evidence about the user's project.
 
 For additional worked scenarios, see [synthetic scenarios](examples/scenarios.md). They are synthetic teaching cases, not verified customer outcomes. Do not load them as evidence for a live project.
+
+Source: Matt Pocock, [mattpocock/skills](https://github.com/mattpocock/skills) (grilling), MIT license. The grilling section adapts his dependency-by-dependency interview.
