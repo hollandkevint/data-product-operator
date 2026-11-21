@@ -1,0 +1,38 @@
+{
+  "name": "weekly-metric-review",
+  "trigger": "weekly, Monday morning after the weekend loads",
+  "checker": "check.py",
+  "demo": "demo",
+  "breaks": [
+    {
+      "why": "a big move is called steady",
+      "file": "loops/weekly-metric-review/2026-11-21.md",
+      "find": "| 1500000 | 50.0 | unexplained |",
+      "replace": "| 1500000 | 50.0 | steady |"
+    },
+    {
+      "why": "the change figure is wrong",
+      "file": "loops/weekly-metric-review/2026-11-21.md",
+      "find": "| 31 | -22.5 |",
+      "replace": "| 31 | -12.5 |"
+    },
+    {
+      "why": "an explanation has no cause on record",
+      "file": "loops/weekly-metric-review/2026-11-21.md",
+      "find": "`(stakeholder-verbal, Ana Reyes, 2026-11-19)`",
+      "replace": "Unknown"
+    },
+    {
+      "why": "a metric value differs from the data",
+      "file": "metrics/values.csv",
+      "find": "Rows loaded,2026-11-16,1500000",
+      "replace": "Rows loaded,2026-11-16,1100000"
+    },
+    {
+      "why": "a defined metric is dropped from the output",
+      "file": "loops/weekly-metric-review/2026-11-21.md",
+      "find": "| Median query seconds | 2.0 | 2.1 | 5.0 | steady | Inside the 25% threshold. | - | None. |\n",
+      "replace": ""
+    }
+  ]
+}

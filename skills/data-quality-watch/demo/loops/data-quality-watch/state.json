@@ -1,0 +1,14 @@
+{
+  "loop": "data-quality-watch",
+  "last_run": "2026-11-21",
+  "next_run": "2026-11-22",
+  "checked": [
+    "claims_feed",
+    "consumer_queries"
+  ],
+  "failing": [
+    "claims_feed:nulls:payer",
+    "consumer_queries:freshness",
+    "consumer_queries:schema"
+  ]
+}

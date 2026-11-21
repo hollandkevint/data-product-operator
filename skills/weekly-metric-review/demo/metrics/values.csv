@@ -1,0 +1,9 @@
+metric,week_start,value
+"Readmission rate, 30 days",2026-11-09,12.0
+"Readmission rate, 30 days",2026-11-16,12.4
+Active consumers,2026-11-09,40
+Active consumers,2026-11-16,31
+Rows loaded,2026-11-09,1000000
+Rows loaded,2026-11-16,1500000
+Median query seconds,2026-11-09,2.0
+Median query seconds,2026-11-16,2.1

@@ -1,0 +1,16 @@
+{
+  "loop": "strategy-review",
+  "last_run": "2026-11-21",
+  "next_run": "2027-02-20",
+  "quarter": "2026-Q3",
+  "operator": "Priya Nair",
+  "reviewed": [
+    "2026-08-04-friday-refresh.md",
+    "2026-09-20-thirty-day-window.md",
+    "2026-09-01-retire-lag-export.md",
+    "2026-07-10-daily-refresh.md"
+  ],
+  "open": [
+    "2026-09-01-retire-lag-export.md"
+  ]
+}

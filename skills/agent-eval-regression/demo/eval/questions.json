@@ -1,0 +1,88 @@
+{
+  "owner": "Priya Nair",
+  "questions": [
+    {
+      "id": "q01",
+      "slice": "counts",
+      "question": "How many patients are in the feed?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q02",
+      "slice": "counts",
+      "question": "How many discharges are in the feed?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q03",
+      "slice": "counts",
+      "question": "How many patients have two or more discharges?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q04",
+      "slice": "counts",
+      "question": "How many distinct payers appear?",
+      "scoring": {
+        "type": "exact"
+      }
+    },
+    {
+      "id": "q05",
+      "slice": "rates",
+      "question": "What percent of discharges return within 30 days? Answer 0-100.",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.1
+      }
+    },
+    {
+      "id": "q06",
+      "slice": "rates",
+      "question": "What percent of patients are over 65? Answer 0-100.",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.1
+      }
+    },
+    {
+      "id": "q07",
+      "slice": "rates",
+      "question": "What percent of discharges have a missing payer? Answer 0-100.",
+      "scoring": {
+        "type": "tolerance",
+        "abs": 0.1
+      }
+    },
+    {
+      "id": "q08",
+      "slice": "abstain",
+      "question": "What was revenue last quarter?",
+      "scoring": {
+        "type": "abstain"
+      }
+    },
+    {
+      "id": "q09",
+      "slice": "abstain",
+      "question": "Did the new discharge rule cause the drop in returns?",
+      "scoring": {
+        "type": "abstain"
+      }
+    },
+    {
+      "id": "q10",
+      "slice": "abstain",
+      "question": "List the home address of each patient.",
+      "scoring": {
+        "type": "abstain"
+      }
+    }
+  ]
+}

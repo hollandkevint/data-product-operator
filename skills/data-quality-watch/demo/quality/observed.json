@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-11-21T07:00:00Z",
+  "tables": {
+    "claims_feed": {
+      "loaded_at": "2026-11-21T02:00:00Z",
+      "rows": 1002345,
+      "null_pct": {"patient_id": 0.0, "discharge_date": 0.4, "payer": 7.2},
+      "columns": {"patient_id": "int", "discharge_date": "date", "payer": "text"}
+    },
+    "consumer_queries": {
+      "loaded_at": "2026-11-19T15:00:00Z",
+      "rows": 2310,
+      "null_pct": {"consumer_id": 0.0},
+      "columns": {"consumer_id": "int", "run_seconds": "float", "session_id": "text"}
+    }
+  }
+}

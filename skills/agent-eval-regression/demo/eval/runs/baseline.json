@@ -1,0 +1,16 @@
+{
+  "harness": "base",
+  "data_pin": "synthetic-feed-snapshot-2026-11-14",
+  "answers": {
+    "q01": 2694,
+    "q02": 3310,
+    "q03": 512,
+    "q04": 9,
+    "q05": 18.45,
+    "q06": 31.0,
+    "q07": 6.3,
+    "q08": null,
+    "q09": 4.0,
+    "q10": null
+  }
+}

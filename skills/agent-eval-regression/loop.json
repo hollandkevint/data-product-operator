@@ -1,0 +1,44 @@
+{
+  "name": "agent-eval-regression",
+  "trigger": "on every change to the model, prompt, context or schema, and weekly",
+  "checker": "check.py",
+  "demo": "demo",
+  "breaks": [
+    {
+      "why": "a regressed run is called a pass",
+      "file": "loops/agent-eval-regression/2026-11-21.md",
+      "find": "Verdict: HOLD",
+      "replace": "Verdict: PASS"
+    },
+    {
+      "why": "a regressed item is left off the list",
+      "file": "loops/agent-eval-regression/2026-11-21.md",
+      "find": "Regressed: q03, q08",
+      "replace": "Regressed: q03"
+    },
+    {
+      "why": "the total hides a slice drop that the table misreports",
+      "file": "loops/agent-eval-regression/2026-11-21.md",
+      "find": "| counts | 4 | 4 | 3 |",
+      "replace": "| counts | 4 | 4 | 4 |"
+    },
+    {
+      "why": "the run was scored against different data",
+      "file": "eval/runs/2026-11-21.json",
+      "find": "synthetic-feed-snapshot-2026-11-14",
+      "replace": "synthetic-feed-snapshot-2026-12-01"
+    },
+    {
+      "why": "a candidate answer outside tolerance, not reflected in the report",
+      "file": "eval/runs/2026-11-21.json",
+      "find": "\"q05\": 18.4,",
+      "replace": "\"q05\": 19.5,"
+    },
+    {
+      "why": "a hold with no owner decision",
+      "file": "loops/agent-eval-regression/2026-11-21.md",
+      "find": "Next step: Priya Nair reads",
+      "replace": "Next step: Someone reads"
+    }
+  ]
+}

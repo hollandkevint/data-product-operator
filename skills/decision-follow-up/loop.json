@@ -1,0 +1,32 @@
+{
+  "name": "decision-follow-up",
+  "trigger": "weekly, after the decision packet",
+  "checker": "check.py",
+  "demo": "demo",
+  "breaks": [
+    {
+      "why": "keep with no outcome evidence",
+      "file": "loops/decision-follow-up/2026-11-21.md",
+      "find": "`(stakeholder-verbal, Ana Reyes, 2026-09-16)`",
+      "replace": "Unknown"
+    },
+    {
+      "why": "reverse condition drifts from the record",
+      "file": "loops/decision-follow-up/2026-11-21.md",
+      "find": "Two or more consumers report the Friday load",
+      "replace": "One consumer reports the Friday load"
+    },
+    {
+      "why": "a pending decision gets followed up",
+      "file": "decisions/LOG.md",
+      "find": "decided | 2026-09-15",
+      "replace": "pending | 2026-09-15"
+    },
+    {
+      "why": "a due decision is missing from the output",
+      "file": "decisions/LOG.md",
+      "find": "2027-01-15",
+      "replace": "2026-11-15"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "tables": {
+    "claims_feed": {
+      "owner": "Ana Reyes",
+      "max_age_hours": 26,
+      "min_rows": 900000,
+      "max_rows": 1100000,
+      "max_null_pct": {"patient_id": 0.0, "discharge_date": 1.0, "payer": 5.0},
+      "columns": {"patient_id": "int", "discharge_date": "date", "payer": "text"}
+    },
+    "consumer_queries": {
+      "owner": "Marcus Webb",
+      "max_age_hours": 26,
+      "min_rows": 500,
+      "max_rows": 5000,
+      "max_null_pct": {"consumer_id": 0.0},
+      "columns": {"consumer_id": "int", "run_seconds": "float"}
+    }
+  }
+}

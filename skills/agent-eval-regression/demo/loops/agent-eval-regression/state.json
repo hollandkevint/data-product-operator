@@ -1,0 +1,12 @@
+{
+  "loop": "agent-eval-regression",
+  "last_run": "2026-11-21",
+  "next_run": "2026-11-28",
+  "baseline": "baseline.json",
+  "candidate": "2026-11-21.json",
+  "verdict": "HOLD",
+  "regressed": [
+    "q03",
+    "q08"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "utilization",
+  "parent": "base",
+  "slice": "utilization",
+  "summary": "A utilization analyst's harness. Scopes the study population to patients observed in the 2010-2018 analysis window, counts length of stay as end minus start, and orders visits by date instead of the preceding-visit field."
+}
