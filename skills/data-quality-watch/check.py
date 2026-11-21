@@ -59,9 +59,25 @@ def load_json(path, problems, label):
         return None
 
 
+def is_number(x):
+    return isinstance(x, (int, float)) and not isinstance(x, bool)
+
+
 def expected_checks(exp, obs, observed_at, problems, name):
     """Return {check name: (expected text, observed text, passed)} for one table."""
     out = {}
+    bad = [k for k in ("max_age_hours", "min_rows", "max_rows") if not is_number(exp.get(k))]
+    limits = exp.get("max_null_pct", {})
+    if not isinstance(limits, dict):
+        problems.append(f"{name}: max_null_pct must be a table of column limits")
+        limits = {}
+    bad_limits = [c for c, v in limits.items() if not is_number(v)]
+    for k in bad:
+        problems.append(f"{name}: {k} must be a number")
+    for c in sorted(bad_limits):
+        problems.append(f"{name}: max_null_pct for {c} must be a number")
+    if bad or bad_limits:
+        return out
     loaded = parse_time(obs.get("loaded_at"))
     if not loaded or not observed_at:
         problems.append(f"{name}: loaded_at or observed_at is not a timestamp")
@@ -71,10 +87,10 @@ def expected_checks(exp, obs, observed_at, problems, name):
     rows = obs.get("rows")
     out["volume"] = (f"{exp['min_rows']} to {exp['max_rows']} rows", f"{rows} rows",
                      isinstance(rows, (int, float)) and exp["min_rows"] <= rows <= exp["max_rows"])
-    for col, limit in sorted(exp.get("max_null_pct", {}).items()):
+    for col, limit in sorted(limits.items()):
         pct = obs.get("null_pct", {}).get(col)
-        if pct is None:
-            problems.append(f"{name}: observed.json has no null_pct for column {col}")
+        if not is_number(pct):
+            problems.append(f"{name}: observed.json has no numeric null_pct for column {col}")
             continue
         out[f"nulls:{col}"] = (f"<= {limit:.1f}%", f"{pct:.1f}%", pct <= limit)
     want, got = exp["columns"], obs.get("columns", {})

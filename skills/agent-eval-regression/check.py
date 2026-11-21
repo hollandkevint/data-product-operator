@@ -128,6 +128,8 @@ def check(root):
             problems.append(f"{q['id']}: no answer in eval/answer_key.json")
         elif (q["scoring"]["type"] == "abstain") != (answers_key[q["id"]] is None):
             problems.append(f"{q['id']}: abstain questions have a null key, all others a value")
+        elif q["scoring"]["type"] != "abstain" and not is_number(answers_key[q["id"]]):
+            problems.append(f"{q['id']}: answer key value must be a number for {q['scoring']['type']} questions")
     pin = key.get("data_pin")
     if not pin:
         problems.append("eval/answer_key.json: data_pin is missing")

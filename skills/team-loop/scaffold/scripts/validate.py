@@ -236,6 +236,10 @@ def check_log(path: Path, root: Path, text: str) -> list[str]:
         if len(cells) != LOG_CELLS:
             out.append(f"{rel}: row {n + 1} has {len(cells)} cells, expected {LOG_CELLS}")
             continue
+        if not DATE_RE.match(cells[0]):
+            out.append(f"{rel}: row {n + 1} date '{cells[0]}' is not YYYY-MM-DD")
+        if not (DATE_RE.match(cells[5]) or cells[5].startswith("Unknown")):
+            out.append(f"{rel}: row {n + 1} review date '{cells[5]}' is not YYYY-MM-DD or Unknown")
         status = cells[4].lower()
         if status not in STATUS_VALUES:
             out.append(f"{rel}: row {n + 1} status '{cells[4]}' not in {sorted(STATUS_VALUES)}")
