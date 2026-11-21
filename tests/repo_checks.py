@@ -134,3 +134,162 @@ def check_relative_links(root):
                 if not dest.exists():
                     problems.append(f"{md.relative_to(root)}:{n}: broken link '{target}'")
     return problems
+
+
+# --- glossary checks ---------------------------------------------------------
+
+# Avoid terms that are ordinary words and cannot be banned from prose. Each
+# entry says why. A term here is still checked nowhere, so keep this short.
+GLOSSARY_ALLOWED = {
+    "dashboard": "a real kind of delivery surface; the glossary bans it only as a synonym for 'data product'",
+    "report": "an ordinary noun; banned only as a synonym for 'data product'",
+    "the data": "an ordinary phrase; banned only as a name for the product itself",
+    "stakeholder": "part of skill and command names (stakeholder alignment, stakeholder brief)",
+    "customer": "domain vocabulary in the ecommerce and support guides",
+}
+
+GLOSSARY_USE_SCOPE = ("README.md", "docs")
+QUOTED = re.compile(r'"[^"\n]*"|“[^”\n]*”')
+HTML_COMMENT = re.compile(r"<!--.*?-->")
+LINK_TARGET = re.compile(r"\]\([^)]*\)")
+BARE_URL = re.compile(r"https?://\S+")
+
+
+def _split_top_level(text):
+    parts, depth, quoted, cur = [], 0, False, ""
+    for ch in text:
+        if ch == '"':
+            quoted = not quoted
+        elif ch == "(" and not quoted:
+            depth += 1
+        elif ch == ")" and not quoted:
+            depth -= 1
+        if ch == "," and depth == 0 and not quoted:
+            parts.append(cur.strip())
+            cur = ""
+        else:
+            cur += ch
+    if cur.strip():
+        parts.append(cur.strip())
+    return parts
+
+
+def avoid_terms(root):
+    """Avoid terms with no qualifier. A term with '(...)' only applies in a
+    named context, so it is not matched as plain text."""
+    glossary = Path(root) / "GLOSSARY.md"
+    if not glossary.is_file():
+        return []
+    terms = []
+    for line in glossary.read_text(encoding="utf-8").splitlines():
+        if line.startswith("_Avoid_:"):
+            for item in _split_top_level(line.split(":", 1)[1]):
+                if "(" not in item:
+                    terms.append(item.strip('"'))
+    return terms
+
+
+def check_glossary_shape(root):
+    """Every glossary entry has a bold term, a definition and an _Avoid_ line."""
+    glossary = Path(root) / "GLOSSARY.md"
+    if not glossary.is_file():
+        return ["GLOSSARY.md: file is missing"]
+    problems, term, body = [], None, []
+
+    def close():
+        if term is None:
+            return
+        if not any(b.strip() and not b.startswith("_Avoid_") for b in body):
+            problems.append(f"GLOSSARY.md: '{term}' has no definition")
+        if not any(b.startswith("_Avoid_:") for b in body):
+            problems.append(f"GLOSSARY.md: '{term}' has no _Avoid_ line")
+
+    for line in glossary.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^\*\*(.+?)\*\*:\s*$", line)
+        if m:
+            close()
+            term, body = m.group(1), []
+        elif line.startswith("#"):
+            close()
+            term, body = None, []
+        elif term is not None:
+            body.append(line)
+    close()
+    return problems
+
+
+def _prose(text):
+    """Text a reader sees as plain words: no code, quotes, comments or link targets."""
+    out, in_fence = [], False
+    for line in text.splitlines():
+        if FENCE.match(line):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            out.append("")
+            continue
+        line = HTML_COMMENT.sub("", line)
+        line = INLINE_CODE.sub("", line)
+        line = LINK_TARGET.sub("]", line)
+        line = BARE_URL.sub("", line)
+        out.append(QUOTED.sub("", line))
+    return out
+
+
+def check_glossary_use(root, allowed=None):
+    """Avoid terms from GLOSSARY.md do not appear unquoted in README.md or docs/."""
+    root = Path(root)
+    allowed = GLOSSARY_ALLOWED if allowed is None else allowed
+    terms = [t for t in avoid_terms(root) if t.lower() not in allowed]
+    problems = []
+    for md in markdown_files(root):
+        rel = md.relative_to(root)
+        if rel.parts[0] not in GLOSSARY_USE_SCOPE:
+            continue
+        for n, line in enumerate(_prose(md.read_text(encoding="utf-8")), 1):
+            for t in terms:
+                if re.search(rf"(?<![\w-]){re.escape(t)}(?![\w-])", line, re.I):
+                    problems.append(f"{rel}:{n}: uses avoided term '{t}' (see GLOSSARY.md)")
+    return problems
+
+
+# --- first-principles page ---------------------------------------------------
+
+FP_PATH = "docs/first-principles.md"
+MIN_DISAGREEMENTS = 8
+URL = re.compile(r"\]\(https?://[^)\s]+\)")
+
+
+def _sections(text, level):
+    """Split text into {heading: body} at the given heading level."""
+    pat = re.compile(rf"^{'#' * level} (.+)$", re.M)
+    marks = list(pat.finditer(text))
+    return {
+        m.group(1): text[m.end(): marks[i + 1].start() if i + 1 < len(marks) else len(text)]
+        for i, m in enumerate(marks)
+    }
+
+
+def check_first_principles(root):
+    page = Path(root) / FP_PATH
+    if not page.is_file():
+        return [f"{FP_PATH}: file is missing"]
+    text = page.read_text(encoding="utf-8")
+    problems = []
+    principles = {h: b for h, b in _sections(text, 3).items() if re.match(r"P\d+\.", h)}
+    if len(principles) != 9:
+        problems.append(f"{FP_PATH}: expected 9 principles, found {len(principles)}")
+    for h, body in principles.items():
+        if not URL.search(body):
+            problems.append(f"{FP_PATH}: {h.split('.')[0]} names no source with a link")
+    disagree = next((b for h, b in _sections(text, 2).items() if h.lower().startswith("where the sources disagree")), None)
+    count = len(re.findall(r"^[-*] ", disagree or "", re.M))
+    if count < MIN_DISAGREEMENTS:
+        problems.append(f"{FP_PATH}: disagreements section has {count} items, need {MIN_DISAGREEMENTS}")
+    if "Kevin Holland's synthesis" not in text:
+        problems.append(f"{FP_PATH}: maturity model is not labelled Kevin Holland's synthesis")
+    for n, line in enumerate(text.splitlines(), 1):
+        for q in QUOTED.findall(line):
+            if len(q.split()) >= 6 and "<!-- recheck quote -->" not in line:
+                problems.append(f"{FP_PATH}:{n}: quote lacks a recheck marker")
+    return problems
