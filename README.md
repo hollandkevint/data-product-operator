@@ -43,7 +43,7 @@ A skill is a Markdown file of instructions. Choose the job first, then add domai
 | Job | Skills |
 |---|---|
 | Understand the problem | [Consumer discovery](skills/data-consumer-discovery/SKILL.md), [research synthesis](skills/research-synthesis-data/SKILL.md), [dashboards to decisions](skills/dashboards-to-decisions/SKILL.md) |
-| Decide what to build | [Data product thinking](skills/data-product-thinking/SKILL.md), [product validation](skills/data-product-validation/SKILL.md), [question a data-product plan](skills/grill-me-data/SKILL.md), [check a plan against the dictionary](skills/data-dictionary-grill/SKILL.md), [market advantage review](skills/arbitrage-audit-data/SKILL.md) |
+| Decide what to build | [Data product thinking](skills/data-product-thinking/SKILL.md), [product validation](skills/data-product-validation/SKILL.md), [question a data-product plan](skills/grill-me-data/SKILL.md), [check a plan against the dictionary](skills/data-dictionary-grill/SKILL.md), [look back at a decision](skills/data-product-retro/SKILL.md), [market advantage review](skills/arbitrage-audit-data/SKILL.md) |
 | Define and check the data | [Metric definitions](skills/metrics-definition/SKILL.md), [metric glossary](skills/metric-glossary/SKILL.md), [quality assessment](skills/data-quality-assessment/SKILL.md), [model design](skills/data-model-design/SKILL.md), [pipeline quality](skills/data-pipeline-quality/SKILL.md), [ethical risk assessment](skills/ethical-risk-assessment/SKILL.md) |
 | Coordinate and explain | [Stakeholder alignment](skills/stakeholder-alignment/SKILL.md), [team operating model](skills/data-team-operating-model/SKILL.md), [team positioning](skills/data-team-positioning/SKILL.md), [storytelling](skills/data-storytelling/SKILL.md) |
 
