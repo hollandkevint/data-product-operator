@@ -83,7 +83,7 @@ Cross-reference `data-pipeline-quality` for delivery patterns.
 
 ## Session Dynamics
 
-A typical data product grill session runs 20-40 questions over several rounds. Don't shortcut the schema and quality branches — those are where undiscovered complexity hides.
+A typical data product grill session runs 20-40 questions over several rounds. Don't shortcut the schema and quality branches, those are where undiscovered complexity hides.
 
 When the user says "I don't know yet": record it as an open question with a suggested investigation step.
 
