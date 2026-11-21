@@ -147,6 +147,7 @@ docs/
   healthcare-applications.md    Healthcare application pack
   analyst-testing.md            Checks and explicit limits
   loop-pattern.md               Maker, checker, state file and demo data for loops
+  match-grid.md                 Nine jobs against nine source packs, with the cycle
 .claude-plugin/                 Claude plugin and marketplace metadata
 CONNECTORS.md                   Optional integrations
 CLAUDE.md                       Contributor and agent guidance
