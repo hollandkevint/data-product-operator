@@ -1,0 +1,14 @@
+{
+  "loop": "weekly-metric-review",
+  "last_run": "2026-11-21",
+  "next_run": "2026-11-28",
+  "reviewed": [
+    "Readmission rate, 30 days",
+    "Active consumers",
+    "Rows loaded",
+    "Median query seconds"
+  ],
+  "unexplained": [
+    "Rows loaded"
+  ]
+}

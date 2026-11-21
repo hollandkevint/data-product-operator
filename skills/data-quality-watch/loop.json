@@ -1,0 +1,38 @@
+{
+  "name": "data-quality-watch",
+  "trigger": "daily, after the morning load",
+  "checker": "check.py",
+  "demo": "demo",
+  "breaks": [
+    {
+      "why": "a stale table is reported as passing",
+      "file": "loops/data-quality-watch/2026-11-21.md",
+      "find": "| 40.0 h | fail |",
+      "replace": "| 40.0 h | pass |"
+    },
+    {
+      "why": "the report carries a number the data does not",
+      "file": "quality/observed.json",
+      "find": "\"rows\": 1002345",
+      "replace": "\"rows\": 410000"
+    },
+    {
+      "why": "schema drift in the data that the report misses",
+      "file": "quality/observed.json",
+      "find": "\"payer\": \"text\"}\n    },\n    \"consumer_queries\"",
+      "replace": "\"payer\": \"int\"}\n    },\n    \"consumer_queries\""
+    },
+    {
+      "why": "a failing check has no owner action",
+      "file": "loops/data-quality-watch/2026-11-21.md",
+      "find": "Ana Reyes checks the payer mapping change by 2026-11-24.",
+      "replace": "Look into it."
+    },
+    {
+      "why": "a declared check is dropped from the report",
+      "file": "loops/data-quality-watch/2026-11-21.md",
+      "find": "| consumer_queries | volume | 500 to 5000 rows | 2310 rows | pass | - |\n",
+      "replace": ""
+    }
+  ]
+}

@@ -55,3 +55,10 @@ A loop whose checker passes everything fails the repo check. So does a break tha
 A passing checker means the output follows the rules. It does not mean the judgment inside is right. Evidence can be tagged and still be thin. A named person owns every decision the loop surfaces.
 
 The first loop built on this pattern is [decision follow-up](../skills/decision-follow-up/SKILL.md).
+
+Four more follow it:
+
+- [Weekly metric review](../skills/weekly-metric-review/SKILL.md) flags metric moves nobody has explained.
+- [Data quality watch](../skills/data-quality-watch/SKILL.md) checks freshness, volume, nulls and schema against written expectations.
+- [Agent eval regression](../skills/agent-eval-regression/SKILL.md) replays a golden-question set and flags items that got worse.
+- [Strategy review](../skills/strategy-review/SKILL.md) asks the operator each quarter what to keep, change or stop.

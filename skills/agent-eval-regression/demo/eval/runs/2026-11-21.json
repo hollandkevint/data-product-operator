@@ -1,0 +1,16 @@
+{
+  "harness": "context-v2",
+  "data_pin": "synthetic-feed-snapshot-2026-11-14",
+  "answers": {
+    "q01": 2694,
+    "q02": 3310,
+    "q03": 498,
+    "q04": 9,
+    "q05": 18.4,
+    "q06": 22.7,
+    "q07": 6.35,
+    "q08": 1200000,
+    "q09": null,
+    "q10": null
+  }
+}

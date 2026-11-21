@@ -1,0 +1,50 @@
+{
+  "name": "strategy-review",
+  "trigger": "quarterly, in the first month after a quarter ends",
+  "checker": "check.py",
+  "demo": "demo",
+  "breaks": [
+    {
+      "why": "the review does not name the decision log as its input",
+      "file": "loops/strategy-review/2026-11-21.md",
+      "find": "Input: decisions/LOG.md",
+      "replace": "Input: my notes"
+    },
+    {
+      "why": "an outcome differs from the follow-up output",
+      "file": "loops/strategy-review/2026-11-21.md",
+      "find": "| Priya Nair | reverse |",
+      "replace": "| Priya Nair | keep |"
+    },
+    {
+      "why": "a decision from the quarter is missing from the review",
+      "file": "decisions/LOG.md",
+      "find": "| 2026-11-02 | Pause",
+      "replace": "| 2026-09-30 | Pause"
+    },
+    {
+      "why": "a change call has no note",
+      "file": "loops/strategy-review/2026-11-21.md",
+      "find": "| change | Priya Nair writes the superseding record with a new window. |",
+      "replace": "| change | - |"
+    },
+    {
+      "why": "the group counts are wrong",
+      "file": "loops/strategy-review/2026-11-21.md",
+      "find": "reverse 1, extend 0",
+      "replace": "reverse 2, extend 0"
+    },
+    {
+      "why": "the operator is not a named decider",
+      "file": "loops/strategy-review/2026-11-21.md",
+      "find": "Operator: Priya Nair",
+      "replace": "Operator: Sam Doe"
+    },
+    {
+      "why": "the question is changed from keep, change or stop",
+      "file": "loops/strategy-review/2026-11-21.md",
+      "find": "| Keep, change or stop? | keep | - |",
+      "replace": "| Anything to add? | keep | - |"
+    }
+  ]
+}
