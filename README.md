@@ -139,12 +139,14 @@ In Claude Code, select the installed command from the command menu. Other assist
 skills/
   data-product-operator/        Leader/DPM entry point and operating loop
   analyst/                      Evidence graph, example and structural checker
+  decision-follow-up/           First loop: checks past decisions against outcomes
   ...                           Core, domain and platform skills
 commands/                       Longer workflow entry points
 docs/
   domain-applications.md        Marketing, logistics/ops and ecommerce routes
   healthcare-applications.md    Healthcare application pack
   analyst-testing.md            Checks and explicit limits
+  loop-pattern.md               Maker, checker, state file and demo data for loops
 .claude-plugin/                 Claude plugin and marketplace metadata
 CONNECTORS.md                   Optional integrations
 CLAUDE.md                       Contributor and agent guidance

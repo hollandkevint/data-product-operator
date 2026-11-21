@@ -1,0 +1,13 @@
+{
+  "loop": "decision-follow-up",
+  "last_run": "2026-11-21",
+  "next_run": "2026-11-28",
+  "followed_up": [
+    "2026-08-04-friday-refresh.md",
+    "2026-09-01-retire-lag-export.md",
+    "2026-09-20-thirty-day-window.md"
+  ],
+  "open": [
+    "2026-09-01-retire-lag-export.md"
+  ]
+}

@@ -42,6 +42,7 @@ Read the selected skill before using it. If it is missing, name that limitation 
 
 Start at the unresolved step; do not replay completed discovery. An urgent incident may need containment through the organization's incident process before product planning.
 For each handoff, record the trigger, receiving owner, needed evidence and disposition if it is absent. Follow up over an agreed observation period. A calendar event alone does not close the loop.
+For a recurring check with a built-in verifier, use a [loop](../../docs/loop-pattern.md). The first one is [decision follow-up](../decision-follow-up/SKILL.md).
 
 ## Grow the operating rhythm
 
