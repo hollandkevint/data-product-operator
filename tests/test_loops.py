@@ -22,6 +22,7 @@ def copy_loop(tmp, mutate=None):
     """Copy the real loop into a temp repo root, then let `mutate(loop_dir)` break it."""
     dest = Path(tmp) / "skills" / "decision-follow-up"
     shutil.copytree(LOOP, dest)
+    shutil.copytree(REPO / "lib", Path(tmp) / "lib")
     if mutate:
         mutate(dest)
     return tmp
@@ -44,6 +45,17 @@ class LoopCheck(unittest.TestCase):
         with tempfile.TemporaryDirectory() as t:
             out = "\n".join(check_loops(copy_loop(t, lax)))
             self.assertIn("accepts a broken copy", out)
+
+    def test_checker_that_crashes_on_junk_input_fails(self):
+        def crash_on_bad_date(d):
+            """Swap in a parse_date that raises on a bad date, as the old copies could."""
+            text = (d / "check.py").read_text(encoding="utf-8")
+            text = text.replace("if __name__ ==", "def parse_date(text):\n    from datetime import date\n"
+                                "    return date.fromisoformat(str(text).strip())\n\n\nif __name__ ==", 1)
+            (d / "check.py").write_text(text, encoding="utf-8")
+        with tempfile.TemporaryDirectory() as t:
+            out = "\n".join(check_loops(copy_loop(t, crash_on_bad_date)))
+            self.assertIn("crashes on junk input", out)
 
     def test_checker_that_rejects_the_demo_fails(self):
         def strict(d):

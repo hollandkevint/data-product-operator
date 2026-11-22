@@ -14,6 +14,10 @@ import sys
 from datetime import date
 from pathlib import Path
 
+# Shared helpers live in <repo>/lib. The plugin installs the whole repo, so this path holds.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "lib"))
+from loop_helpers import parse_date, read_log, table_rows  # noqa: E402
+
 DISPOSITIONS = {"keep", "reverse", "extend", "no-outcome"}
 OPEN = {"extend", "no-outcome"}
 NEEDS_EVIDENCE = {"keep", "reverse"}
@@ -25,54 +29,11 @@ EVIDENCE = [
     re.compile(r"^\(chat, no artifact\)$"),
     re.compile(r"^Unknown$"),
 ]
-LINK = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
-
-
-def parse_date(text):
-    try:
-        return date.fromisoformat(text.strip())
-    except ValueError:
-        return None
-
-
-def table_rows(text, header_start):
-    """Return rows (list of cell lists) of the first table whose header starts with header_start."""
-    rows, in_table = [], False
-    for line in text.splitlines():
-        line = line.strip()
-        if not in_table:
-            in_table = line.startswith("|") and line.lstrip("| ").startswith(header_start)
-            continue
-        if not line.startswith("|"):
-            break
-        cells = [c.strip() for c in line.strip("|").split("|")]
-        if all(re.fullmatch(r"-+", c) for c in cells):
-            continue
-        rows.append(cells)
-    return rows
 
 
 def section(text, heading):
     m = re.search(rf"^## {re.escape(heading)}\s*\n(.*?)(?=^## |\Z)", text, re.S | re.M)
     return " ".join(m.group(1).split()) if m else ""
-
-
-def read_log(root, problems):
-    path = root / "decisions" / "LOG.md"
-    if not path.exists():
-        problems.append("decisions/LOG.md is missing")
-        return []
-    out = []
-    for cells in table_rows(path.read_text(encoding="utf-8"), "Date"):
-        if len(cells) != 7:
-            problems.append(f"decisions/LOG.md: row has {len(cells)} cells, expected 7: {cells[:2]}")
-            continue
-        link = LINK.search(cells[3])
-        out.append({
-            "decision": cells[1], "status": cells[4], "review": cells[5],
-            "record": Path(link.group(1)).name if link else None,
-        })
-    return out
 
 
 def check(root):
@@ -107,7 +68,8 @@ def check(root):
     if not m or parse_date(m.group(1)) != last:
         problems.append(f"{out_path.name}: 'As of:' line must equal state last_run {state['last_run']}")
 
-    log = read_log(root, problems)
+    log = read_log(root, problems, lambda cells, record: {
+        "decision": cells[1], "status": cells[4], "review": cells[5], "record": record})
     by_record = {r["record"]: r for r in log if r["record"]}
     due = {r["record"] for r in log
            if r["status"] == "decided" and r["record"]
