@@ -28,13 +28,13 @@ Two or three concrete gaps, no more. Example: "`context/data-contract.md` has no
 
 ## 6. Receipt
 
-Print:
+Run `python3 scripts/validate.py --summary .` and copy its two lines into the receipt as they print. Then print:
 
 ```
 Self-test receipt:
 - Validator: exit 0
 - Links walked: N
-- Context sections populated: N of 30, tagged: N, Unknown: N
+- <the two --summary lines>
 - Contradictions surfaced: N
 ```
 

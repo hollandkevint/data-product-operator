@@ -33,7 +33,7 @@ Start at [INDEX.md](./INDEX.md). It carries the current decision and the area ta
 
 ## Validation
 
-`python3 scripts/validate.py .` checks required files, links, decision records, and the log. A hook in `.claude/settings.json` runs the same script on every file you write. Fix a blocking finding in the same turn.
+`python3 scripts/validate.py .` checks required files, links, decision records, the log, and a provenance tag under `## Provenance` in every populated context file. A hook in `.claude/settings.json` runs the same script on every file you write. Fix a blocking finding in the same turn.
 
 ## Off-limits
 

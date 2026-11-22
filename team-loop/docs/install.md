@@ -25,12 +25,17 @@ cp -R data-product-operator/skills/* <your-project>/.claude/skills/
 
 ## Uninstall
 
-An instance is the set of files the scaffold copied. Remove them and nothing else:
+An instance is the set of files the scaffold copied, plus whatever you added inside its folders. The skill's validator prints that list with `--manifest`. Run it from the installed skill, not from the instance's `scripts/validate.py`: an instance made before scaffold 0.2.0 has a validator without the flag. From the project root:
 
 ```bash
-rm -rf context rules packets decisions risks source ingestion maintenance scripts
-rm -f AGENTS.md CLAUDE.md INDEX.md README.md
+SKILL=.claude/skills/team-loop   # or ~/.claude/skills/team-loop for a per-user install
+python3 "$SKILL/scaffold/scripts/validate.py" --manifest > team-loop-manifest.txt \
+  && test -s team-loop-manifest.txt \
+  && cut -d/ -f1 team-loop-manifest.txt | sort -u | grep -vx -e .claude -e .gitignore | xargs rm -rf \
+  && rm team-loop-manifest.txt
 ```
+
+The chain stops before deleting anything if the manifest is empty or the command fails. It removes every top-level file and folder the manifest names, except `.claude/` and `.gitignore`. Init never overwrites an existing `.gitignore`, so that file may be yours; remove it by hand if the scaffold created it. The same is true of any file init reported as a collision, such as an existing `CLAUDE.md` or `README.md`: the command above removes it, so set it aside first.
 
 If `.claude/settings.json` existed before install, remove only the `PostToolUse` entry whose command is `python3 scripts/validate.py`. If it did not, remove the file. Then delete `.claude/skills/team-loop`.
 

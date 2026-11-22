@@ -7,7 +7,7 @@ import shutil
 import tempfile
 from pathlib import Path
 
-VERSION = "2.0.0"
+VERSION = "2.0.1"
 AUDIENCE = "data leaders, data product operators, and their teams"
 KEYWORDS = ("analytics-agents", "data-mesh", "claude-code")
 

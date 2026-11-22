@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from checks_release import (
+    VERSION,
     AUDIENCE,
     MOVED,
     NOTES,
@@ -44,7 +45,7 @@ class ReleaseManifests(unittest.TestCase):
 
     def test_old_version_fails(self):
         out = self.mutate("plugin.json", lambda d: d.update(version="1.3.0"))
-        self.assertIn("2.0.0", out)
+        self.assertIn(VERSION, out)
 
     def test_old_audience_fails(self):
         out = self.mutate("marketplace.json", lambda d: d["plugins"][0].update(description="For data product managers."))
