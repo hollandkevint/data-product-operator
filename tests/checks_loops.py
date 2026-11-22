@@ -5,6 +5,7 @@ For each loop this check confirms the shape, runs the loop's checker on its
 demo workspace (must pass), then on a broken copy per declared break (must fail).
 """
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -27,6 +28,69 @@ def run_checker(checker, workspace):
     except subprocess.TimeoutExpired:
         return 1, "checker timed out"
     return p.returncode, (p.stdout + p.stderr).strip()
+
+
+DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
+# A number standing alone in a JSON value, table cell or CSV cell. Prose and dates do not match.
+NUMBER_RE = re.compile(r"(?<=[|,:\[])(\s*)-?\d+(?:\.\d+)?(\s*)(?=[|,\]}\n]|$)", re.M)
+TEXT_SUFFIXES = {".md", ".json", ".csv", ".txt"}
+
+
+# Each corruption is a text -> text function, applied to a copy of the demo.
+CORRUPTIONS = {
+    "text where numbers go": (TEXT_SUFFIXES, lambda t: NUMBER_RE.sub(r"\1junk\2", t)),
+    "garbage where dates go": (TEXT_SUFFIXES, lambda t: DATE_RE.sub("9999-99-99", t)),
+    "empty JSON": ({".json"}, lambda t: ""),
+    "invalid JSON": ({".json"}, lambda t: "{not json"),
+}
+
+
+def _corrupt(workspace, suffixes, fn, only=None):
+    """Rewrite matching files (or just `only`). Return how many files changed."""
+    changed = 0
+    for f in sorted(workspace.rglob("*")):
+        if f.is_file() and f.suffix in suffixes and (only is None or f == only):
+            old = f.read_text(encoding="utf-8")
+            new = fn(old)
+            if new != old:
+                f.write_text(new, encoding="utf-8")
+                changed += 1
+    return changed
+
+
+def _crashed(out):
+    return "Traceback (most recent call last)" in out
+
+
+def check_junk_input(checker, demo, label):
+    """A checker must reject junk input with a problem line, never a Python traceback.
+
+    Whole demo: every corruption at once must exit non-zero. Then each file alone gets
+    each corruption, so an early exit on one bad file cannot hide a crash on another.
+    """
+    problems = []
+    for why, (suffixes, fn) in CORRUPTIONS.items():
+        with tempfile.TemporaryDirectory() as t:
+            copy = Path(t) / "demo"
+            shutil.copytree(demo, copy)
+            if not _corrupt(copy, suffixes, fn):
+                continue
+            code, out = run_checker(checker, copy)
+            if _crashed(out):
+                problems.append(f"{label}: checker crashes on junk input ({why}): {out.splitlines()[-1]}")
+            elif code == 0:
+                problems.append(f"{label}: checker accepts junk input ({why})")
+        for f in sorted(p for p in demo.rglob("*") if p.is_file() and p.suffix in suffixes):
+            rel = f.relative_to(demo)
+            with tempfile.TemporaryDirectory() as t:
+                copy = Path(t) / "demo"
+                shutil.copytree(demo, copy)
+                if not _corrupt(copy, suffixes, fn, only=copy / rel):
+                    continue
+                code, out = run_checker(checker, copy)
+                if _crashed(out):
+                    problems.append(f"{label}: checker crashes on junk in {rel} ({why}): {out.splitlines()[-1]}")
+    return problems
 
 
 def check_loop(manifest_path, root):
@@ -77,6 +141,7 @@ def check_loop(manifest_path, root):
             code, _ = run_checker(checker, copy)
             if code == 0:
                 problems.append(f"{label}: checker accepts a broken copy ({b['why']})")
+    problems += check_junk_input(checker, demo, label)
     return problems
 
 

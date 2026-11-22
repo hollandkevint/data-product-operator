@@ -14,40 +14,15 @@ import sys
 from datetime import date, timedelta
 from pathlib import Path
 
+# Shared helpers live in <repo>/lib. The plugin installs the whole repo, so this path holds.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "lib"))
+from loop_helpers import line_value, parse_date, read_log, table_rows  # noqa: E402
+
 LOOP = "strategy-review"
 DATE = r"\d{4}-\d{2}-\d{2}"
 GROUPS = ["keep", "reverse", "extend", "no-outcome", "superseded", "not-reviewed"]
 CALLS = {"pending", "keep", "change", "stop", "n/a"}
 QUESTION = "Keep, change or stop?"
-LINK = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
-
-
-def parse_date(text):
-    try:
-        return date.fromisoformat(str(text).strip())
-    except ValueError:
-        return None
-
-
-def table_rows(text, header_start):
-    rows, in_table = [], False
-    for line in text.splitlines():
-        line = line.strip()
-        if not in_table:
-            in_table = line.startswith("|") and line.lstrip("| ").startswith(header_start)
-            continue
-        if not line.startswith("|"):
-            break
-        cells = [c.strip() for c in line.strip("|").split("|")]
-        if all(re.fullmatch(r"-+", c) for c in cells):
-            continue
-        rows.append(cells)
-    return rows
-
-
-def line_value(text, label):
-    m = re.search(rf"^{label}:\s*(.*?)\s*$", text, re.M)
-    return m.group(1) if m else None
 
 
 def quarter_range(label):
@@ -58,23 +33,6 @@ def quarter_range(label):
     start = date(year, 3 * q - 2, 1)
     end = date(year + (q == 4), 1 if q == 4 else 3 * q + 1, 1) - timedelta(days=1)
     return start, end
-
-
-def read_log(root, problems):
-    path = root / "decisions" / "LOG.md"
-    if not path.exists():
-        problems.append("decisions/LOG.md is missing")
-        return []
-    out = []
-    for cells in table_rows(path.read_text(encoding="utf-8"), "Date"):
-        if len(cells) != 7:
-            problems.append(f"decisions/LOG.md: row has {len(cells)} cells, expected 7: {cells[:2]}")
-            continue
-        link = LINK.search(cells[3])
-        out.append({"date": parse_date(cells[0]), "decision": cells[1], "decider": cells[2],
-                    "status": cells[4], "supersedes": cells[6],
-                    "record": Path(link.group(1)).name if link else None})
-    return out
 
 
 def follow_up_dispositions(root):
@@ -127,7 +85,9 @@ def check(root):
     if line_value(text, "Input") != "decisions/LOG.md":
         problems.append(f"{out_path.name}: 'Input:' must name decisions/LOG.md, the Team Loop decision log")
 
-    log = read_log(root, problems)
+    log = read_log(root, problems, lambda cells, record: {
+        "date": parse_date(cells[0]), "decision": cells[1], "decider": cells[2],
+        "status": cells[4], "supersedes": cells[6], "record": record})
     deciders = {r["decider"] for r in log}
     operator = line_value(text, "Operator")
     if not operator or operator != state["operator"]:

@@ -8,21 +8,17 @@ It recomputes every freshness, volume, null and schema check from
 quality/expectations.json and quality/observed.json, then verifies the maker's
 report (loops/data-quality-watch/<last_run>.md) and state file against SKILL.md.
 """
-import json
 import re
 import sys
-from datetime import date, datetime
+from datetime import datetime
 from pathlib import Path
+
+# Shared helpers live in <repo>/lib. The plugin installs the whole repo, so this path holds.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "lib"))
+from loop_helpers import is_number, load_json, parse_date, table_rows  # noqa: E402
 
 LOOP = "data-quality-watch"
 DATE = r"\d{4}-\d{2}-\d{2}"
-
-
-def parse_date(text):
-    try:
-        return date.fromisoformat(str(text).strip())
-    except ValueError:
-        return None
 
 
 def parse_time(text):
@@ -30,37 +26,6 @@ def parse_time(text):
         return datetime.fromisoformat(str(text).replace("Z", "+00:00"))
     except ValueError:
         return None
-
-
-def table_rows(text, header_start):
-    rows, in_table = [], False
-    for line in text.splitlines():
-        line = line.strip()
-        if not in_table:
-            in_table = line.startswith("|") and line.lstrip("| ").startswith(header_start)
-            continue
-        if not line.startswith("|"):
-            break
-        cells = [c.strip() for c in line.strip("|").split("|")]
-        if all(re.fullmatch(r"-+", c) for c in cells):
-            continue
-        rows.append(cells)
-    return rows
-
-
-def load_json(path, problems, label):
-    if not path.exists():
-        problems.append(f"{label} is missing")
-        return None
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as e:
-        problems.append(f"{label} is not valid JSON: {e}")
-        return None
-
-
-def is_number(x):
-    return isinstance(x, (int, float)) and not isinstance(x, bool)
 
 
 def expected_checks(exp, obs, observed_at, problems, name):

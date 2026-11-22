@@ -12,8 +12,11 @@ import csv
 import json
 import re
 import sys
-from datetime import date
 from pathlib import Path
+
+# Shared helpers live in <repo>/lib. The plugin installs the whole repo, so this path holds.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "lib"))
+from loop_helpers import parse_date, table_rows  # noqa: E402
 
 LOOP = "weekly-metric-review"
 STATUSES = {"steady", "explained", "unexplained"}
@@ -24,29 +27,6 @@ EVIDENCE = [
     re.compile(r"^\(industry-knowledge\)$"),
     re.compile(r"^\(chat, no artifact\)$"),
 ]
-
-
-def parse_date(text):
-    try:
-        return date.fromisoformat(str(text).strip())
-    except ValueError:
-        return None
-
-
-def table_rows(text, header_start):
-    rows, in_table = [], False
-    for line in text.splitlines():
-        line = line.strip()
-        if not in_table:
-            in_table = line.startswith("|") and line.lstrip("| ").startswith(header_start)
-            continue
-        if not line.startswith("|"):
-            break
-        cells = [c.strip() for c in line.strip("|").split("|")]
-        if all(re.fullmatch(r"-+", c) for c in cells):
-            continue
-        rows.append(cells)
-    return rows
 
 
 def number(text):

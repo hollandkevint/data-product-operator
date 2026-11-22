@@ -10,53 +10,17 @@ maker's report (loops/agent-eval-regression/<last_run>.md) and state file.
 The set has the shape of team-loop/grader: questions.json, answer_key.json,
 one answers file per harness.
 """
-import json
 import re
 import sys
-from datetime import date
 from pathlib import Path
+
+# Shared helpers live in <repo>/lib. The plugin installs the whole repo, so this path holds.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "lib"))
+from loop_helpers import is_number, line_value, load_json, parse_date, table_rows  # noqa: E402
 
 LOOP = "agent-eval-regression"
 DATE = r"\d{4}-\d{2}-\d{2}"
 SCORING = {"exact", "tolerance", "abstain"}
-
-
-def parse_date(text):
-    try:
-        return date.fromisoformat(str(text).strip())
-    except ValueError:
-        return None
-
-
-def table_rows(text, header_start):
-    rows, in_table = [], False
-    for line in text.splitlines():
-        line = line.strip()
-        if not in_table:
-            in_table = line.startswith("|") and line.lstrip("| ").startswith(header_start)
-            continue
-        if not line.startswith("|"):
-            break
-        cells = [c.strip() for c in line.strip("|").split("|")]
-        if all(re.fullmatch(r"-+", c) for c in cells):
-            continue
-        rows.append(cells)
-    return rows
-
-
-def load_json(path, problems, label):
-    if not path.exists():
-        problems.append(f"{label} is missing")
-        return None
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as e:
-        problems.append(f"{label} is not valid JSON: {e}")
-        return None
-
-
-def is_number(x):
-    return isinstance(x, (int, float)) and not isinstance(x, bool)
 
 
 def right(question, key, answers):
@@ -71,11 +35,6 @@ def right(question, key, answers):
     if rule["type"] == "exact":
         return got == want
     return abs(got - want) <= rule["abs"]
-
-
-def line_value(text, label):
-    m = re.search(rf"^{label}:\s*(.*?)\s*$", text, re.M)
-    return m.group(1) if m else None
 
 
 def id_list(text):
