@@ -23,7 +23,17 @@ HERE = Path(__file__).resolve().parent
 DATA = HERE / ".data"
 ZIP = DATA / "GiBleed_5.3.zip"
 CSV_DIR = DATA / "GiBleed_5.3"
-DB = DATA / "eunomia.duckdb"
+def _duckdb_version() -> str:
+    try:
+        from importlib.metadata import version
+        return version("duckdb")
+    except Exception:
+        return "none"
+
+
+# A DuckDB file can only be read by the version that wrote it (or a close one),
+# so each installed version builds and reads its own file.
+DB = DATA / f"eunomia-duckdb-{_duckdb_version()}.duckdb"
 
 TABLES = [
     "person", "observation_period", "visit_occurrence", "condition_occurrence",

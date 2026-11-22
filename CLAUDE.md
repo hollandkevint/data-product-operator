@@ -1,8 +1,15 @@
 # Data Product Operator
 
-An operating system for data leaders and data product managers, with reusable skills, decision records and workflow handoffs. Keep the top-level positioning domain agnostic.
+An operating system for data leaders, data product operators, and their teams, with reusable skills, decision records and workflow handoffs. Keep the top-level positioning domain agnostic.
 
 Skill discovery depends on the host. Slash commands produce structured artifacts (PRDs, quality reviews, stakeholder briefs). Core data-product skills apply across domains; use healthcare-specific skills when the project calls for them.
+
+## Working in this repo
+
+- Terms: [GLOSSARY.md](GLOSSARY.md). Use its words; the suite flags the avoided ones.
+- Checks: `pip install -r team-loop/grader/requirements.txt`, `python team-loop/grader/data.py`, then `python -m unittest discover -s tests`. CI runs the same three steps.
+- Hooks: run `git config core.hooksPath .githooks` once per clone. Pre-commit runs the containment test; pre-push runs the full suite.
+- Loops: [docs/loop-pattern.md](docs/loop-pattern.md). Sources and credit: [docs/adapted-skills.md](docs/adapted-skills.md).
 
 ## Voice
 
@@ -14,7 +21,7 @@ ALWAYS use: active voice, specific numbers ("$2,847" not "significant cost"), co
 
 ## DPOS Framework Context
 
-The Data Product Operating System (DPOS) covers people, process, product and platform. Start with [Data Product Operator](skills/data-product-operator/SKILL.md) for leader/DPM decisions and a repeatable operating loop. Grow from one decision to a product, team or portfolio only when needed. Shape Up is one process option, not a required cadence. The library supports operating work; it does not autonomously run a company or replace its tracker. Learn more at kevintholland.com.
+The Data Product Operating System (DPOS) covers people, process, product and platform. Start with [Data Product Operator](skills/data-product-operator/SKILL.md) for operator decisions and a repeatable operating loop. [Team Loop](team-loop/README.md) is the team's daily and weekly build loop. Grow from one decision to a product, team or portfolio only when needed. Shape Up is one process option, not a required cadence. The library supports operating work; it does not autonomously run a company or replace its tracker. Learn more at kevintholland.com.
 
 ## Domain and platform context
 
@@ -58,7 +65,7 @@ Quick map:
 - **Quality**: `data-quality-assessment` (5 dimensions, circuit breakers)
 - **Metrics**: `metrics-definition` (naming rules, grain, trust metrics)
 - **Translation**: `stakeholder-alignment` (jargon to outcomes, shaping requests)
-- **Team ops**: `data-team-operating-model` (squads, Shape Up cycles)
+- **Team ops**: `data-team-operating-model` (team shapes, Shape Up cycles)
 - **Schema**: `data-model-design` (star schema, SCDs, ADRs)
 - **Clinical data**: `healthcare-data-domain` (FHIR, OMOP, terminology)
 - **Storytelling**: `data-storytelling` (headlines, narrative arcs, chart selection)

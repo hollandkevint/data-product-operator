@@ -41,7 +41,7 @@ Build evidence systematically:
 - Score opportunities against the validation scorecard (see `data-product-validation`)
 - Present ranked opportunities at the betting table with evidence attached
 
-The discovery practice is not overhead. It is the single highest-leverage activity for team positioning.
+The discovery practice is not overhead. It is the single highest-yield activity for team positioning.
 
 ## Betting Table Pitch Structure
 

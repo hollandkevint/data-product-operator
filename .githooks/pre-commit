@@ -1,0 +1,6 @@
+#!/bin/sh
+# Fast checks before every commit: client terms, glossary words, banned words, links.
+# Turn on once per clone: git config core.hooksPath .githooks
+cd "$(git rev-parse --show-toplevel)/tests" || exit 1
+"${PYTHON:-python3}" -m unittest -q test_containment test_glossary test_voice test_links \
+  || { echo "pre-commit: fix the failures above, then commit again"; exit 1; }

@@ -1,0 +1,8 @@
+#!/bin/sh
+# Full suite before every push. Set CONTAINMENT_SWEEP to a sweep script to also scan history.
+cd "$(git rev-parse --show-toplevel)" || exit 1
+PY="${PYTHON:-python3}"
+"$PY" -m unittest discover -s tests -q || { echo "pre-push: suite failed"; exit 1; }
+if [ -n "${CONTAINMENT_SWEEP:-}" ]; then
+  "$PY" "$CONTAINMENT_SWEEP" . || { echo "pre-push: containment sweep failed"; exit 1; }
+fi

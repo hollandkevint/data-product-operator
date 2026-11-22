@@ -138,5 +138,12 @@ class EndToEndTests(unittest.TestCase):
         self.assertLess(sum(passes.values()), len(passes))
 
 
+class DataFileTests(unittest.TestCase):
+    @unittest.skipUnless(HAS_DUCKDB, "needs duckdb")
+    def test_db_file_is_keyed_to_the_installed_duckdb_version(self):
+        import duckdb
+        self.assertIn(f"duckdb-{duckdb.__version__}", data.DB.name)
+
+
 if __name__ == "__main__":
     unittest.main()
