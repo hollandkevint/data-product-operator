@@ -1,11 +1,13 @@
 ---
 name: team-loop
-description: Formerly dpm_os. Initialize a Team Loop workspace (a DPM OS) — a markdown workspace for one data product manager to move one data product decision from discovery to controlled release with three manual gates, a weekly decision packet, and an append-only decision log. Detects greenfield, migration, or active-repo mode, asks only for missing load-bearing context, copies the deterministic scaffold without overwriting, populates fields with provenance tags, runs the validator, and hands off the first three actions. Use when invoked as `/team-loop` (formerly `/dpm-os`) or when asked to set up a Team Loop or DPM OS in a directory.
+description: Formerly dpm_os. Initialize a Team Loop workspace, a markdown workspace for one data product operator to move one data product decision from discovery to controlled release with three manual gates, a weekly decision packet, and an append-only decision log. Detects greenfield, migration, or active-repo mode, asks only for missing load-bearing context, copies the deterministic scaffold without overwriting, populates fields with provenance tags, runs the validator, and hands off the first three actions. Use when invoked as `/team-loop` (formerly `/dpm-os`) or when asked to set up a Team Loop in a directory.
+metadata:
+  version: "0.1.0"
 ---
 
 # team-loop — initializer (formerly dpm_os)
 
-Scaffolds and initializes a DPM OS instance in the current working directory. Structure is deterministic (copied from `scaffold/`). Reasoning is adaptive (loaded from `prompts/` per phase).
+Scaffolds and initializes a team loop workspace in the current working directory. Structure is deterministic (copied from `scaffold/`). Reasoning is adaptive (loaded from `prompts/` per phase).
 
 | Layer | Where | Why |
 | --- | --- | --- |
@@ -15,7 +17,7 @@ Scaffolds and initializes a DPM OS instance in the current working directory. St
 
 ## When to invoke
 
-- The operator runs `/team-loop` or asks to set up a DPM OS here.
+- The operator runs `/team-loop` or asks to set up a team loop here.
 - Do not invoke for routine work after init. The seeded `CLAUDE.md` in the instance owns that.
 
 ## Workflow
@@ -59,7 +61,7 @@ Run `python3 scripts/validate.py .` from the instance root. Fix every finding be
 
 ### 7. Commit
 
-If the directory is inside a git work tree, stage the scaffolded files and commit once: `feat: initialize DPM OS`. Otherwise `git init` here first. Never push. The operator controls publication.
+If the directory is inside a git work tree, stage the scaffolded files and commit once: `feat: initialize team loop`. Otherwise `git init` here first. Never push. The operator controls publication.
 
 ### 8. Hand off
 
@@ -67,7 +69,7 @@ Load `prompts/post-scaffold.md`. Lead with the three first actions, then contrad
 
 ## Skill surface
 
-This initializer does not bundle analysis skills. When the `data-product-operator` skill library is installed under `.claude/skills/` at project or user scope, these resolve by name. When it is absent, the names below will not resolve; install it first (see the repo's `docs/install.md`).
+This initializer does not bundle analysis skills. When the `data-product-operator` skill library is installed under `.claude/skills/` at project or user scope, these resolve by name. When it is absent, the names below will not resolve; install it first (see [install](../../team-loop/docs/install.md)).
 
 | Skill | Reach for it when |
 | --- | --- |
@@ -88,6 +90,23 @@ This initializer does not bundle analysis skills. When the `data-product-operato
 | `dashboards-to-decisions` | Turning a dashboard request into a decision |
 | `grill-me-data` | Pressure-testing a packet before the gate |
 | `arbitrage-audit-data` | Finding where the data creates an edge |
+| `data-product-retro` | Looking back after a launch or an incident, with actions tied to log rows |
+| `analytics-agent` | Planning or testing chat over the data product |
+| `metric-glossary` | Settling metric names, owners and grains |
+| `launch-and-adoption` | Planning the launch for a named consumer |
+| `shipping-bridge` | Mapping the controlled-release gate to release practices |
+
+### Loops that read this workspace
+
+Each loop follows the shared [loop pattern](../../docs/loop-pattern.md). A loop reads the decision log and the files named in its skill. It reports and never edits the workspace.
+
+| Loop | Reach for it when |
+| --- | --- |
+| `decision-follow-up` | Weekly, after the packet: which decisions are past their review date |
+| `weekly-metric-review` | Weekly, before the team reads its numbers: which moves have no cause |
+| `data-quality-watch` | Daily, after the load: whether the data can be trusted today |
+| `agent-eval-regression` | After a model, prompt or schema change: whether an agent got worse |
+| `strategy-review` | Quarterly: what to keep, change or stop |
 
 ## Anti-patterns
 

@@ -1,6 +1,7 @@
 ---
 name: launch-and-adoption
-version: 0.1.0
+metadata:
+  version: "0.1.0"
 description: >
   Plan the launch of a data product (see GLOSSARY.md): the named consumer, the decision it
   changes, the adoption signal, the countermetric, onboarding, channels and a retire rule.

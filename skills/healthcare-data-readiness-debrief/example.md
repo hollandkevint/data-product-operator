@@ -15,7 +15,7 @@ This is a fictional example. No client or patient data was used.
 | Issue | Evidence and uncertainty | Next check | Owner to confirm | What the result changes |
 |---|---|---|---|---|
 | Counting unit | The account says procedures can have multiple charge lines. The desired metric is unspecified. | Agree whether the dashboard counts charge lines, units, or procedures. Review linkage and counting logic against that definition. | Analytics owner and product lead | Determines which metric the dashboard can describe |
-| Mapping ambiguity | Free-text descriptions need mapping. No mapping review was supplied. | Separate exact, ambiguous, and unmapped descriptions and review categories with someone who knows the source. | Domain/data owner | Determines which brand assignments have supporting evidence |
+| Mapping ambiguity | Free-text descriptions need mapping. No mapping review was supplied. | Separate exact, ambiguous, and unmapped descriptions and review categories with someone who knows the source. | Domain expert and source steward | Determines which brand assignments have supporting evidence |
 | Exclusion bias | Hospital concentration of unmapped records is unknown. | Compare mapping coverage by hospital before and after proposed exclusions. | Analytics owner | Determines whether hospital comparisons need narrower scope or explicit limitations |
 
 **Next decision:** Confirm the counting unit first. If reliable procedure linkage exists and the intended metric counts procedures, evaluate a procedure-based aggregation. If it does not, assess whether a clearly labeled charge-line metric serves the intended use or whether that comparison must wait. Mapping and coverage checks still apply.

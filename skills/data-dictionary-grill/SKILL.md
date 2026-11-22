@@ -1,6 +1,7 @@
 ---
 name: data-dictionary-grill
-version: 0.1.0
+metadata:
+  version: "0.1.0"
 adapted_from: Matt Pocock, mattpocock/skills, grill-with-docs
 description: >
   Grill a data plan against the team's data dictionary and METRICS glossary, and call

@@ -46,7 +46,7 @@ A loop whose checker passes everything fails the repo check. So does a break tha
 
 1. Copy the folder layout above.
 2. Write the maker steps in `SKILL.md`. List the rules the checker enforces.
-3. Write `check.py`. Each rule gets a problem message and a test in `tests/test_loops.py` that breaks that rule.
+3. Write `check.py`. Each rule gets a problem message and a test that breaks that rule. `tests/test_loops.py` tests decision-follow-up and the shared loop checks. `tests/test_loops_remaining.py` tests the four later loops, so add a new loop's tests there.
 4. Build `demo/` from made-up data. Include one case for each outcome the loop can produce.
 5. List breaks in `loop.json`. Run `python3 -m unittest discover -s tests`.
 

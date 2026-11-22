@@ -10,17 +10,17 @@ description: >
 user-invocable: false
 ---
 
-## Core Model: Extended Squad
+## Core Model: Extended Team
 
-Data products are built by a core squad with extended stakeholder input:
+Data products are built by a core team with extended stakeholder input:
 
-**Core Squad** (day-to-day, co-equal authority):
+**Core Team** (day-to-day, co-equal authority):
 - Product Manager: strategy and prioritization
 - Tech Lead: architecture and feasibility
 - Design Lead: UX and usability
 - Data Lead: data quality, ethics, and engineering
 
-**Extended Squad** (contribute expertise, not approval gates):
+**Extended Team** (contribute expertise, not approval gates):
 - Legal/Compliance: regulatory input early in shaping, not as a late blocker
 - Medical Affairs / Domain SMEs: validate domain accuracy
 - Commercial/Sales: pricing, GTM, customer feedback
@@ -56,7 +56,7 @@ Never build what was asked for without understanding why it was asked for. The r
 
 Use a Betting Table (quarterly or per-cycle):
 - Each stakeholder pitches their top priority with business impact
-- The squad evaluates feasibility and effort for each
+- The team evaluates feasibility and effort for each
 - Leadership allocates fixed capacity to the highest-impact bets
 - Boundaries enable autonomy: what's fixed (strategic direction) vs. flexible (implementation approach)
 

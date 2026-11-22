@@ -33,7 +33,7 @@ flowchart LR
 
 ## How to read the grid
 
-- Rows are jobs, grouped Decide, Deliver, Check outcome, Team and Launch. A job with more than one topic has sub-rows, such as J4.1 to J4.6.
+- Rows are jobs, grouped Decide, Deliver, Check outcome, Team and Launch. A job with more than one topic has sub-rows, such as J4.1 to J4.7.
 - Columns are source packs, in a fixed order. Data Product Operator and Team Loop are this repo. The other seven are outside packs.
 - A cell holds one of three things. A link to a skill in this repo. The name of an outside skill with a link to its pack. The word `gap`.
 - kh-os is Kevin Holland's own skill repo. It is private, so its cells give skill names without links.
@@ -66,6 +66,7 @@ flowchart LR
 | J4.4 Prototype | gap | gap | gap | gap | gap | [pmg-write-prototype-brief](https://github.com/polar-bear-org/claude-skills/tree/main/packs/complete-claude-guide-for-product-managers-pack) | [prototype](https://news.aakashg.com)<br>[generate-ai-prototype](https://news.aakashg.com) | gap | [prototype](https://github.com/mattpocock/skills) |
 | J4.5 Ship it | [databricks-data-product-review](../skills/databricks-data-product-review/SKILL.md)<br>[shipping-bridge](../skills/shipping-bridge/SKILL.md) | [team-loop](../skills/team-loop/SKILL.md) | `codex-build`<br>`codex-review` | gap | [ai-shipping:ship-check](https://github.com/phuryn/product-engineering)<br>[ai-shipping:release-gate](https://github.com/phuryn/product-engineering)<br>[ai-shipping:code-review](https://github.com/phuryn/product-engineering) | gap | gap | gap | [code-review](https://github.com/mattpocock/skills)<br>[pr](https://github.com/mattpocock/skills)<br>[codebase-design](https://github.com/mattpocock/skills) |
 | J4.6 Retire it when done | [launch-and-adoption](../skills/launch-and-adoption/SKILL.md) | gap | gap | gap | gap | gap | gap | [deprecation-plan](https://news.aakashg.com) | gap |
+| J4.7 Data science and ML models | [ethical-risk-assessment](../skills/ethical-risk-assessment/SKILL.md) | gap | `ethical-risk-assessment` | gap | gap | gap | gap | gap | gap |
 
 ### Check outcome (J5 and J6)
 
@@ -105,6 +106,7 @@ Every `gap` in the Data Product Operator or Team Loop column has one line here. 
 - J4.4 / Data Product Operator: No prototype skill yet. Matt Pocock's prototype covers the job today.
 - J4.4 / Team Loop: No loop fits a one-off prototype. None planned.
 - J4.6 / Team Loop: A retire check needs a retire rule first. launch-and-adoption writes one. A loop that checks it is not built.
+- J4.7 / Team Loop: No loop watches a model for drift yet. The data-quality-watch loop covers tables, and agent-eval-regression covers analytics agents. Neither checks a predictive model. Ethical risk is the only skill here for this job, and the inventory found no model-evaluation, drift or feature-store skill in any pack.
 - J5.2 / Data Product Operator: No experiment skill yet. Pawel's brainstorm-experiments-existing covers the job today.
 - J5.2 / Team Loop: No loop fits an experiment. None planned.
 - J7.2 / Team Loop: Team Loop gates are manual reviews. Plan pressure-tests sit in the Data Product Operator column.

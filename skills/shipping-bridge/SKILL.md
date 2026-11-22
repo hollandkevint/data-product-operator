@@ -1,6 +1,7 @@
 ---
 name: shipping-bridge
-version: 0.1.0
+metadata:
+  version: "0.1.0"
 description: >
   Map a data product decision to release gates before it ships. Connects the Team Loop
   controlled-launch gate to the ai-shipping release practices in Pawel Huryn's

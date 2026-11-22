@@ -1,4 +1,4 @@
-# DPM OS instance
+# Team loop workspace
 
 A markdown workspace for one data product decision. One repo, plain files, git history.
 

@@ -41,6 +41,40 @@ class SkillShape(unittest.TestCase):
             make_skill(t, "b", "---\nname: b\nversion: 0.1.0\ndescription: >\n  Folded\n  text.\nuser-invocable: false\n---\n")
             self.assertEqual(check_skill_shape(t), [])
 
+    def test_release_skill_with_top_level_version_fails(self):
+        with tempfile.TemporaryDirectory() as t:
+            make_skill(t, "a", "---\nname: a\nversion: 0.1.0\ndescription: x\n---\n")
+            out = check_skill_shape(t, release_skills=("a",))
+            self.assertEqual(len(out), 1)
+            self.assertIn("metadata.version", out[0])
+
+    def test_release_skill_without_any_version_fails(self):
+        with tempfile.TemporaryDirectory() as t:
+            make_skill(t, "a", "---\nname: a\ndescription: x\n---\n")
+            self.assertEqual(len(check_skill_shape(t, release_skills=("a",))), 1)
+
+    def test_release_skill_with_metadata_version_passes(self):
+        with tempfile.TemporaryDirectory() as t:
+            make_skill(t, "a", '---\nname: a\ndescription: x\nmetadata:\n  version: "0.1.0"\n---\n')
+            self.assertEqual(check_skill_shape(t, release_skills=("a",)), [])
+
+    def test_older_skill_with_top_level_version_is_allowed(self):
+        with tempfile.TemporaryDirectory() as t:
+            make_skill(t, "old", "---\nname: old\nversion: 0.1.0\ndescription: x\n---\n")
+            self.assertEqual(check_skill_shape(t, release_skills=()), [])
+
+    def test_release_list_names_real_skills(self):
+        from repo_checks import RELEASE_2_SKILLS
+        for name in RELEASE_2_SKILLS:
+            self.assertTrue((REPO / "skills" / name / "SKILL.md").is_file(), name)
+
+    def test_team_loop_points_at_operator_skills_and_loops(self):
+        text = (REPO / "skills" / "team-loop" / "SKILL.md").read_text(encoding="utf-8")
+        for name in ("strategy-review", "decision-follow-up", "weekly-metric-review", "data-quality-watch",
+                     "agent-eval-regression", "data-product-retro", "analytics-agent", "metric-glossary",
+                     "launch-and-adoption", "shipping-bridge"):
+            self.assertIn(f"`{name}`", text, name)
+
     def test_parse_folded_description(self):
         fm = parse_frontmatter("---\nname: x\ndescription: >\n  one\n  two\n---\n")
         self.assertEqual(fm["description"], "one two")

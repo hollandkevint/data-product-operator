@@ -14,7 +14,7 @@ Pre-existing product artifacts: briefs, requirements, decks, interview notes, st
 
 A working software repository: build manifests (`package.json`, `pyproject.toml`, `go.mod`, and the like), `src/`, `lib/`, `tests/`, CI config, a `Dockerfile`, or substantial source code. Do not scaffold without confirmation. Ask:
 
-> "This looks like an active working repository (detected: <signals>). I can (a) scaffold the DPM OS here alongside the code, skipping any file that already exists, or (b) stop so you can run this in a different directory. Which one?"
+> "This looks like an active working repository (detected: <signals>). I can (a) scaffold the team loop here alongside the code, skipping any file that already exists, or (b) stop so you can run this in a different directory. Which one?"
 
 Wait for the answer. On (a), run migration on any product artifacts mixed in with the code, ignoring code and build directories, and apply the no-overwrite rule strictly: existing `CLAUDE.md`, `INDEX.md`, `README.md`, `.gitignore`, and `.claude/settings.json` are kept, and the scaffold versions are skipped or merged per `SKILL.md` step 4.
 
