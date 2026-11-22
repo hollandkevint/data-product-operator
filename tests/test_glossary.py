@@ -81,6 +81,12 @@ class GlossaryUse(unittest.TestCase):
             self.assertEqual(len(out), 1)
             self.assertIn("DPM OS", out[0])
 
+    def test_plural_of_an_avoid_term_fails(self):
+        self.assertEqual(len(self.run_check({"docs/a.md": "Two squads ship.\n"})), 1)
+
+    def test_root_claude_md_is_checked(self):
+        self.assertEqual(len(self.run_check({"CLAUDE.md": "Ask the squad.\n"})), 1)
+
     def test_other_folders_are_not_checked(self):
         self.assertEqual(self.run_check({"tests/x.md": "squad\n"}), [])
 

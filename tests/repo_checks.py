@@ -160,7 +160,7 @@ GLOSSARY_ALLOWED = {
     "customer": "domain vocabulary in the ecommerce and support guides",
 }
 
-GLOSSARY_USE_SCOPE = ("README.md", "docs", "skills", "team-loop")
+GLOSSARY_USE_SCOPE = ("README.md", "CLAUDE.md", "docs", "skills", "team-loop")
 QUOTED = re.compile(r'"[^"\n]*"|“[^”\n]*”')
 HTML_COMMENT = re.compile(r"<!--.*?-->")
 LINK_TARGET = re.compile(r"\]\([^)]*\)")
@@ -260,7 +260,7 @@ def check_glossary_use(root, allowed=None):
             continue
         for n, line in enumerate(_prose(md.read_text(encoding="utf-8")), 1):
             for t in terms:
-                if re.search(rf"(?<![\w-]){re.escape(t)}(?![\w-])", line, re.I):
+                if re.search(rf"(?<![\w-]){re.escape(t)}s?(?![\w-])", line, re.I):
                     problems.append(f"{rel}:{n}: uses avoided term '{t}' (see GLOSSARY.md)")
     return problems
 
