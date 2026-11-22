@@ -1,6 +1,19 @@
 # Install and uninstall
 
-## Claude Code
+## Claude Code: plugin (recommended)
+
+Install the Data Product Operator plugin once. Team Loop and every analysis skill it names come with it.
+
+```text
+/plugin marketplace add hollandkevint/data-product-operator
+/plugin install data-product-operator@data-product-operator
+```
+
+Open the project that will hold the instance and run `/data-product-operator:team-loop` (formerly `/dpm-os`). The skill detects whether the directory is empty, holds product artifacts, or is an active code repo, asks for what it cannot infer, copies the scaffold without overwriting anything you already have, runs the validator, and hands you the first three actions.
+
+## Claude Code: copy the skill
+
+Use this when you want Team Loop without the plugin, or a copy pinned inside one project.
 
 1. Clone `data-product-operator`. Team Loop is in it as `skills/team-loop`.
 2. Copy the skill into the project that will hold the instance:
@@ -10,18 +23,27 @@
    ```
 
    For every project on the machine, copy to `~/.claude/skills/team-loop` instead.
-3. Open the project in Claude Code and run `/team-loop` (formerly `/dpm-os`). The skill detects whether the directory is empty, holds product artifacts, or is an active code repo, asks for what it cannot infer, copies the scaffold without overwriting anything you already have, runs the validator, and hands you the first three actions.
+3. Open the project in Claude Code and run `/team-loop`.
 
 Requirements: `python3` on the path for the validator and its hook. Nothing else.
 
 ## Skill library
 
-The initializer's "Skill surface" table names analysis skills from [data-product-operator](https://github.com/hollandkevint/data-product-operator). They are a separate install. Without them the names in that table do not resolve; the scaffold, gates, packet, log, and validator work without them.
+The initializer's "Skill surface" table names analysis skills from this repo. The plugin install includes them. With a copied skill, copy them too, or the names in that table do not resolve. The scaffold, gates, packet, log, and validator work without them.
 
 ```bash
-git clone https://github.com/hollandkevint/data-product-operator.git
 cp -R data-product-operator/skills/* <your-project>/.claude/skills/
 ```
+
+## Upgrade an instance
+
+An instance keeps the validator it was created with. The version is the `SCAFFOLD_VERSION` line in the instance's `README.md`; the current one is in `skills/team-loop/scaffold/README.md`. To upgrade:
+
+1. Copy `skills/team-loop/scaffold/scripts/validate.py` over the instance's `scripts/validate.py`. Do this only if the instance copy has no local edits; diff it against its old version first.
+2. Run `python3 scripts/validate.py .` in the instance and fix each finding. From scaffold 0.2.0, every populated context file needs a provenance tag, or `Unknown`, at the end of a line under `## Provenance`. Use the source the file's rows already cite. Never invent one.
+3. Update the instance's `SCAFFOLD_VERSION` line.
+
+The [release notes](../../docs/releases/) say which scaffold changes need this.
 
 ## Uninstall
 

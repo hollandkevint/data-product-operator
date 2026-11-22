@@ -5,9 +5,9 @@ Team Loop is one Claude Code skill, `team-loop`, that scaffolds an instance. It 
 ## Rules
 
 - **Edit `scaffold/`, never an instance.** Instances are copies. A fix belongs in the scaffold and ships in the next version.
-- **This repo is public. It contains no client, customer, or engagement terms.** `tests/test_containment.py` (repo root) holds the only list of such terms and fails on any hit. Before any push, also grep tracked files and `git log -p` by hand for names the list does not know.
+- **This repo is public. It contains no client, customer, or engagement terms.** `tests/test_containment.py` (repo root) holds the only list of such terms and fails on any hit. The pre-commit hook runs it (`git config core.hooksPath .githooks`). Before any push, also grep tracked files and `git log -p` by hand for names the list does not know.
 - **No CE artifacts here.** Plans, solutions, and other compound-engineering documents live outside this repo.
-- **Bump `SCAFFOLD_VERSION`** in `scaffold/README.md` when the scaffold changes shape.
+- **Bump `SCAFFOLD_VERSION`** in `scaffold/README.md` when the scaffold changes shape, and say in the release notes whether instances must upgrade ([install](docs/install.md#upgrade-an-instance)).
 - **Stdlib only** in `scripts/validate.py`. It must run on a bare `python3`.
 - **Shared skills: public wins.** `data-product-operator` owns the body of every analysis skill the initializer names. A private collection copies those bodies unchanged. A private-only difference goes in a sibling `overlay.md` in the private copy, never as an edit to the shared `SKILL.md`. Improve a shared skill in the library first, then re-sync.
 

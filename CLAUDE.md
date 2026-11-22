@@ -56,21 +56,7 @@ Use [Analyst](skills/analyst/SKILL.md) for an explicit evidence graph across ski
 
 Hosts may select several skills or require explicit invocation. They cross-reference instead of duplicating. `ethical-risk-assessment` points to `data-quality-assessment` for scoring details rather than repeating the 5-dimension model.
 
-Quick map:
-- **Discovery**: `data-consumer-discovery` (Mom Test for data, workaround archaeology, consumer segments)
-- **Validation**: `data-product-validation` (5-dimension scorecard, experiment types, Type 1/2 decisions)
-- **Synthesis**: `research-synthesis-data` (atomic research chain, evidence hierarchy, 3 outputs)
-- **Team positioning**: `data-team-positioning` (3 stances, evidence as currency, betting table pitches)
-- **Decision framing**: `data-product-thinking` (5-risk model, outcome trees)
-- **Quality**: `data-quality-assessment` (5 dimensions, circuit breakers)
-- **Metrics**: `metrics-definition` (naming rules, grain, trust metrics)
-- **Translation**: `stakeholder-alignment` (jargon to outcomes, shaping requests)
-- **Team ops**: `data-team-operating-model` (team shapes, Shape Up cycles)
-- **Schema**: `data-model-design` (star schema, SCDs, ADRs)
-- **Clinical data**: `healthcare-data-domain` (FHIR, OMOP, terminology)
-- **Storytelling**: `data-storytelling` (headlines, narrative arcs, chart selection)
-- **Pipeline quality**: `data-pipeline-quality` (dbt tests, contracts, circuit breakers)
-- **Ethics**: `ethical-risk-assessment` (bias testing, phased rollout)
+Skill map: [README, Jobs and skills](README.md#jobs-and-skills) lists every skill by job. Each skill's `description` says what it covers. Loops follow [docs/loop-pattern.md](docs/loop-pattern.md); their checkers share `lib/loop_helpers.py`.
 
 ## Skill Writing Rules
 
