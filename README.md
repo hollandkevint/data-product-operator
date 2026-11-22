@@ -205,6 +205,6 @@ The repo checks run in CI with `python -m unittest discover -s tests`. They chec
 
 ## Contributing and license
 
-Open an issue with the task, what you expected and what you saw. Use synthetic examples. Follow [CLAUDE.md](CLAUDE.md), keep guidance beside its skill, and say what you tested.
+Open an issue with the task, what you expected and what you saw. Use synthetic examples. Follow [CLAUDE.md](CLAUDE.md), keep guidance beside its skill, and say what you tested. The rules for skills, loops and checks are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 [MIT license](LICENSE).
