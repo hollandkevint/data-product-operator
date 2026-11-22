@@ -20,6 +20,22 @@ _Avoid_: Data product (for a dashboard or agent), front end
 A delivery surface that answers questions in natural language over one or more data products.
 _Avoid_: AI analyst, data product (for the agent itself)
 
+## Layers
+
+A data product has one frame and four layers: data assets, semantics, context, and the delivery surface. Design from the decision down, build from the data up, and ship the surface last. Governance and evals run across all four layers.
+
+**Decision frame**:
+The consumer, the decision they make, the outcome it changes, and the quality promise. It is not a layer of data; it is what turns a data asset into a data product.
+_Avoid_: Context (for the decision itself), requirements (when no decision is named)
+
+**Semantics**:
+One written, approved definition for each metric and field: its grain, filters, time window, and calculation. A semantic layer or curated views hold it. A change needs an approver, because every surface on top changes with it.
+_Avoid_: Metrics layer (when it holds more than metrics), business logic (when it is not written down)
+
+**Context**:
+What a newcomer or an agent needs to read the numbers right: synonyms, caveats, conventions, sample questions, and the reason behind a rule. It sits above semantics, changes weekly, and is fed by failed questions. Team Loop's `context/` folder is wider: it holds a product's decision frame and working notes.
+_Avoid_: Context (for the decision frame), prompt (when it is a maintained asset)
+
 ## People
 
 **Data product operator**:

@@ -6,13 +6,17 @@ An analytics agent is a delivery surface. It answers questions in natural langua
 
 ## The parts
 
+The parts follow the [layers](../../GLOSSARY.md#layers): data assets, then semantics, then context, with the agent as the delivery surface on top. The decision frame sets what to build. Design from the decision down, build from the data up, and ship the surface last. Semantics and context stay separate because they have different owners: a definition change needs an approver, while context is weekly upkeep.
+
+
 ```mermaid
 flowchart LR
-  A["Data assets<br/>owned, documented tables"] --> S["Semantic layer<br/>metric definitions, joins, synonyms"]
-  S --> G["Analytics agent<br/>(delivery surface)"]
+  F["Decision frame<br/>consumer, decision, outcome"] -. "sets what to build" .-> A
+  A["Data assets<br/>owned, documented tables"] --> S["Semantic layer<br/>metric definitions, joins, grain"]
+  S --> X["Context<br/>synonyms, caveats, sample queries"]
+  X --> G["Analytics agent<br/>(delivery surface)"]
   G --> C["Consumer<br/>the person whose decision it improves"]
-  C -. "ratings, failed questions" .-> X["Context<br/>descriptions, sample queries, glossary"]
-  X --> G
+  C -. "ratings, failed questions" .-> X
   H["Eval harness<br/>golden questions, expected answers, scoring"] -. "replays questions" .-> G
   H -. "checks definitions against key" .-> S
   P["Governance<br/>identity, row and column rules"] --> G
