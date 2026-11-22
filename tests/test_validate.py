@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -197,6 +198,131 @@ class ScaffoldTests(unittest.TestCase):
         outside = Path(tempfile.mkdtemp()) / "loose.md"
         outside.write_text("- untagged claim\n")
         self.assertEqual(run_hook(outside).returncode, 0)
+
+
+def fill(path: Path, heading: str, body: str, provenance: str | None = None) -> None:
+    """Put body under '## heading', and optionally a line under '## Provenance'."""
+    text = path.read_text().replace(f"## {heading}\n", f"## {heading}\n{body}\n", 1)
+    if provenance is not None:
+        text = text.replace("## Provenance\n", f"## Provenance\n{provenance}\n", 1)
+    path.write_text(text)
+
+
+def run_summary(root: Path) -> subprocess.CompletedProcess:
+    return subprocess.run([sys.executable, str(VALIDATE), "--summary", str(root)], capture_output=True, text=True)
+
+
+class ContextProvenanceTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp())
+        copy_scaffold(self.tmp)
+        self.product = self.tmp / "context" / "product.md"
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp)
+
+    def test_populated_context_without_tag_fails_cli_warns_hook(self):
+        fill(self.product, "Out of scope", "- Real-time feeds.")
+        cli = run_cli(self.tmp)
+        self.assertEqual(cli.returncode, 1)
+        self.assertIn("context/product.md: populated context has no provenance tag under '## Provenance'", cli.stdout)
+        hook = run_hook(self.product)
+        self.assertEqual(hook.returncode, 0)
+        self.assertIn("no provenance tag", hook.stderr)
+
+    def test_enum_tag_under_provenance_passes(self):
+        fill(self.product, "Out of scope", "- Real-time feeds.", "(stakeholder-verbal, A. Person, 2026-01-04)")
+        r = run_cli(self.tmp)
+        self.assertEqual(r.returncode, 0, r.stdout)
+
+    def test_backticked_tag_under_provenance_passes(self):
+        fill(self.product, "Out of scope", "- Real-time feeds.", "- `(stakeholder-verbal, A. Person, 2026-01-04)`")
+        r = run_cli(self.tmp)
+        self.assertEqual(r.returncode, 0, r.stdout)
+
+    def test_unknown_under_provenance_passes(self):
+        fill(self.product, "Out of scope", "- Real-time feeds.", "Unknown")
+        r = run_cli(self.tmp)
+        self.assertEqual(r.returncode, 0, r.stdout)
+
+    def test_untagged_line_under_provenance_is_not_a_tag(self):
+        fill(self.product, "Out of scope", "- Real-time feeds.", "from the kickoff call")
+        self.assertIn("no provenance tag", run_cli(self.tmp).stdout)
+
+    def test_row_label_alone_is_not_populated(self):
+        roles = self.tmp / "context" / "team-and-decision-rights.md"
+        self.assertEqual(run_cli(self.tmp).returncode, 0)
+        roles.write_text(roles.read_text().replace("| Working owner |  |", "| Working owner | A. Person |", 1))
+        self.assertIn("context/team-and-decision-rights.md: populated context", run_cli(self.tmp).stdout)
+
+    def test_text_only_under_provenance_is_not_populated(self):
+        self.product.write_text(self.product.read_text() + "\nA stray note.\n")
+        r = run_cli(self.tmp)
+        self.assertEqual(r.returncode, 0, r.stdout)
+
+    def test_summary_counts_raw_scaffold(self):
+        r = run_summary(SCAFFOLD)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("context sections populated: 0 of 28", r.stdout)
+        self.assertIn("context files populated: 0 of 7, tagged: 0, Unknown: 0", r.stdout)
+
+    def test_summary_counts_filled_sections(self):
+        fill(self.product, "Out of scope", "- Real-time feeds.", "Unknown")
+        fill(self.product, "Product line and owner", "Claims insights, owned by A. Person.")
+        strategy = self.tmp / "context" / "strategy.md"
+        fill(strategy, "Non-goals", "- No dashboards.", "(industry-knowledge)")
+        r = run_summary(self.tmp)
+        self.assertIn("context sections populated: 3 of 28", r.stdout)
+        self.assertIn("context files populated: 2 of 7, tagged: 2, Unknown: 1", r.stdout)
+
+
+def manifest() -> list[str]:
+    r = subprocess.run([sys.executable, str(VALIDATE), "--manifest"], capture_output=True, text=True, check=True)
+    return r.stdout.splitlines()
+
+
+class ManifestTests(unittest.TestCase):
+    def test_manifest_matches_the_scaffold_tree(self):
+        shipped = {
+            p.relative_to(SCAFFOLD).as_posix()
+            for p in SCAFFOLD.rglob("*")
+            if p.is_file() and "__pycache__" not in p.parts
+        }
+        self.assertEqual(set(manifest()), shipped)
+
+    def test_manifest_includes_every_required_file(self):
+        self.assertLessEqual(set(validate.REQUIRED_FILES), set(manifest()))
+
+    def test_initializer_docs_name_only_manifest_paths(self):
+        files = manifest()
+        docs = [SKILL_DIR / "SKILL.md", *sorted((SKILL_DIR / "prompts").glob("*.md"))]
+        for doc in docs:
+            self.assertEqual(unknown_paths(doc.read_text(), files), [], doc.name)
+
+    def test_unknown_path_is_caught(self):
+        files = manifest()
+        text = "Fill `context/missing.md`, skip `packets/<date>-weekly-packet.md` and `prompts/*.md`."
+        self.assertEqual(unknown_paths(text, files), ["context/missing.md"])
+
+
+SKILL_DIR = SCAFFOLD.parent
+BACKTICK_RE = re.compile(r"`([^`\s]+)`")
+
+
+def unknown_paths(text: str, files: list[str]) -> list[str]:
+    """Backticked scaffold file paths that the manifest does not list.
+
+    A token counts when its first segment is a scaffold folder and it ends in a file
+    extension. Placeholders (`<...>`), globs, and folders are skipped.
+    """
+    folders = {f.split("/", 1)[0] for f in files if "/" in f}
+    out = []
+    for token in BACKTICK_RE.findall(text):
+        if any(c in token for c in "<*") or token.endswith("/") or "/" not in token:
+            continue
+        if token.split("/", 1)[0] in folders and re.search(r"\.\w+$", token) and token not in files:
+            out.append(token)
+    return out
 
 
 class NoOverwriteTests(unittest.TestCase):

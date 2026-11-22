@@ -2,7 +2,7 @@
 
 A markdown workspace for one data product decision. One repo, plain files, git history.
 
-SCAFFOLD_VERSION: 0.1.0
+SCAFFOLD_VERSION: 0.2.0
 
 ## The habit loop
 

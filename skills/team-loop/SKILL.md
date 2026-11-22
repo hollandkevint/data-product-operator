@@ -49,11 +49,11 @@ Plain `cp -R` overwrites collisions; do not use it. On macOS, `cp -n` exits 1 wh
 - The current directory is the project root. Do not create a nested subfolder.
 - Do not modify files under `scaffold/` at the source.
 
-Verify by listing the destination: `INDEX.md`, `CLAUDE.md`, `.claude/settings.json`, `scripts/validate.py`, and the folders `context/`, `rules/`, `packets/`, `decisions/`, `risks/`, `source/`, `ingestion/`, `maintenance/` are present.
+Verify the copy with `python3 scripts/validate.py .`. Any `required file missing` finding means the copy failed; fix it before continuing. Other findings are expected until step 5 fills the context files.
 
 ### 5. Populate with provenance
 
-Walk the copied `context/` files and fill each section from the interview or the source artifacts, per the table in `prompts/interview.md`. Every populated section ends with a tag from the enum in `scaffold/decisions/_SCHEMA.md` or the literal `Unknown`. Fill the `## Current decision` block in `INDEX.md`; when no decision exists yet, write the first decision the operator named and mark its evidence gap.
+Walk the copied `context/` files and fill each section from the interview or the source artifacts, per the table in `prompts/interview.md`. Each context file you fill carries a tag under its `## Provenance` heading, from the enum in `decisions/_SCHEMA.md` or the literal `Unknown`. The validator in step 6 checks this. Fill the `## Current decision` block in `INDEX.md`; when no decision exists yet, write the first decision the operator named and mark its evidence gap.
 
 ### 6. Validate
 
