@@ -51,7 +51,7 @@ Follow the [loop pattern](docs/loop-pattern.md). The checker must be a script, n
 
 ## Commit hooks
 
-If `.githooks/` exists, turn the hooks on with `git config core.hooksPath .githooks`.
+Turn the hooks on once per clone with `git config core.hooksPath .githooks`. Pre-commit runs the containment, glossary, banned-word and link tests. Pre-push runs the full suite.
 
 ## Commits and PRs
 
