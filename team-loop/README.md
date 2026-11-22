@@ -12,13 +12,15 @@ An operating system for a data product operator. One markdown repo per product d
 
 ## Install
 
-```bash
-git clone https://github.com/hollandkevint/data-product-operator.git
-cp -R data-product-operator/skills/team-loop <your-project>/.claude/skills/team-loop
-cd <your-project> && claude
+Install the plugin in Claude Code, then run the skill in the project that will hold the instance:
+
+```text
+/plugin marketplace add hollandkevint/data-product-operator
+/plugin install data-product-operator@data-product-operator
+/data-product-operator:team-loop
 ```
 
-Then run `/team-loop`. If you installed the whole plugin, the skill is already there. Full steps, the skill library it expects, and uninstall are in [docs/install.md](docs/install.md).
+To copy the skill instead, upgrade an older instance, or uninstall, see [docs/install.md](docs/install.md).
 
 ## What you get
 
@@ -37,7 +39,7 @@ scripts/validate.py      required files, links, decision fields, provenance tags
 
 ## Where it comes from
 
-The gates, packet, and decision log encode the Data Product Operating System (DPOS): the handoff between roles is the unit that gets engineered. The analysis skills the initializer points at live in [data-product-operator](https://github.com/hollandkevint/data-product-operator), installed from the same repo (see [install](docs/install.md)).
+The gates, packet, and decision log encode the Data Product Operating System (DPOS): the handoff between roles is the unit that gets engineered. The analysis skills the initializer points at ship in the same plugin. The [job map](../README.md#jobs-and-skills) lists them.
 
 ## Sample grader
 

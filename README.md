@@ -197,11 +197,11 @@ Each adapted skill ends with a `Source:` line. The rules are in [adapted skills]
 
 ## Formerly dpm_os
 
-Team Loop was a separate repo, dpm_os. It now lives here, with its history. The workspace and initializer are in [skills/team-loop](skills/team-loop/SKILL.md), and the command `/dpm-os` is now `/team-loop`. The docs and the sample grader are in [team-loop/](team-loop/README.md). The [v2.0.0 release notes](docs/releases/v2.0.0.md) list every moved path and the steps to upgrade a fork.
+Team Loop was a separate repo, dpm_os. It now lives here, with its history. The workspace and initializer are in [skills/team-loop](skills/team-loop/SKILL.md), and the command `/dpm-os` is now `/team-loop`. The docs and the sample grader are in [team-loop/](team-loop/README.md). The [v2.0.0 release notes](docs/releases/v2.0.0.md) list every moved path and the steps to upgrade a fork. The old dpm_os repo is archived, and its open issues moved here. [v2.0.1](docs/releases/v2.0.1.md) adds a validator change that missed the move; existing workspaces can [upgrade](team-loop/docs/install.md#upgrade-an-instance).
 
 ## Limits
 
-The repo checks run in CI with `python -m unittest discover -s tests`. They check structure: links, manifests, the glossary, the grid, loop checkers, the grader and the Team Loop validator. They do not check whether the advice is right for your team. Databricks has not been tested against a live workspace. No test here shows production readiness, regulatory acceptance or measured team performance.
+The repo checks run in CI with `python -m unittest discover -s tests`. They check structure: links, manifests, the glossary, banned words, the grid, loop checkers and their handling of bad input, the grader, the Team Loop validator and client-term containment. Commit hooks run the fast checks before each commit. They do not check whether the advice is right for your team. Databricks has not been tested against a live workspace. No test here shows production readiness, regulatory acceptance or measured team performance.
 
 ## Contributing and license
 
